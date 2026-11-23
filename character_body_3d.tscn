@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://sajcr155km6v"]
+
+[ext_resource type="Script" uid="uid://c2t5qt4hbug3y" path="res://script/Player.gd" id="1_cvunv"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_cy14o"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_fj7yv"]
+points = PackedVector3Array(-0.12520654, -0.532801, -0.4805069, 0.022783129, 0.4760704, 0.49888408, 0.16971254, 0.5591441, 0.46417162, 0.23105091, -0.8035912, 0.32045516, 0.40741014, 0.651043, -0.24352328, -0.4827893, 0.59484255, 0.082213186, -0.3628679, -0.68231165, 0.2896967, 0.46904355, -0.65452886, -0.06627126, -0.12744367, 0.8427015, -0.33810276, -0.39343542, -0.6839421, -0.24471663, 0.43825462, 0.62330925, 0.20084947, 0.0841477, 0.977454, 0.11479468, -0.06820232, -0.9764576, -0.12927033, 0.20054972, -0.56312895, -0.4514544, -0.18552664, 0.59545326, -0.4534751, -0.27336287, 0.59226835, 0.40775412, -0.0069364863, -0.47682306, 0.49966025, 0.37582088, -0.5886136, 0.31695515, 0.111579016, 0.5630594, -0.48117727, -0.41725034, 0.5278656, -0.27049688, -0.48454633, -0.59697217, -0.06650971, -0.27974695, 0.90856135, 0.05333608, -0.25019687, -0.8807117, 0.20531891, 0.263647, -0.90277094, -0.1273943, 0.29336792, 0.8715263, -0.15719566, 0.3734115, -0.5263189, -0.32824618, 0.4996626, 0.47664148, -0.0068885577, 0.053105574, 0.8750009, 0.32470253, -0.15454252, -0.5908538, 0.4658794, -0.09727988, -0.7823577, -0.39818847, -0.3876489, -0.49817133, 0.31564978, -0.30067965, -0.58799505, -0.38890144)
+
+[sub_resource type="Shader" id="Shader_fj7yv"]
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+uniform sampler2D screen_texture : hint_screen_texture, filter_nearest;
+uniform vec2 target_resolution = vec2(960.0, 540.0);
+uniform int range_per_color = 24;
+void fragment() {
+    // Pixelation
+    vec2 pixel_uv = floor(SCREEN_UV * target_resolution) / target_resolution;
+    // Sample pixelated screen
+    vec3 color = texture(screen_texture, pixel_uv).rgb;
+    // Color quantization
+    float r = round(color.r * float(range_per_color)) / float(range_per_color);
+    float g = round(color.g * float(range_per_color)) / float(range_per_color);
+    float b = round(color.b * float(range_per_color)) / float(range_per_color);
+    COLOR = vec4(r, g, b, 1.0);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f3sb7"]
+shader = SubResource("Shader_fj7yv")
+shader_parameter/target_resolution = Vector2(1280, 400)
+shader_parameter/range_per_color = 12
+
+[sub_resource type="QuadMesh" id="QuadMesh_hdwr6"]
+size = Vector2(1280, 720)
+center_offset = Vector3(640, 360, 0)
+
+[node name="CharacterBody3D" type="CharacterBody3D" unique_id=658356461 groups=["player"]]
+transform = Transform3D(0.9999729, -2.8383727e-05, -0.0073524583, -7.2408155e-05, 0.99990594, -0.013709268, 0.0073521566, 0.01370943, 0.99987894, 0, 0, 0)
+wall_min_slide_angle = 0.17453292
+script = ExtResource("1_cvunv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=358564963]
+visible = false
+mesh = SubResource("CapsuleMesh_cy14o")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1434841412]
+shape = SubResource("ConvexPolygonShape3D_fj7yv")
+
+[node name="Head" type="Node3D" parent="." unique_id=228465702]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6794615, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Head" unique_id=708619513]
+current = true
+
+[node name="Hand" type="Node3D" parent="Head/Camera3D" unique_id=1657694506]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.6)
+
+[node name="RayCast3D" type="RayCast3D" parent="Head/Camera3D" unique_id=1507698061]
+target_position = Vector3(0, 0, -4)
+collision_mask = 3
+debug_shape_custom_color = Color(0, 0, 1, 1)
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Head/Camera3D" unique_id=715666741]
+material = SubResource("ShaderMaterial_f3sb7")
+position = Vector2(-7, 15)
+mesh = SubResource("QuadMesh_hdwr6")
