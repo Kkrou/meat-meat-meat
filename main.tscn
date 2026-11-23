@@ -1,44 +1,47 @@
 [gd_scene format=3 uid="uid://cjibqe12ct4su"]
 
 [ext_resource type="PackedScene" uid="uid://sajcr155km6v" path="res://character_body_3d.tscn" id="1_ig7tw"]
+[ext_resource type="Texture2D" uid="uid://qppcd60eij4g" path="res://textures/meat/Meat_Raw_001_basecolor.jpg" id="2_lquwl"]
+[ext_resource type="Texture2D" uid="uid://r64b3vo0made" path="res://textures/meat/Meat_Raw_001_ambientOcclusion.jpg" id="3_7mycd"]
+[ext_resource type="Texture2D" uid="uid://dxgx3lex645k" path="res://textures/meat/Meat_Raw_001_roughness.jpg" id="4_272bh"]
+[ext_resource type="Texture2D" uid="uid://b3aakr7h00c42" path="res://textures/meat/Meat_Raw_001_normal.jpg" id="5_5vw27"]
+[ext_resource type="Texture2D" uid="uid://ubn8f02gxqtm" path="res://textures/meat/packed_normal_roughness.png" id="6_7mycd"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
-sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-
-[sub_resource type="Sky" id="Sky_0xm2m"]
-sky_material = SubResource("ProceduralSkyMaterial_ig7tw")
+[sub_resource type="Sky" id="Sky_7mycd"]
 
 [sub_resource type="Environment" id="Environment_h2yge"]
-background_mode = 2
-sky = SubResource("Sky_0xm2m")
+sky = SubResource("Sky_7mycd")
 tonemap_mode = 2
 glow_enabled = true
 fog_enabled = true
+fog_light_color = Color(0.3019608, 0.019607844, 0.05882353, 1)
+fog_light_energy = 0.5
 fog_density = 0.005
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0001
+volumetric_fog_length = 200.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0xm2m"]
-size = Vector3(10, 1, 20)
+size = Vector3(10, 40, 20)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kek77"]
+albedo_texture = ExtResource("2_lquwl")
+metallic_specular = 0.0
+roughness_texture = ExtResource("4_272bh")
+normal_enabled = true
+normal_texture = ExtResource("5_5vw27")
+ao_enabled = true
+ao_texture = ExtResource("3_7mycd")
+uv1_scale = Vector3(15, 15, 15)
 
 [sub_resource type="BoxMesh" id="BoxMesh_h2yge"]
-size = Vector3(10, 1, 20)
+material = SubResource("StandardMaterial3D_kek77")
+size = Vector3(10, 40, 20)
 
 [sub_resource type="Terrain3DMaterial" id="Terrain3DMaterial_ig7tw"]
 _shader_parameters = {
 &"bias_distance": null,
 &"blend_sharpness": null,
-&"contour_color": null,
-&"contour_far_opacity": null,
-&"contour_half_dist": null,
-&"contour_half_thickness": null,
-&"contour_index_dist": null,
-&"contour_index_interval": null,
-&"contour_index_thickness": null,
-&"contour_inter_dist": null,
-&"contour_inter_thickness": null,
-&"contour_lines": null,
-&"contour_thermal_color": null,
-&"contour_thermal_heights": null,
 &"depth_blur": null,
 &"distant_normal_scale": null,
 &"flat_terrain_normals": null,
@@ -49,9 +52,6 @@ _shader_parameters = {
 &"private": null,
 &"region_blend": null
 }
-show_region_grid = true
-show_contours = true
-show_checkered = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xm2m"]
 transparency = 4
@@ -73,8 +73,20 @@ last_lod = 0
 last_shadow_lod = 0
 lod0_range = 128.0
 
+[sub_resource type="Terrain3DTextureAsset" id="Terrain3DTextureAsset_272bh"]
+name = "Meat_Raw_001_roughness"
+albedo_texture = ExtResource("2_lquwl")
+normal_texture = ExtResource("6_7mycd")
+detiling_rotation = 1.0
+detiling_shift = 1.0
+
 [sub_resource type="Terrain3DAssets" id="Terrain3DAssets_1bvp3"]
 mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_h2yge")])
+texture_list = Array[Terrain3DTextureAsset]([SubResource("Terrain3DTextureAsset_272bh")])
+
+[sub_resource type="FogMaterial" id="FogMaterial_ig7tw"]
+density = 0.8
+albedo = Color(0, 0, 0, 1)
 
 [node name="Main" type="Node3D" unique_id=976627802]
 
@@ -84,29 +96,47 @@ environment = SubResource("Environment_h2yge")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1788189058]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 50.60275, 0)
 shadow_enabled = true
+directional_shadow_mode = 0
+sky_mode = 2
 
 [node name="CharacterBody3D" parent="." unique_id=658356461 instance=ExtResource("1_ig7tw")]
-transform = Transform3D(0.9999729, -2.8383727e-05, -0.0073524583, -7.2408155e-05, 0.99990594, -0.013709268, 0.0073521566, 0.01370943, 0.99987894, -1.685334, 4.030277, 4.078642)
+transform = Transform3D(0.9999729, -2.8383727e-05, -0.0073524583, -7.2408155e-05, 0.99990594, -0.013709268, 0.0073521566, 0.01370943, 0.99987894, 29.320076, 41.603428, -2.2542543)
 
-[node name="Ground" type="StaticBody3D" parent="." unique_id=2117794034]
+[node name="palace" type="StaticBody3D" parent="." unique_id=2117794034]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.133348, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground" unique_id=1401636390]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="palace" unique_id=1401636390]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.463507, 0)
 shape = SubResource("BoxShape3D_0xm2m")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground" unique_id=28984913]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="palace" unique_id=28984913]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.44925, 0)
 mesh = SubResource("BoxMesh_h2yge")
 
 [node name="Terrain3D" type="Terrain3D" parent="." unique_id=1097524623]
 data_directory = "res://terrain-data"
 material = SubResource("Terrain3DMaterial_ig7tw")
 assets = SubResource("Terrain3DAssets_1bvp3")
-show_grid = true
 collision_mode = 3
 displacement_sharpness = 0.5
-show_region_grid = true
-show_contours = true
-show_checkered = true
 top_level = true
 metadata/_edit_lock_ = true
+
+[node name="FogVolume" type="FogVolume" parent="." unique_id=1275978943]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 103.110306, -32.735565, 0)
+size = Vector3(140.80188, 33.416138, 200)
+material = SubResource("FogMaterial_ig7tw")
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="." unique_id=1713942615]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 102.86266, -70.34903, -3.3046875)
+visible = false
+light_color = Color(1, 0, 0, 1)
+light_energy = 16.0
+light_indirect_energy = 16.0
+light_volumetric_fog_energy = 16.0
+light_size = 1.0
+spot_range = 1000000.0
+spot_attenuation = -10.0
+spot_angle = 1.0
 
 [editable path="CharacterBody3D"]
