@@ -21,6 +21,59 @@ size = Vector3(10, 1, 20)
 [sub_resource type="BoxMesh" id="BoxMesh_h2yge"]
 size = Vector3(10, 1, 20)
 
+[sub_resource type="Terrain3DMaterial" id="Terrain3DMaterial_ig7tw"]
+_shader_parameters = {
+&"bias_distance": null,
+&"blend_sharpness": null,
+&"contour_color": null,
+&"contour_far_opacity": null,
+&"contour_half_dist": null,
+&"contour_half_thickness": null,
+&"contour_index_dist": null,
+&"contour_index_interval": null,
+&"contour_index_thickness": null,
+&"contour_inter_dist": null,
+&"contour_inter_thickness": null,
+&"contour_lines": null,
+&"contour_thermal_color": null,
+&"contour_thermal_heights": null,
+&"depth_blur": null,
+&"distant_normal_scale": null,
+&"flat_terrain_normals": null,
+&"general_uniforms": null,
+&"ground_level": null,
+&"mipmap_bias": null,
+&"mipmaps": null,
+&"private": null,
+&"region_blend": null
+}
+show_region_grid = true
+show_contours = true
+show_checkered = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xm2m"]
+transparency = 4
+cull_mode = 2
+vertex_color_use_as_albedo = true
+backlight_enabled = true
+backlight = Color(0.5, 0.5, 0.5, 1)
+distance_fade_mode = 1
+distance_fade_min_distance = 128.0
+distance_fade_max_distance = 96.0
+metadata/terrain3d_generated_material = true
+
+[sub_resource type="Terrain3DMeshAsset" id="Terrain3DMeshAsset_h2yge"]
+generated_type = 1
+height_offset = 0.5
+density = 10.0
+material_override = SubResource("StandardMaterial3D_0xm2m")
+last_lod = 0
+last_shadow_lod = 0
+lod0_range = 128.0
+
+[sub_resource type="Terrain3DAssets" id="Terrain3DAssets_1bvp3"]
+mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_h2yge")])
+
 [node name="Main" type="Node3D" unique_id=976627802]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1719016655]
@@ -40,5 +93,17 @@ shape = SubResource("BoxShape3D_0xm2m")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground" unique_id=28984913]
 mesh = SubResource("BoxMesh_h2yge")
+
+[node name="Terrain3D" type="Terrain3D" parent="." unique_id=1097524623]
+data_directory = "res://terrain-data"
+material = SubResource("Terrain3DMaterial_ig7tw")
+assets = SubResource("Terrain3DAssets_1bvp3")
+show_grid = true
+collision_mode = 3
+displacement_sharpness = 0.5
+show_region_grid = true
+show_contours = true
+show_checkered = true
+top_level = true
 
 [editable path="CharacterBody3D"]
