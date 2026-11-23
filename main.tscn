@@ -7,22 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://b3aakr7h00c42" path="res://textures/meat/Meat_Raw_001_normal.jpg" id="5_5vw27"]
 [ext_resource type="Texture2D" uid="uid://ubn8f02gxqtm" path="res://textures/meat/packed_normal_roughness.png" id="6_7mycd"]
 
-[sub_resource type="Sky" id="Sky_7mycd"]
-
-[sub_resource type="Environment" id="Environment_h2yge"]
-sky = SubResource("Sky_7mycd")
-tonemap_mode = 2
-glow_enabled = true
-fog_enabled = true
-fog_light_color = Color(0.3019608, 0.019607844, 0.05882353, 1)
-fog_light_energy = 0.5
-fog_density = 0.005
-volumetric_fog_enabled = true
-volumetric_fog_density = 0.0001
-volumetric_fog_length = 200.0
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_0xm2m"]
-size = Vector3(10, 40, 20)
+size = Vector3(10, 60, 20.12732)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kek77"]
 albedo_texture = ExtResource("2_lquwl")
@@ -36,7 +22,82 @@ uv1_scale = Vector3(15, 15, 15)
 
 [sub_resource type="BoxMesh" id="BoxMesh_h2yge"]
 material = SubResource("StandardMaterial3D_kek77")
-size = Vector3(10, 40, 20)
+size = Vector3(20, 60, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7mycd"]
+size = Vector3(10, 60, 9.849579)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7mycd"]
+load_path = "res://.godot/imported/Meat_Raw_001_basecolor.jpg-53977c2599d79b4fe93bf8a34721fcbb.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_272bh"]
+load_path = "res://.godot/imported/Meat_Raw_001_ambientOcclusion.jpg-5751ce831fe31f5ae0a87ad675216472.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5vw27"]
+load_path = "res://.godot/imported/Meat_Raw_001_normal.jpg-f0f1f750b1c553eeb082878b8825f2aa.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_kek77"]
+load_path = "res://.godot/imported/Meat_Raw_001_roughness.jpg-980a9cd8a817d81622b07d0425145685.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4c57u"]
+albedo_texture = SubResource("CompressedTexture2D_7mycd")
+metallic_specular = 0.0
+roughness_texture = SubResource("CompressedTexture2D_kek77")
+normal_enabled = true
+normal_texture = SubResource("CompressedTexture2D_5vw27")
+ao_enabled = true
+ao_texture = SubResource("CompressedTexture2D_272bh")
+uv1_scale = Vector3(15, 15, 15)
+
+[sub_resource type="BoxMesh" id="BoxMesh_efxa6"]
+material = SubResource("StandardMaterial3D_4c57u")
+size = Vector3(10, 120, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_272bh"]
+size = Vector3(10, 60, 9.905075)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dg77c"]
+load_path = "res://.godot/imported/Meat_Raw_001_basecolor.jpg-53977c2599d79b4fe93bf8a34721fcbb.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ycdy4"]
+load_path = "res://.godot/imported/Meat_Raw_001_ambientOcclusion.jpg-5751ce831fe31f5ae0a87ad675216472.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_w48qg"]
+load_path = "res://.godot/imported/Meat_Raw_001_normal.jpg-f0f1f750b1c553eeb082878b8825f2aa.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vivmo"]
+load_path = "res://.godot/imported/Meat_Raw_001_roughness.jpg-980a9cd8a817d81622b07d0425145685.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2cqfq"]
+albedo_texture = SubResource("CompressedTexture2D_dg77c")
+metallic_specular = 0.0
+roughness_texture = SubResource("CompressedTexture2D_vivmo")
+normal_enabled = true
+normal_texture = SubResource("CompressedTexture2D_w48qg")
+ao_enabled = true
+ao_texture = SubResource("CompressedTexture2D_ycdy4")
+uv1_scale = Vector3(15, 15, 15)
+
+[sub_resource type="BoxMesh" id="BoxMesh_yaehf"]
+material = SubResource("StandardMaterial3D_2cqfq")
+size = Vector3(10, 120, 10)
+
+[sub_resource type="Sky" id="Sky_7mycd"]
+
+[sub_resource type="Environment" id="Environment_h2yge"]
+sky = SubResource("Sky_7mycd")
+tonemap_mode = 2
+glow_enabled = true
+fog_light_color = Color(0.3019608, 0.019607844, 0.05882353, 1)
+fog_light_energy = 0.5
+fog_density = 0.003
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0001
+volumetric_fog_length = 200.0
+
+[sub_resource type="FogMaterial" id="FogMaterial_ig7tw"]
+density = 0.8
+albedo = Color(0, 0, 0, 1)
 
 [sub_resource type="Terrain3DMaterial" id="Terrain3DMaterial_ig7tw"]
 _shader_parameters = {
@@ -84,48 +145,16 @@ detiling_shift = 1.0
 mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_h2yge")])
 texture_list = Array[Terrain3DTextureAsset]([SubResource("Terrain3DTextureAsset_272bh")])
 
-[sub_resource type="FogMaterial" id="FogMaterial_ig7tw"]
-density = 0.8
-albedo = Color(0, 0, 0, 1)
-
 [node name="Main" type="Node3D" unique_id=976627802]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1719016655]
-environment = SubResource("Environment_h2yge")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1788189058]
-transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 50.60275, 0)
-shadow_enabled = true
-directional_shadow_mode = 0
-sky_mode = 2
-
 [node name="CharacterBody3D" parent="." unique_id=658356461 instance=ExtResource("1_ig7tw")]
-transform = Transform3D(0.9999729, -2.8383727e-05, -0.0073524583, -7.2408155e-05, 0.99990594, -0.013709268, 0.0073521566, 0.01370943, 0.99987894, 29.320076, 41.603428, -2.2542543)
+transform = Transform3D(0.9999999, 0, 0, 0, 0.9999024, -0.013962179, 0, 0.0139621785, 0.9999025, -406.50296, 0.25799942, -2.2542543)
 
-[node name="palace" type="StaticBody3D" parent="." unique_id=2117794034]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.133348, 0, 0)
+[node name="Head" parent="CharacterBody3D" index="2" unique_id=228465702]
+transform = Transform3D(1, 0, 1.3969839e-09, 0, 1, 2.7939677e-09, 0, 0, 1, 0, 0.71608746, -0.0005013943)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="palace" unique_id=1401636390]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.463507, 0)
-shape = SubResource("BoxShape3D_0xm2m")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="palace" unique_id=28984913]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.44925, 0)
-mesh = SubResource("BoxMesh_h2yge")
-
-[node name="Terrain3D" type="Terrain3D" parent="." unique_id=1097524623]
-data_directory = "res://terrain-data"
-material = SubResource("Terrain3DMaterial_ig7tw")
-assets = SubResource("Terrain3DAssets_1bvp3")
-collision_mode = 3
-displacement_sharpness = 0.5
-top_level = true
-metadata/_edit_lock_ = true
-
-[node name="FogVolume" type="FogVolume" parent="." unique_id=1275978943]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 103.110306, -32.735565, 0)
-size = Vector3(140.80188, 33.416138, 200)
-material = SubResource("FogMaterial_ig7tw")
+[node name="Camera3D" parent="CharacterBody3D/Head" index="0" unique_id=708619513]
+transform = Transform3D(1.0000001, -9.567884e-09, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, -3.0517578e-05, -0.059036195, 0.0008094311)
 
 [node name="SpotLight3D2" type="SpotLight3D" parent="." unique_id=1713942615]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 102.86266, -70.34903, -3.3046875)
@@ -138,5 +167,264 @@ light_size = 1.0
 spot_range = 1000000.0
 spot_attenuation = -10.0
 spot_angle = 1.0
+
+[node name="Enviorment" type="Node" parent="." unique_id=1013091573]
+
+[node name="meat-palaces" type="Node" parent="Enviorment" unique_id=1687437008]
+
+[node name="palace" type="StaticBody3D" parent="Enviorment/meat-palaces" unique_id=2117794034]
+transform = Transform3D(-0.07071398, 0.9974966, 0, -0.9974966, -0.07071398, 0, 0, 0, 1, -83.08808, 50.798122, -2.9372787)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enviorment/meat-palaces/palace" unique_id=1401636390]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3647919, 13.828438, 3.0227337)
+shape = SubResource("BoxShape3D_0xm2m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Enviorment/meat-palaces/palace" unique_id=28984913]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5876465, 24.049366, 2.5406551)
+mesh = SubResource("BoxMesh_h2yge")
+
+[node name="palace8" type="StaticBody3D" parent="Enviorment/meat-palaces" unique_id=1942467846]
+transform = Transform3D(0.24465758, 0.7034431, -0.66731596, 0.12794924, 0.6587905, 0.7413661, 0.96113044, -0.2667634, 0.07117307, -201.35846, 21.49958, 49.11605)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enviorment/meat-palaces/palace8" unique_id=1331719236]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1720428, 14.079178, 3.0227337)
+shape = SubResource("BoxShape3D_0xm2m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Enviorment/meat-palaces/palace8" unique_id=202791568]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.988163, 25.61985, 3.2414494)
+mesh = SubResource("BoxMesh_h2yge")
+
+[node name="TowerRight" type="StaticBody3D" parent="Enviorment/meat-palaces" unique_id=806625977]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, -96.39885, 55.124634, 19.593445)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enviorment/meat-palaces/TowerRight" unique_id=1308126023]
+transform = Transform3D(1, 0, 0, 0, 0.9999946, 0, 0, 0, 0.9999946, 1.1110458, 14.079178, -2.8074188)
+shape = SubResource("BoxShape3D_7mycd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Enviorment/meat-palaces/TowerRight" unique_id=2103561244]
+transform = Transform3D(1, 0, 0, 0, 0.99999976, 0, 0, 0, 0.99999976, 1.9954453, 48.38575, -2.6236134)
+mesh = SubResource("BoxMesh_efxa6")
+
+[node name="TowerLeft" type="StaticBody3D" parent="Enviorment/meat-palaces" unique_id=1574254846]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, -96.39885, 55.124634, -19.842419)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enviorment/meat-palaces/TowerLeft" unique_id=1647812257]
+transform = Transform3D(1, 0, 0, 0, 0.999992, 0, 0, 0, 0.999992, 2.0595856, 14.079178, -2.063713)
+shape = SubResource("BoxShape3D_272bh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Enviorment/meat-palaces/TowerLeft" unique_id=1242690551]
+transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 1.9881592, 49.037415, -2.0167217)
+mesh = SubResource("BoxMesh_yaehf")
+
+[node name="palace9" type="StaticBody3D" parent="Enviorment/meat-palaces" unique_id=1159975490]
+transform = Transform3D(-0.6096536, 0.6418475, -0.46513912, 0.12794925, 0.6587905, 0.7413661, 0.78227335, 0.3924624, -0.48375797, -194.24216, 3.6719322, -80.376884)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enviorment/meat-palaces/palace9" unique_id=758376019]
+transform = Transform3D(1, 8.940697e-08, 0, 2.3841858e-07, 1, 0, 2.9802322e-08, -2.3841858e-07, 1, 11.581753, 26.664673, 8.056229)
+shape = SubResource("BoxShape3D_0xm2m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Enviorment/meat-palaces/palace9" unique_id=1451745398]
+transform = Transform3D(1, 2.9802322e-08, 0, 5.9604645e-08, 1, 0, 0, -4.4703484e-08, 1, 2.5656776, 28.593414, 6.587723)
+mesh = SubResource("BoxMesh_h2yge")
+
+[node name="palace10" type="StaticBody3D" parent="Enviorment/meat-palaces" unique_id=285370549]
+transform = Transform3D(-0.5527809, 0.6680054, -0.4981989, 0.1279493, 0.6587905, 0.7413661, 0.8234454, 0.34606898, -0.44963768, -240.61324, -2.8994713, -80.376884)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enviorment/meat-palaces/palace10" unique_id=455750655]
+transform = Transform3D(0.99999976, -2.9802322e-08, 8.940697e-08, 1.1920929e-07, 0.9999997, -5.9604645e-08, 5.9604645e-08, 1.4901161e-08, 0.9999999, 3.7125473, 25.201645, -1.4862823)
+shape = SubResource("BoxShape3D_0xm2m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Enviorment/meat-palaces/palace10" unique_id=1801790503]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.988163, 25.61985, 3.2414494)
+mesh = SubResource("BoxMesh_h2yge")
+
+[node name="palace11" type="StaticBody3D" parent="Enviorment/meat-palaces" unique_id=2044325417]
+transform = Transform3D(-0.5539252, 0.22492683, 0.8016075, 0.65830964, 0.7077673, 0.2563074, -0.5097014, 0.6696812, -0.54012215, -249.42764, 6.900379, -91.27263)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enviorment/meat-palaces/palace11" unique_id=560899065]
+transform = Transform3D(1, 0, 4.172325e-07, 0, 0.9999999, -1.1920929e-07, 0, 2.9802322e-08, 1, 2.3366241, 35.325996, 4.3934937)
+shape = SubResource("BoxShape3D_0xm2m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Enviorment/meat-palaces/palace11" unique_id=1888502474]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.988163, 25.61985, 3.2414494)
+mesh = SubResource("BoxMesh_h2yge")
+
+[node name="palace13" type="StaticBody3D" parent="Enviorment/meat-palaces" unique_id=2051733581]
+transform = Transform3D(-0.023961212, 0.7940926, -0.60732436, 0.9832936, -0.09092952, -0.15768734, -0.18044215, -0.60095584, -0.7786473, -415.73752, 27.335724, -28.474392)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enviorment/meat-palaces/palace13" unique_id=264422071]
+transform = Transform3D(1, 0, 4.172325e-07, 0, 0.9999999, -1.1920929e-07, 0, 2.9802322e-08, 1, 2.3366241, 35.325996, 4.3934937)
+shape = SubResource("BoxShape3D_0xm2m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Enviorment/meat-palaces/palace13" unique_id=105928508]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.988163, 25.61985, 3.2414494)
+mesh = SubResource("BoxMesh_h2yge")
+
+[node name="palace14" type="StaticBody3D" parent="Enviorment/meat-palaces" unique_id=927329157]
+transform = Transform3D(-0.18882988, 0.9715802, -0.1427421, 0.9668821, 0.15853056, -0.20001842, -0.17170504, -0.17578353, -0.9693387, -368.84653, 28.647121, -63.507404)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enviorment/meat-palaces/palace14" unique_id=770633297]
+transform = Transform3D(1, 0, 4.172325e-07, 0, 0.9999999, -1.1920929e-07, 0, 2.9802322e-08, 1, 2.3366241, 35.325996, 4.3934937)
+shape = SubResource("BoxShape3D_0xm2m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Enviorment/meat-palaces/palace14" unique_id=88231743]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.988163, 25.61985, 3.2414494)
+mesh = SubResource("BoxMesh_h2yge")
+
+[node name="palace12" type="StaticBody3D" parent="Enviorment/meat-palaces" unique_id=1490062338]
+transform = Transform3D(-0.51298815, 0.85839003, -0.003114436, 0.8268074, 0.49508208, 0.26698932, 0.23072286, 0.1343878, -0.96369445, -289.68896, 16.648155, -78.85041)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enviorment/meat-palaces/palace12" unique_id=1344097221]
+transform = Transform3D(1, 0, 4.172325e-07, 0, 0.9999999, -1.1920929e-07, 0, 2.9802322e-08, 1, 2.3366241, 35.325996, 4.3934937)
+shape = SubResource("BoxShape3D_0xm2m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Enviorment/meat-palaces/palace12" unique_id=1979724921]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.988163, 25.61985, 3.2414494)
+mesh = SubResource("BoxMesh_h2yge")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Enviorment/meat-palaces/palace12" unique_id=1294163063]
+transform = Transform3D(1, -2.4214387e-08, 0, -2.0489097e-08, 1, 0, 0, 1.4901161e-08, 1.0000001, 24.760452, -12.485382, 3.3796768)
+mesh = SubResource("BoxMesh_h2yge")
+
+[node name="palace15" type="StaticBody3D" parent="Enviorment/meat-palaces" unique_id=1777521171]
+transform = Transform3D(0.62830305, -0.6322167, 0.4533623, 0.12794934, 0.65879047, 0.741366, -0.7673749, -0.40779525, 0.4948118, -385.9129, -2.8994703, 30.668022)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enviorment/meat-palaces/palace15" unique_id=57276451]
+transform = Transform3D(0.99999976, -2.9802322e-08, 8.940697e-08, 1.1920929e-07, 0.9999997, -5.9604645e-08, 5.9604645e-08, 1.4901161e-08, 0.9999999, 3.7125473, 25.201645, -1.4862823)
+shape = SubResource("BoxShape3D_0xm2m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Enviorment/meat-palaces/palace15" unique_id=2028206075]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.988163, 25.61985, 3.2414494)
+mesh = SubResource("BoxMesh_h2yge")
+
+[node name="palace16" type="StaticBody3D" parent="Enviorment/meat-palaces" unique_id=2113285219]
+transform = Transform3D(0.5031481, -0.16047378, -0.8491704, 0.6583097, 0.7077673, 0.25630745, 0.5598844, -0.6879777, 0.46175355, -378.17035, 6.900379, 42.349796)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enviorment/meat-palaces/palace16" unique_id=1112025368]
+transform = Transform3D(1, 0, 4.172325e-07, 0, 0.9999999, -1.1920929e-07, 0, 2.9802322e-08, 1, 2.3366241, 35.325996, 4.3934937)
+shape = SubResource("BoxShape3D_0xm2m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Enviorment/meat-palaces/palace16" unique_id=593835927]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.988163, 25.61985, 3.2414494)
+mesh = SubResource("BoxMesh_h2yge")
+
+[node name="palace17" type="StaticBody3D" parent="Enviorment/meat-palaces" unique_id=1900125268]
+transform = Transform3D(0.0067594424, -0.84745234, 0.5308287, 0.9832937, -0.09092953, -0.15768735, 0.18190058, 0.52302575, 0.8326798, -206.65929, 27.335724, -4.4108315)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enviorment/meat-palaces/palace17" unique_id=762741067]
+transform = Transform3D(1, -2.9802322e-08, 3.874302e-07, 1.4901161e-08, 0.99999976, -1.4901161e-07, 2.9802322e-08, 2.9802322e-08, 1, 13.566084, 40.279022, 12.15789)
+shape = SubResource("BoxShape3D_0xm2m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Enviorment/meat-palaces/palace17" unique_id=403783163]
+transform = Transform3D(0.87185836, -0.4426138, 0.20965713, 0.37013227, 0.8758134, 0.30976266, -0.32072568, -0.19246845, 0.9274106, 7.989313, 42.87523, 30.712738)
+mesh = SubResource("BoxMesh_h2yge")
+
+[node name="palace18" type="StaticBody3D" parent="Enviorment/meat-palaces" unique_id=1369687645]
+transform = Transform3D(0.17171434, -0.9838633, 0.050270915, 0.96688205, 0.15853053, -0.20001847, 0.18882146, 0.08295134, 0.9785018, -256.6582, 28.647121, 26.02245)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enviorment/meat-palaces/palace18" unique_id=250229104]
+transform = Transform3D(1, 0, 4.172325e-07, 0, 0.9999999, -1.1920929e-07, 0, 2.9802322e-08, 1, 2.3366241, 35.325996, 4.3934937)
+shape = SubResource("BoxShape3D_0xm2m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Enviorment/meat-palaces/palace18" unique_id=1888546899]
+transform = Transform3D(0.8226016, -0.43807364, -0.362516, 0.3209661, 0.8839894, -0.33991662, 0.46936908, 0.16326064, 0.8677782, 3.5905008, 26.3237, 11.545069)
+mesh = SubResource("BoxMesh_h2yge")
+
+[node name="palace19" type="StaticBody3D" parent="Enviorment/meat-palaces" unique_id=1755389997]
+transform = Transform3D(0.53253835, -0.8417984, -0.08819413, 0.8268074, 0.49508205, 0.26698932, -0.18108782, -0.21510205, 0.95965534, -336.91327, 16.648155, 33.79755)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enviorment/meat-palaces/palace19" unique_id=404748912]
+transform = Transform3D(1, 0, 4.172325e-07, 0, 0.9999999, -1.1920929e-07, 0, 2.9802322e-08, 1, 2.3366241, 35.325996, 4.3934937)
+shape = SubResource("BoxShape3D_0xm2m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Enviorment/meat-palaces/palace19" unique_id=1499076014]
+transform = Transform3D(0.99823964, 0.030403357, -0.050925754, -0.02584825, 0.9957998, 0.08783491, 0.053382292, -0.08636396, 0.99483263, 0.99539185, 24.440582, 8.502563)
+mesh = SubResource("BoxMesh_h2yge")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Enviorment/meat-palaces/palace19" unique_id=41454564]
+transform = Transform3D(1.0000001, -7.0780516e-08, 1.4901161e-08, -3.3527613e-08, 1.0000001, 0, -1.4901161e-08, 1.4901161e-08, 1.0000002, 23.267212, -14.259186, 11.293015)
+mesh = SubResource("BoxMesh_h2yge")
+
+[node name="palace2" type="StaticBody3D" parent="Enviorment/meat-palaces" unique_id=170184557]
+transform = Transform3D(-0.07071398, 0.9974966, 0, -0.9974966, -0.07071398, 0, 0, 0, 1, -25.274555, 46.32918, -2.9372787)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enviorment/meat-palaces/palace2" unique_id=473089141]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.652317, 3.875023, 2.9726286)
+shape = SubResource("BoxShape3D_0xm2m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Enviorment/meat-palaces/palace2" unique_id=299090184]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2684326, 4.174795, 2.959879)
+mesh = SubResource("BoxMesh_h2yge")
+
+[node name="palace3" type="StaticBody3D" parent="Enviorment/meat-palaces" unique_id=1279657989]
+transform = Transform3D(0.8161274, 0.5778718, 0, -0.5778718, 0.8161274, 0, 0, 0, 1, -431.63885, -3.9613953, -8.584154)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enviorment/meat-palaces/palace3" unique_id=469766036]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.463507, 0)
+shape = SubResource("BoxShape3D_0xm2m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Enviorment/meat-palaces/palace3" unique_id=1455593427]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.44925, 0.11027527)
+mesh = SubResource("BoxMesh_h2yge")
+
+[node name="palace4" type="StaticBody3D" parent="Enviorment/meat-palaces" unique_id=2020593616]
+transform = Transform3D(-0.2943348, -0.20840837, 0.93270206, -0.77125466, 0.62813234, -0.103033066, -0.5643875, -0.74967706, -0.34561715, -386.00516, -3.9613953, 24.28365)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enviorment/meat-palaces/palace4" unique_id=2075820885]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.463507, 0)
+shape = SubResource("BoxShape3D_0xm2m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Enviorment/meat-palaces/palace4" unique_id=1467897744]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.44925, 0.11027527)
+mesh = SubResource("BoxMesh_h2yge")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Enviorment/meat-palaces/palace4" unique_id=381114685]
+transform = Transform3D(0.2277514, 0.97336733, -0.026205253, -0.86963844, 0.19122726, -0.45515049, -0.43801722, 0.12645042, 0.8900289, 13.3131485, 44.050728, 2.5011292)
+mesh = SubResource("BoxMesh_h2yge")
+
+[node name="palace6" type="StaticBody3D" parent="Enviorment/meat-palaces" unique_id=2099779547]
+transform = Transform3D(-0.72937363, -0.5164444, 0.4486641, -0.5778718, 0.8161274, -5.2215395e-08, -0.36616713, -0.25927034, -0.8937006, -391.1801, -3.9613953, 21.0016)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enviorment/meat-palaces/palace6" unique_id=306039715]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.463507, 0)
+shape = SubResource("BoxShape3D_0xm2m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Enviorment/meat-palaces/palace6" unique_id=890720167]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.44925, 0.11027527)
+mesh = SubResource("BoxMesh_h2yge")
+
+[node name="palace5" type="StaticBody3D" parent="Enviorment/meat-palaces" unique_id=1518268802]
+transform = Transform3D(-0.474797, -0.33618748, -0.81335473, -0.5778718, 0.8161274, -5.6808858e-08, 0.6638012, 0.4700148, -0.58176816, -408.7132, -3.9613953, -23.732483)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enviorment/meat-palaces/palace5" unique_id=859291927]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.463507, 0)
+shape = SubResource("BoxShape3D_0xm2m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Enviorment/meat-palaces/palace5" unique_id=185235545]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.44925, 0.11027527)
+mesh = SubResource("BoxMesh_h2yge")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Enviorment" unique_id=1719016655]
+environment = SubResource("Environment_h2yge")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Enviorment" unique_id=1788189058]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 50.60275, 0)
+shadow_enabled = true
+directional_shadow_mode = 0
+sky_mode = 2
+
+[node name="FogVolume" type="FogVolume" parent="Enviorment" unique_id=1275978943]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.076157, -32.735565, 0)
+size = Vector3(262.87018, 33.416138, 200)
+material = SubResource("FogMaterial_ig7tw")
+
+[node name="Terrain3D" type="Terrain3D" parent="Enviorment" unique_id=1097524623]
+data_directory = "res://terrain-data"
+material = SubResource("Terrain3DMaterial_ig7tw")
+assets = SubResource("Terrain3DAssets_1bvp3")
+collision_mode = 3
+displacement_sharpness = 0.5
+top_level = true
+metadata/_edit_lock_ = true
 
 [editable path="CharacterBody3D"]
