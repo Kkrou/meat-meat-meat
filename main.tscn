@@ -105,5 +105,6 @@ show_region_grid = true
 show_contours = true
 show_checkered = true
 top_level = true
+metadata/_edit_lock_ = true
 
 [editable path="CharacterBody3D"]
