@@ -31,7 +31,7 @@ transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545
 shadow_enabled = true
 
 [node name="CharacterBody3D" parent="." unique_id=658356461 instance=ExtResource("1_ig7tw")]
-transform = Transform3D(0.9999729, -2.8383727e-05, -0.0073524583, -7.2408155e-05, 0.99990594, -0.013709268, 0.0073521566, 0.01370943, 0.99987894, -1.685334, 1.5031734, -3.760837)
+transform = Transform3D(0.9999729, -2.8383727e-05, -0.0073524583, -7.2408155e-05, 0.99990594, -0.013709268, 0.0073521566, 0.01370943, 0.99987894, -1.685334, 4.030277, 4.078642)
 
 [node name="Ground" type="StaticBody3D" parent="." unique_id=2117794034]
 
