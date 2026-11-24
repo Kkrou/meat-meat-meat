@@ -1,13 +1,12 @@
 extends CharacterBody3D
-#hold constants
-const MAX_HOLD_DISTANCE = 1.5 
 #movement constants
-const SPEED = 8.0
-const JUMP_VELOCITY = 4.5
-const SENSITIVITY = 0.003
+const SPEED = 3.0
+const JUMP_VELOCITY = 0
+const SENSITIVITY = 0.001
+
 #bob variables
-const BOB_FREQ = 2.0
-const BOB_AMP = 0.08
+const BOB_FREQ = 1.5
+const BOB_AMP = 0.04
 var t_bob = 0.0
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 9.8
@@ -232,15 +231,7 @@ func _physics_process(delta):
 			velocity.x = 0.0
 			velocity.z = 0.0
 
-	# Hold logic: move the held object toward the hand every physics tick
-	if held_object:
-		var to_hand = hand.global_position - held_object.global_position
-		if to_hand.length() > MAX_HOLD_DISTANCE:
-			drop()
-		else:
-			held_object.linear_velocity = to_hand / delta
-			var target_basis = hand.global_transform.basis
-			held_object.angular_velocity = (target_basis * held_object.global_transform.basis.inverse()).get_euler() / delta
+	
 #bob code
 	t_bob += delta * velocity.length() * float(is_on_floor())
 	camera.transform.origin = _headbob(t_bob)
