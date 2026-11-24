@@ -88,6 +88,7 @@ size = Vector3(10, 120, 10)
 sky = SubResource("Sky_7mycd")
 tonemap_mode = 2
 glow_enabled = true
+fog_enabled = true
 fog_light_color = Color(0.3019608, 0.019607844, 0.05882353, 1)
 fog_light_energy = 0.5
 fog_density = 0.003
@@ -149,9 +150,10 @@ texture_list = Array[Terrain3DTextureAsset]([SubResource("Terrain3DTextureAsset_
 
 [node name="CharacterBody3D" parent="." unique_id=658356461 instance=ExtResource("1_ig7tw")]
 transform = Transform3D(0.9999999, 0, 0, 0, 0.9999024, -0.013962179, 0, 0.0139621785, 0.9999025, -406.50296, 0.25799942, -2.2542543)
+feet_head_y = -0.553
 
 [node name="Head" parent="CharacterBody3D" index="2" unique_id=228465702]
-transform = Transform3D(1, 0, 1.3969839e-09, 0, 1, 2.7939677e-09, 0, 0, 1, 0, 0.71608746, -0.0005013943)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8666609, -0.0026025772)
 
 [node name="Camera3D" parent="CharacterBody3D/Head" index="0" unique_id=708619513]
 transform = Transform3D(1.0000001, -9.567884e-09, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, -3.0517578e-05, -0.059036195, 0.0008094311)
@@ -191,6 +193,28 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1720428, 14.079178, 3.02273
 shape = SubResource("BoxShape3D_0xm2m")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Enviorment/meat-palaces/palace8" unique_id=202791568]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.988163, 25.61985, 3.2414494)
+mesh = SubResource("BoxMesh_h2yge")
+
+[node name="palace20" type="StaticBody3D" parent="Enviorment/meat-palaces" unique_id=1594140975]
+transform = Transform3D(0.52251345, 0.5905788, -0.6149768, 0.12794925, 0.6587905, 0.7413661, 0.8429761, -0.46605957, 0.2686628, -134.39403, 32.94029, 60.065582)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enviorment/meat-palaces/palace20" unique_id=1731766292]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1720428, 14.079178, 3.0227337)
+shape = SubResource("BoxShape3D_0xm2m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Enviorment/meat-palaces/palace20" unique_id=1593343400]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.988163, 25.61985, 3.2414494)
+mesh = SubResource("BoxMesh_h2yge")
+
+[node name="palace21" type="StaticBody3D" parent="Enviorment/meat-palaces" unique_id=1706784313]
+transform = Transform3D(0.52251345, 0.5905788, -0.6149768, 0.12794925, 0.6587905, 0.7413661, 0.8429761, -0.46605957, 0.2686628, -157.17403, 32.94029, 53.576958)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enviorment/meat-palaces/palace21" unique_id=1988496920]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1720428, 14.079178, 3.0227337)
+shape = SubResource("BoxShape3D_0xm2m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Enviorment/meat-palaces/palace21" unique_id=356705701]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.988163, 25.61985, 3.2414494)
 mesh = SubResource("BoxMesh_h2yge")
 

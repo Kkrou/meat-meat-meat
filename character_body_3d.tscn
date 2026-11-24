@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://sajcr155km6v"]
 
-[ext_resource type="Script" uid="uid://c2t5qt4hbug3y" path="res://script/Player.gd" id="1_cvunv"]
+[ext_resource type="Script" uid="uid://clvwitntq4kfs" path="res://script/Player.gd" id="1_cvunv"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_cy14o"]
 
@@ -35,10 +35,85 @@ shader_parameter/range_per_color = 12
 size = Vector2(1280, 720)
 center_offset = Vector3(640, 360, 0)
 
+[sub_resource type="Animation" id="Animation_iwpo4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_c7tqt"]
+resource_name = "claw_final"
+length = 2.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.22, 0.57, 2.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.13962634, 0, 0.05235988), Vector3(-0.13962634, 0, 0.02443461), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_vd578"]
+resource_name = "claw_left"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.12, 0.25, 0.7, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.05235988, 0.17453292, 0.034906585), Vector3(-0.02617994, 0.12217305, 0.027925268), Vector3(-0.02617994, 0.12217305, 0.027925268), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_fb3t6"]
+resource_name = "claw_right"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.12, 0.25, 0.7, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.05235988, -0.17453292, -0.034906585), Vector3(-0.02617994, -0.12217305, -0.027925268), Vector3(-0.02617994, -0.12217305, -0.027925268), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c7tqt"]
+_data = {
+&"RESET": SubResource("Animation_iwpo4"),
+&"claw_final": SubResource("Animation_c7tqt"),
+&"claw_left": SubResource("Animation_vd578"),
+&"claw_right": SubResource("Animation_fb3t6")
+}
+
 [node name="CharacterBody3D" type="CharacterBody3D" unique_id=658356461 groups=["player"]]
 transform = Transform3D(0.9999729, -2.8383727e-05, -0.0073524583, -7.2408155e-05, 0.99990594, -0.013709268, 0.0073521566, 0.01370943, 0.99987894, 0, 0, 0)
 wall_min_slide_angle = 0.17453292
 script = ExtResource("1_cvunv")
+final_drop_depth = 0.3
+drop_time = 0.3
+impact_dip = 0.1
+recover_time = 0.8
+feet_head_y = 0.1
+auto_start_for_testing = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=358564963]
 visible = false
@@ -48,7 +123,7 @@ mesh = SubResource("CapsuleMesh_cy14o")
 shape = SubResource("ConvexPolygonShape3D_fj7yv")
 
 [node name="Head" type="Node3D" parent="." unique_id=228465702]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6794615, 0)
+transform = Transform3D(0.99999976, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000002, 7.275958e-12, 0.6794616, -2.7939677e-09)
 
 [node name="Camera3D" type="Camera3D" parent="Head" unique_id=708619513]
 current = true
@@ -65,3 +140,6 @@ debug_shape_custom_color = Color(0, 0, 1, 1)
 material = SubResource("ShaderMaterial_f3sb7")
 position = Vector2(-7, 15)
 mesh = SubResource("QuadMesh_hdwr6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=469370002]
+libraries/ = SubResource("AnimationLibrary_c7tqt")
