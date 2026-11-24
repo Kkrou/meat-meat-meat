@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bhywtj4qkxsb1"]
+
+[ext_resource type="PackedScene" path="res://scene.gltf" id="1_8ognc"]
+[ext_resource type="Texture2D" uid="uid://cmwum16f863m3" path="res://textures/meat-piece/Meat_piece_mat_baseColor.png" id="2_14b3g"]
+[ext_resource type="Texture2D" uid="uid://cn4rb6fhbruyt" path="res://textures/meat-piece/Meat_piece_mat_normal.png" id="3_j1dt7"]
+[ext_resource type="Texture2D" uid="uid://4ocyrryllv8a" path="res://textures/meat-piece/Meat_piece_mat_metallicRoughness.png" id="4_rv84n"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5vmpt"]
+albedo_texture = ExtResource("2_14b3g")
+roughness_texture = ExtResource("4_rv84n")
+normal_enabled = true
+normal_texture = ExtResource("3_j1dt7")
+
+[node name="Sketchfab_Scene" unique_id=67079959 instance=ExtResource("1_8ognc")]
+
+[node name="Meat_piece_Meat_piece_mat_0" parent="Sketchfab_model/6b4671afa6904b60a80f1d90324d2fca_fbx/RootNode/Meat_piece" parent_id_path=PackedInt32Array(1834627292) index="0" unique_id=1906116141]
+surface_material_override/0 = SubResource("StandardMaterial3D_5vmpt")

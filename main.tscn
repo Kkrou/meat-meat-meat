@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://ubn8f02gxqtm" path="res://textures/meat/packed_normal_roughness.png" id="6_7mycd"]
 [ext_resource type="Script" uid="uid://duv1tbxivojvw" path="res://fade-in-out.gd" id="7_5vw27"]
 [ext_resource type="LabelSettings" uid="uid://dpfmepwt8njvy" path="res://fontsettings.tres" id="7_272bh"]
+[ext_resource type="PackedScene" uid="uid://bhywtj4qkxsb1" path="res://models/meat-piece.tscn" id="9_kek77"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0xm2m"]
 size = Vector3(10, 60, 20.12732)
@@ -153,6 +154,7 @@ texture_list = Array[Terrain3DTextureAsset]([SubResource("Terrain3DTextureAsset_
 [node name="CharacterBody3D" parent="." unique_id=658356461 instance=ExtResource("1_ig7tw")]
 transform = Transform3D(0.9999999, 0, 0, 0, 0.9999024, -0.013962179, 0, 0.0139621785, 0.9999025, -406.50296, 0.25799942, -2.2542543)
 feet_head_y = -0.553
+auto_start_for_testing = false
 
 [node name="Head" parent="CharacterBody3D" index="2" unique_id=228465702]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8666609, -0.0026025772)
@@ -529,5 +531,41 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Reach The Hole"
 label_settings = ExtResource("7_272bh")
+
+[node name="meat piece" parent="." unique_id=67079959 instance=ExtResource("9_kek77")]
+transform = Transform3D(29.999998, 0, 0, 0, -21.048548, 21.37658, 0, -21.37658, -21.048548, -407.5906, 4.6351624, 2.2654638)
+
+[node name="meat piece2" parent="." unique_id=2144998689 instance=ExtResource("9_kek77")]
+transform = Transform3D(29.999994, 0, 0, 0, 17.603886, -24.292025, 0, 24.292025, 17.603886, -186.53566, 24.476955, -33.07093)
+
+[node name="meat piece12" parent="." unique_id=763110409 instance=ExtResource("9_kek77")]
+transform = Transform3D(-15.110676, -48.230953, -48.429764, -21.146664, 50.464577, -43.659412, 64.99605, 5.205784, -25.463976, -149.16801, 57.122036, -52.06134)
+
+[node name="meat piece9" parent="." unique_id=318676703 instance=ExtResource("9_kek77")]
+transform = Transform3D(30.000002, 0, 0, 0, 25.107788, 16.419437, 0, -16.419437, 25.107788, -186.53566, 31.240437, 22.135138)
+
+[node name="meat piece3" parent="." unique_id=516097928 instance=ExtResource("9_kek77")]
+transform = Transform3D(4.698833, -9.95322, -27.907948, -29.532879, -3.8560038, -3.5971947, -2.3936522, 28.036833, -10.4022, -230.55017, 4.9565096, -46.38057)
+
+[node name="meat piece4" parent="." unique_id=320739737 instance=ExtResource("9_kek77")]
+transform = Transform3D(4.698833, -9.95322, -27.907948, -29.532879, -3.8560038, -3.5971947, -2.3936522, 28.036833, -10.4022, -295.73877, 4.9565096, -51.804375)
+
+[node name="meat piece5" parent="." unique_id=1898027616 instance=ExtResource("9_kek77")]
+transform = Transform3D(-1.2131331, 6.789914, -29.196314, 21.039778, 21.005722, 4.0108814, 21.350784, -20.313946, -5.611367, -282.69873, 4.9565096, 9.664444)
+
+[node name="meat piece11" parent="." unique_id=1363923686 instance=ExtResource("9_kek77")]
+transform = Transform3D(-26.7683, -13.7996645, -51.89439, 32.55817, 41.939754, -27.946785, 42.70157, -40.6279, -11.222733, -270.1444, 47.6651, 28.134495)
+
+[node name="meat piece10" parent="." unique_id=1629757385 instance=ExtResource("9_kek77")]
+transform = Transform3D(-22.28433, -19.379622, 5.2762113, -14.285065, 9.752743, -24.511631, 14.118964, -20.719877, -16.472416, -235.41937, 10.823892, 7.2439575)
+
+[node name="meat piece6" parent="." unique_id=1497015656 instance=ExtResource("9_kek77")]
+transform = Transform3D(21.23826, -21.182894, -0.4702378, 20.133791, 19.969051, 9.79117, -6.6005073, -7.2471704, 28.353327, -300.1496, 20.484098, 17.510038)
+
+[node name="meat piece7" parent="." unique_id=112751760 instance=ExtResource("9_kek77")]
+transform = Transform3D(21.23826, -21.182894, -0.4702378, 20.133791, 19.969051, 9.79117, -6.6005073, -7.2471704, 28.353327, -337.21948, 15.508699, -59.330143)
+
+[node name="meat piece8" parent="." unique_id=1356872912 instance=ExtResource("9_kek77")]
+transform = Transform3D(88.691925, 35.385654, 29.691666, -33.296654, 93.526886, -12.002225, -32.01676, 0.75868034, 94.73306, -406.91476, 46.18935, -15.763654)
 
 [editable path="CharacterBody3D"]
