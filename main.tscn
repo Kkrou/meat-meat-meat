@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dxgx3lex645k" path="res://textures/meat/Meat_Raw_001_roughness.jpg" id="4_272bh"]
 [ext_resource type="Texture2D" uid="uid://b3aakr7h00c42" path="res://textures/meat/Meat_Raw_001_normal.jpg" id="5_5vw27"]
 [ext_resource type="Texture2D" uid="uid://ubn8f02gxqtm" path="res://textures/meat/packed_normal_roughness.png" id="6_7mycd"]
+[ext_resource type="Shader" uid="uid://0c178m0yctv3" path="res://script/stylized-sky.gdshader" id="6_efxa6"]
 [ext_resource type="Script" uid="uid://duv1tbxivojvw" path="res://fade-in-out.gd" id="7_5vw27"]
 [ext_resource type="LabelSettings" uid="uid://dpfmepwt8njvy" path="res://fontsettings.tres" id="7_272bh"]
 [ext_resource type="PackedScene" uid="uid://bhywtj4qkxsb1" path="res://models/meat-piece.tscn" id="9_kek77"]
@@ -86,16 +87,65 @@ uv1_scale = Vector3(15, 15, 15)
 material = SubResource("StandardMaterial3D_2cqfq")
 size = Vector3(10, 120, 10)
 
-[sub_resource type="Sky" id="Sky_7mycd"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_efxa6"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dg77c"]
+noise = SubResource("FastNoiseLite_efxa6")
+seamless = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ycdy4"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_w48qg"]
+noise = SubResource("FastNoiseLite_ycdy4")
+seamless = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vivmo"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2cqfq"]
+noise = SubResource("FastNoiseLite_vivmo")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dg77c"]
+shader = ExtResource("6_efxa6")
+shader_parameter/cloud_shape_sampler = SubResource("NoiseTexture2D_2cqfq")
+shader_parameter/cloud_noise_sampler = SubResource("NoiseTexture2D_w48qg")
+shader_parameter/cloud_curves = SubResource("NoiseTexture2D_dg77c")
+shader_parameter/clouds_samples = 32
+shader_parameter/shadow_sample = 4
+shader_parameter/clouds_density = 0.5000000074506
+shader_parameter/clouds_scale = 1.5
+shader_parameter/clouds_smoothness = 0.00999999977648
+shader_parameter/clouds_light_color = Color(1, 0.38859472, 0.31404635, 1)
+shader_parameter/clouds_shadow_intensity = 0.5000000074506
+shader_parameter/high_clouds_density = 0.0
+shader_parameter/top_color = Color(0.19215687, 0.050980393, 0.09411765, 1)
+shader_parameter/bottom_color = Color(0.64705884, 0.25882354, 0.28235295, 1)
+shader_parameter/sun_scatter = Color(1, 1, 1, 1)
+shader_parameter/astro_tint = Color(1, 0.40724552, 0.338652, 1)
+shader_parameter/astro_scale = 10.0
+shader_parameter/astro_intensity = 3.0
+shader_parameter/stars_intensity = 5.0
+shader_parameter/shooting_stars_intensity = 0.0
+shader_parameter/shooting_star_tint = Color(0, 0, 0, 1)
+
+[sub_resource type="Sky" id="Sky_ycdy4"]
+sky_material = SubResource("ShaderMaterial_dg77c")
 
 [sub_resource type="Environment" id="Environment_h2yge"]
 background_mode = 2
-sky = SubResource("Sky_7mycd")
+background_energy_multiplier = 0.5
+sky = SubResource("Sky_ycdy4")
+ambient_light_source = 3
+ambient_light_color = Color(0.25565878, 0.25565878, 0.25565878, 1)
+ambient_light_sky_contribution = 0.1
 tonemap_mode = 2
 glow_enabled = true
 fog_enabled = true
-fog_light_color = Color(0.40392157, 0.02745098, 0.078431375, 1)
-fog_light_energy = 0.5
+fog_light_color = Color(0.6509804, 0.35686275, 0.3764706, 1)
+fog_light_energy = 0.1
+fog_sun_scatter = 0.15
+fog_density = 0.005
+fog_sky_affect = 0.9
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.0001
 volumetric_fog_length = 200.0
@@ -155,7 +205,6 @@ texture_list = Array[Terrain3DTextureAsset]([SubResource("Terrain3DTextureAsset_
 [node name="CharacterBody3D" parent="." unique_id=658356461 instance=ExtResource("1_ig7tw")]
 transform = Transform3D(0.9999999, 0, 0, 0, 0.9999024, -0.013962179, 0, 0.0139621785, 0.9999025, -406.50296, 0.25799942, -2.2542543)
 feet_head_y = -0.553
-auto_start_for_testing = false
 
 [node name="Head" parent="CharacterBody3D" index="2" unique_id=228465702]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8666609, -0.0026025772)
@@ -439,6 +488,7 @@ environment = SubResource("Environment_h2yge")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Enviorment" unique_id=1788189058]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 50.60275, 0)
+light_color = Color(0.91227055, 4.7168137e-06, 6.738305e-07, 1)
 shadow_enabled = true
 directional_shadow_mode = 0
 sky_mode = 2
