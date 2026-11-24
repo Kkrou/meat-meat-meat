@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://duv1tbxivojvw" path="res://fade-in-out.gd" id="7_5vw27"]
 [ext_resource type="LabelSettings" uid="uid://dpfmepwt8njvy" path="res://fontsettings.tres" id="7_272bh"]
 [ext_resource type="PackedScene" uid="uid://bhywtj4qkxsb1" path="res://models/meat-piece.tscn" id="9_kek77"]
+[ext_resource type="PackedScene" uid="uid://bkr8ulearbmf4" path="res://models/heart.tscn" id="10_4c57u"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0xm2m"]
 size = Vector3(10, 60, 20.12732)
@@ -88,13 +89,13 @@ size = Vector3(10, 120, 10)
 [sub_resource type="Sky" id="Sky_7mycd"]
 
 [sub_resource type="Environment" id="Environment_h2yge"]
+background_mode = 2
 sky = SubResource("Sky_7mycd")
 tonemap_mode = 2
 glow_enabled = true
 fog_enabled = true
-fog_light_color = Color(0.3019608, 0.019607844, 0.05882353, 1)
+fog_light_color = Color(0.40392157, 0.02745098, 0.078431375, 1)
 fog_light_energy = 0.5
-fog_density = 0.003
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.0001
 volumetric_fog_length = 200.0
@@ -532,40 +533,77 @@ grow_vertical = 2
 text = "Reach The Hole"
 label_settings = ExtResource("7_272bh")
 
-[node name="meat piece" parent="." unique_id=67079959 instance=ExtResource("9_kek77")]
+[node name="Meat pieces" type="Node" parent="." unique_id=261746168]
+
+[node name="meat piece" parent="Meat pieces" unique_id=67079959 instance=ExtResource("9_kek77")]
 transform = Transform3D(29.999998, 0, 0, 0, -21.048548, 21.37658, 0, -21.37658, -21.048548, -407.5906, 4.6351624, 2.2654638)
 
-[node name="meat piece2" parent="." unique_id=2144998689 instance=ExtResource("9_kek77")]
+[node name="meat piece2" parent="Meat pieces" unique_id=2144998689 instance=ExtResource("9_kek77")]
 transform = Transform3D(29.999994, 0, 0, 0, 17.603886, -24.292025, 0, 24.292025, 17.603886, -186.53566, 24.476955, -33.07093)
 
-[node name="meat piece12" parent="." unique_id=763110409 instance=ExtResource("9_kek77")]
+[node name="meat piece12" parent="Meat pieces" unique_id=763110409 instance=ExtResource("9_kek77")]
 transform = Transform3D(-15.110676, -48.230953, -48.429764, -21.146664, 50.464577, -43.659412, 64.99605, 5.205784, -25.463976, -149.16801, 57.122036, -52.06134)
 
-[node name="meat piece9" parent="." unique_id=318676703 instance=ExtResource("9_kek77")]
+[node name="meat piece9" parent="Meat pieces" unique_id=318676703 instance=ExtResource("9_kek77")]
 transform = Transform3D(30.000002, 0, 0, 0, 25.107788, 16.419437, 0, -16.419437, 25.107788, -186.53566, 31.240437, 22.135138)
 
-[node name="meat piece3" parent="." unique_id=516097928 instance=ExtResource("9_kek77")]
+[node name="meat piece3" parent="Meat pieces" unique_id=516097928 instance=ExtResource("9_kek77")]
 transform = Transform3D(4.698833, -9.95322, -27.907948, -29.532879, -3.8560038, -3.5971947, -2.3936522, 28.036833, -10.4022, -230.55017, 4.9565096, -46.38057)
 
-[node name="meat piece4" parent="." unique_id=320739737 instance=ExtResource("9_kek77")]
+[node name="meat piece4" parent="Meat pieces" unique_id=320739737 instance=ExtResource("9_kek77")]
 transform = Transform3D(4.698833, -9.95322, -27.907948, -29.532879, -3.8560038, -3.5971947, -2.3936522, 28.036833, -10.4022, -295.73877, 4.9565096, -51.804375)
 
-[node name="meat piece5" parent="." unique_id=1898027616 instance=ExtResource("9_kek77")]
+[node name="meat piece5" parent="Meat pieces" unique_id=1898027616 instance=ExtResource("9_kek77")]
 transform = Transform3D(-1.2131331, 6.789914, -29.196314, 21.039778, 21.005722, 4.0108814, 21.350784, -20.313946, -5.611367, -282.69873, 4.9565096, 9.664444)
 
-[node name="meat piece11" parent="." unique_id=1363923686 instance=ExtResource("9_kek77")]
+[node name="meat piece11" parent="Meat pieces" unique_id=1363923686 instance=ExtResource("9_kek77")]
 transform = Transform3D(-26.7683, -13.7996645, -51.89439, 32.55817, 41.939754, -27.946785, 42.70157, -40.6279, -11.222733, -270.1444, 47.6651, 28.134495)
 
-[node name="meat piece10" parent="." unique_id=1629757385 instance=ExtResource("9_kek77")]
+[node name="meat piece10" parent="Meat pieces" unique_id=1629757385 instance=ExtResource("9_kek77")]
 transform = Transform3D(-22.28433, -19.379622, 5.2762113, -14.285065, 9.752743, -24.511631, 14.118964, -20.719877, -16.472416, -235.41937, 10.823892, 7.2439575)
 
-[node name="meat piece6" parent="." unique_id=1497015656 instance=ExtResource("9_kek77")]
+[node name="meat piece6" parent="Meat pieces" unique_id=1497015656 instance=ExtResource("9_kek77")]
 transform = Transform3D(21.23826, -21.182894, -0.4702378, 20.133791, 19.969051, 9.79117, -6.6005073, -7.2471704, 28.353327, -300.1496, 20.484098, 17.510038)
 
-[node name="meat piece7" parent="." unique_id=112751760 instance=ExtResource("9_kek77")]
+[node name="meat piece7" parent="Meat pieces" unique_id=112751760 instance=ExtResource("9_kek77")]
 transform = Transform3D(21.23826, -21.182894, -0.4702378, 20.133791, 19.969051, 9.79117, -6.6005073, -7.2471704, 28.353327, -337.21948, 15.508699, -59.330143)
 
-[node name="meat piece8" parent="." unique_id=1356872912 instance=ExtResource("9_kek77")]
+[node name="meat piece8" parent="Meat pieces" unique_id=1356872912 instance=ExtResource("9_kek77")]
 transform = Transform3D(88.691925, 35.385654, 29.691666, -33.296654, 93.526886, -12.002225, -32.01676, 0.75868034, 94.73306, -406.91476, 46.18935, -15.763654)
+
+[node name="hearts" type="Node" parent="." unique_id=895872931]
+
+[node name="Heart" parent="hearts" unique_id=1104504886 instance=ExtResource("10_4c57u")]
+transform = Transform3D(1, 0, 0, 0, 0.85688853, -0.5155018, 0, 0.5155018, 0.85688853, -317.21317, -0.58515215, 6.6373434)
+
+[node name="Heart6" parent="hearts" unique_id=1356480514 instance=ExtResource("10_4c57u")]
+transform = Transform3D(3, 0, 0, 0, 2.5706656, -1.5465055, 0, 1.5465055, 2.5706656, -317.21317, 20.091053, -71.721695)
+
+[node name="Heart8" parent="hearts" unique_id=1709624785 instance=ExtResource("10_4c57u")]
+transform = Transform3D(-0.97838247, -2.3038588, 1.6537843, 2.5376859, 0.06978916, 1.5985229, -1.2660627, 1.9202513, 1.9260637, -331.5046, 20.091053, -69.391136)
+
+[node name="Heart7" parent="hearts" unique_id=1957367471 instance=ExtResource("10_4c57u")]
+transform = Transform3D(-1.4738967, 2.2390263, -1.3469921, -1.1066452, 0.8660683, 2.650521, 2.367058, 1.7990791, 0.40043765, -307.29303, 20.091053, -71.721695)
+
+[node name="Heart9" parent="hearts" unique_id=1714850315 instance=ExtResource("10_4c57u")]
+transform = Transform3D(-2.1727023, -0.91614544, 1.8547342, -1.5273203, 2.5245504, -0.5421577, -1.395225, -1.336907, -2.2947822, -164.90973, 35.581364, 32.488144)
+
+[node name="Heart10" parent="hearts" unique_id=632617867 instance=ExtResource("10_4c57u")]
+transform = Transform3D(-1.0736072, 2.2709515, -1.6401649, 2.2112398, 1.7653843, 0.9969101, 1.7198195, -0.8521701, -2.3056505, -153.29927, 43.507336, 32.606384)
+
+[node name="Heart11" parent="hearts" unique_id=907132650 instance=ExtResource("10_4c57u")]
+transform = Transform3D(2.4404662, -1.7023909, -0.38208216, 0.50957274, 0.06713815, 2.955643, -1.6686692, -2.4692822, 0.34377968, -172.50859, 39.85141, 34.716663)
+
+[node name="Heart3" parent="hearts" unique_id=494411555 instance=ExtResource("10_4c57u")]
+transform = Transform3D(0.757508, -0.5055652, 0.41301996, 0, 0.6326648, 0.7744258, -0.6528259, -0.58663374, 0.47924864, -254.0632, 3.633884, 6.806637)
+
+[node name="Heart4" parent="hearts" unique_id=1374739650 instance=ExtResource("10_4c57u")]
+transform = Transform3D(-0.87207884, -1.6225929, 5.710224, 0.59862393, 5.718055, 1.7162402, -5.906024, 0.8191629, -0.66921234, -116.56781, 62.99083, -51.369133)
+
+[node name="Heart5" parent="hearts" unique_id=1108083063 instance=ExtResource("10_4c57u")]
+transform = Transform3D(0.0855518, 0.01685214, 1.9980981, -1.368281, 1.4579656, 0.0462886, -1.4561894, -1.36896, 0.07389504, -196.31583, 36.97636, 32.13429)
+
+[node name="Heart2" parent="hearts" unique_id=1582108456 instance=ExtResource("10_4c57u")]
+transform = Transform3D(0.90860295, 0.21530496, 0.35788885, 0, 0.85688853, -0.5155018, -0.41766092, 0.46838644, 0.7785714, -406.65717, 3.2869992, -10.88957)
 
 [editable path="CharacterBody3D"]

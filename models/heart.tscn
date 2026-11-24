@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bkr8ulearbmf4"]
+
+[ext_resource type="PackedScene" uid="uid://cvfl7ek35h6s4" path="res://models/scene.gltf" id="1_han6u"]
+[ext_resource type="Texture2D" uid="uid://iq83oh3lulpj" path="res://textures/heart/Heart_Tex_baseColor.png" id="2_4weym"]
+[ext_resource type="Texture2D" uid="uid://cf53v23eleyio" path="res://textures/heart/Heart_Tex_normal.png" id="3_5wfgc"]
+[ext_resource type="Texture2D" uid="uid://c8583qwh0j6jx" path="res://textures/heart/Heart_Tex_metallicRoughness.png" id="4_l5lq0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fuavt"]
+albedo_color = Color(1, 0.7193896, 0.6908362, 1)
+albedo_texture = ExtResource("2_4weym")
+roughness = 0.0
+roughness_texture = ExtResource("4_l5lq0")
+normal_enabled = true
+normal_texture = ExtResource("3_5wfgc")
+
+[node name="Sketchfab_Scene" unique_id=1104504886 instance=ExtResource("1_han6u")]
+
+[node name="hart_ZBrush_defualt_group_Heart Tex_0" parent="Sketchfab_model/15db5831532f4e549f3754b7e60321e4_fbx/RootNode/hart_ZBrush_defualt_group" parent_id_path=PackedInt32Array(537327315) index="0" unique_id=580696618]
+surface_material_override/0 = SubResource("StandardMaterial3D_fuavt")
