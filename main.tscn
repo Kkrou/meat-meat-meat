@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://dxgx3lex645k" path="res://textures/meat/Meat_Raw_001_roughness.jpg" id="4_272bh"]
 [ext_resource type="Texture2D" uid="uid://b3aakr7h00c42" path="res://textures/meat/Meat_Raw_001_normal.jpg" id="5_5vw27"]
 [ext_resource type="Texture2D" uid="uid://ubn8f02gxqtm" path="res://textures/meat/packed_normal_roughness.png" id="6_7mycd"]
+[ext_resource type="Script" uid="uid://duv1tbxivojvw" path="res://fade-in-out.gd" id="7_5vw27"]
+[ext_resource type="LabelSettings" uid="uid://dpfmepwt8njvy" path="res://fontsettings.tres" id="7_272bh"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0xm2m"]
 size = Vector3(10, 60, 20.12732)
@@ -451,5 +453,81 @@ collision_mode = 3
 displacement_sharpness = 0.5
 top_level = true
 metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1103951218]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -226.0
+offset_top = -90.5
+offset_right = 226.0
+offset_bottom = 90.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+script = ExtResource("7_5vw27")
+
+[node name="Your skeleton taints you" type="Label" parent="VBoxContainer" unique_id=1418200108]
+layout_mode = 2
+text = "Your Skeleton Taints You"
+label_settings = ExtResource("7_272bh")
+horizontal_alignment = 1
+
+[node name="Despise It" type="Label" parent="VBoxContainer" unique_id=890261007]
+layout_mode = 2
+text = "Despise It"
+label_settings = ExtResource("7_272bh")
+horizontal_alignment = 1
+
+[node name="Dispose Of It" type="Label" parent="VBoxContainer" unique_id=1742218961]
+layout_mode = 2
+text = "Dispose Of It"
+label_settings = ExtResource("7_272bh")
+horizontal_alignment = 1
+
+[node name="Claw It Out Of You" type="Label" parent="VBoxContainer" unique_id=45611179]
+layout_mode = 2
+text = "Claw It Out Of You"
+label_settings = ExtResource("7_272bh")
+horizontal_alignment = 1
+
+[node name="[Left Click]" type="Label" parent="." unique_id=422239690]
+visible = false
+offset_left = 273.0
+offset_top = 508.0
+offset_right = 464.0
+offset_bottom = 545.0
+grow_vertical = 0
+text = "[Left Click]"
+label_settings = ExtResource("7_272bh")
+
+[node name="[Right Click]" type="Label" parent="." unique_id=404392070]
+visible = false
+offset_left = 768.0
+offset_top = 505.0
+offset_right = 979.0
+offset_bottom = 549.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "[Right Click]"
+label_settings = ExtResource("7_272bh")
+
+[node name="Reach The Hole" type="Label" parent="." unique_id=1462058820]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -145.5
+offset_top = -22.0
+offset_right = 145.5
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Reach The Hole"
+label_settings = ExtResource("7_272bh")
 
 [editable path="CharacterBody3D"]
