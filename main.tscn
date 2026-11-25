@@ -9,6 +9,7 @@
 [ext_resource type="Shader" uid="uid://0c178m0yctv3" path="res://script/stylized-sky.gdshader" id="6_efxa6"]
 [ext_resource type="Script" uid="uid://duv1tbxivojvw" path="res://fade-in-out.gd" id="7_5vw27"]
 [ext_resource type="LabelSettings" uid="uid://dpfmepwt8njvy" path="res://fontsettings.tres" id="7_272bh"]
+[ext_resource type="Texture2D" uid="uid://bf7etgas0iggb" path="res://script/circle_05_a.png" id="7_dg77c"]
 [ext_resource type="PackedScene" uid="uid://bhywtj4qkxsb1" path="res://models/meat-piece.tscn" id="9_kek77"]
 [ext_resource type="PackedScene" uid="uid://bkr8ulearbmf4" path="res://models/heart.tscn" id="10_4c57u"]
 
@@ -93,7 +94,8 @@ shader_parameter/top_color = Color(0.2901961, 0.02745098, 0.0627451, 1)
 shader_parameter/bottom_color = Color(0.6379732, 0.114864014, 0.18141407, 1)
 shader_parameter/sun_scatter = Color(0.93935597, 0.27958903, 0.3328984, 1)
 shader_parameter/astro_tint = Color(1, 0.40724552, 0.338652, 1)
-shader_parameter/astro_scale = 10.0
+shader_parameter/astro_sampler = ExtResource("7_dg77c")
+shader_parameter/astro_scale = 4.0000000596048
 shader_parameter/astro_intensity = 3.0
 shader_parameter/stars_intensity = 5.0
 shader_parameter/shooting_stars_intensity = 0.0
@@ -223,10 +225,10 @@ left_prompt_label = NodePath("../[Left Click]")
 right_prompt_label = NodePath("../[Right Click]")
 
 [node name="Head" parent="CharacterBody3D" index="2" unique_id=228465702]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8666609, -0.0026025772)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.044799805, 0.832928, -0.0021307468)
 
 [node name="Camera3D" parent="CharacterBody3D/Head" index="0" unique_id=708619513]
-transform = Transform3D(1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 1.1212769, -0.059036255, 0.00080919266)
+transform = Transform3D(1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0.0005187988, -0.00730145, 8.6545944e-05)
 fov = 70.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CharacterBody3D" unique_id=1103951218 node_paths=PackedStringArray("player")]
