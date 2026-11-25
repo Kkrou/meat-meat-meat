@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://hcv50qfp55de"]
+
+[ext_resource type="PackedScene" uid="uid://bhf5h5qfxjpi5" path="res://models/stomach/scene.gltf" id="1_4cbde"]
+[ext_resource type="Texture2D" uid="uid://spmxfb75eykl" path="res://textures/Material.001_baseColor.png" id="2_xl5dj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_388nn"]
+albedo_color = Color(1, 0.4166032, 0.34792536, 1)
+albedo_texture = ExtResource("2_xl5dj")
+roughness = 0.0
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_eeqir"]
+points = PackedVector3Array(0.7340171, -0.323664, -0.02055706, -0.8090713, -0.36617678, 0.008995314, -0.7660683, -0.39013207, -0.050571695, -0.15141644, 0.9775971, -0.18007796, -0.39781487, -0.061276514, 0.41297045, 0.63957214, -0.8582694, 0.42120638, -0.24646226, -0.3834866, -0.40177405, 0.038173165, 1.0093286, 0.009716179, -0.3871654, -0.7915426, 0.19080429, 0.6711983, -0.98499715, 0.16796783, -0.77340746, 0.20629708, -0.05099405, 0.607946, -0.19349414, -0.18007796, -0.5247332, -0.0625243, -0.43425244, -0.70408314, 0.20356663, 0.21604016, 0.7664114, -0.6365454, 0.3579417, -0.5913009, -0.5717563, 0.30784035, -0.43959776, -0.56902057, -0.28870493, -0.3056394, 0.08133322, -0.41784635, 0.006714344, 0.9775971, -0.18007796, 0.54469365, -0.9532656, 0.42120638, -0.15141644, 1.0093286, 0.009716179, -0.70740306, -0.003700018, -0.31839678, 0.73461795, -0.7634715, 0.041348536, -0.50080335, -0.7202286, -0.05076322, 0.7978703, -0.4152181, 0.19960018, -0.43663618, -0.38801935, 0.4225897, -0.21483609, -0.70000845, -0.2117103, 0.006714344, 0.9775971, 0.041348536, 0.06979933, 0.9775971, -0.11672338, -0.77371186, -0.09359955, 0.18897128, -0.71053576, -0.24280679, -0.28990182, -0.6046133, 0.17091127, 0.2996351)
+
+[node name="Sketchfab_Scene" unique_id=1802416568 instance=ExtResource("1_4cbde")]
+
+[node name="Mesh1_Mesh1_114_Material_001_0" parent="Sketchfab_model/72ddf342cfbf4f549337dc6896b85a6a_fbx/RootNode/Mesh1_Mesh1_114" parent_id_path=PackedInt32Array(1361277270) index="0" unique_id=1932761145]
+surface_material_override/0 = SubResource("StandardMaterial3D_388nn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sketchfab_model/72ddf342cfbf4f549337dc6896b85a6a_fbx/RootNode/Mesh1_Mesh1_114" parent_id_path=PackedInt32Array(1361277270) index="1" unique_id=772559014]
+shape = SubResource("ConvexPolygonShape3D_eeqir")

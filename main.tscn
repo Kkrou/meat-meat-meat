@@ -7,13 +7,15 @@
 [ext_resource type="Texture2D" uid="uid://b3aakr7h00c42" path="res://textures/meat/Meat_Raw_001_normal.jpg" id="5_5vw27"]
 [ext_resource type="Texture2D" uid="uid://ubn8f02gxqtm" path="res://textures/meat/packed_normal_roughness.png" id="6_7mycd"]
 [ext_resource type="Shader" uid="uid://0c178m0yctv3" path="res://script/stylized-sky.gdshader" id="6_efxa6"]
-[ext_resource type="Script" uid="uid://duv1tbxivojvw" path="res://fade-in-out.gd" id="7_5vw27"]
+[ext_resource type="Script" uid="uid://duv1tbxivojvw" path="res://script/fade-in-out.gd" id="7_5vw27"]
 [ext_resource type="LabelSettings" uid="uid://dpfmepwt8njvy" path="res://fontsettings.tres" id="7_272bh"]
 [ext_resource type="Texture2D" uid="uid://bf7etgas0iggb" path="res://script/circle_05_a.png" id="7_dg77c"]
 [ext_resource type="PackedScene" uid="uid://bhywtj4qkxsb1" path="res://models/meat-piece.tscn" id="9_kek77"]
 [ext_resource type="PackedScene" uid="uid://bkr8ulearbmf4" path="res://models/heart.tscn" id="10_4c57u"]
+[ext_resource type="PackedScene" uid="uid://hcv50qfp55de" path="res://models/stomach/stomach.tscn" id="11_vivmo"]
 [ext_resource type="Script" uid="uid://6eueavqnlef2" path="res://area_3d.gd" id="13_w48qg"]
 [ext_resource type="FontFile" uid="uid://ch22k04io1wsn" path="res://Aresink.otf" id="14_vivmo"]
+[ext_resource type="PackedScene" uid="uid://cf6m2lxan63ff" path="res://models/intestines/intestines.tscn" id="16_2cqfq"]
 
 [sub_resource type="Terrain3DMaterial" id="Terrain3DMaterial_ig7tw"]
 _shader_parameters = {
@@ -313,6 +315,92 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.076157, -38.086685, 0)
 size = Vector3(262.87018, 33.416138, 200)
 material = SubResource("FogMaterial_ig7tw")
 
+[node name="organs" type="Node" parent="Enviorment" unique_id=941712127]
+
+[node name="Sketchfab_Scene" parent="Enviorment/organs" unique_id=864367585 instance=ExtResource("11_vivmo")]
+transform = Transform3D(-2.9456477, 1.3552856, 9.459724, -6.469325, -7.568534, -0.9301361, 7.0335646, -6.393788, 3.1062026, -232.85143, 21.997725, -67.79439)
+
+[node name="Sketchfab_Scene2" parent="Enviorment/organs" unique_id=1247863466 instance=ExtResource("11_vivmo")]
+transform = Transform3D(8.529239, -2.132955, 4.7647305, 5.105399, 1.50329, -8.46611, 1.0895052, 9.653532, 2.3711503, -211.16246, 19.001263, -48.364265)
+
+[node name="Sketchfab_Scene10" parent="Enviorment/organs" unique_id=1562665023 instance=ExtResource("11_vivmo")]
+transform = Transform3D(29.306696, -1.1171052, 6.31423, 6.0289598, -5.2604237, -28.913303, 2.183826, 29.514061, -4.914357, 66.264465, 7.3257523, -248.52425)
+
+[node name="Sketchfab_Scene11" parent="Enviorment/organs" unique_id=1933623107 instance=ExtResource("11_vivmo")]
+transform = Transform3D(16.892702, -5.283181, -24.222391, -24.695494, -1.0039765, -17.003658, 2.1838257, 29.514061, -4.914356, 137.93268, -6.213604, -139.03479)
+
+[node name="Sketchfab_Scene12" parent="Enviorment/organs" unique_id=841073829 instance=ExtResource("11_vivmo")]
+transform = Transform3D(16.892704, -5.2831817, -24.22239, 22.914543, 14.5159235, 12.814512, 9.463631, -25.717224, 12.209156, 170.61949, 0.27319527, -72.0723)
+
+[node name="Sketchfab_Scene13" parent="Enviorment/organs" unique_id=1923466607 instance=ExtResource("11_vivmo")]
+transform = Transform3D(16.892704, -5.2831817, -24.22239, 22.914543, 14.5159235, 12.814512, 9.463631, -25.717224, 12.209156, 53.75885, 0.27319527, 118.10463)
+
+[node name="Sketchfab_Scene3" parent="Enviorment/organs" unique_id=795067136 instance=ExtResource("11_vivmo")]
+transform = Transform3D(8.529239, -2.132955, 4.7647305, 5.105399, 1.50329, -8.46611, 1.0895052, 9.653532, 2.3711503, -372.44833, 18.0683, 18.766697)
+
+[node name="Sketchfab_Scene9" parent="Enviorment/organs" unique_id=1871095761 instance=ExtResource("11_vivmo")]
+transform = Transform3D(-1.8588655, -2.1454158, 9.588629, 6.1780853, 7.333109, 2.8384466, -7.6404114, 6.4515667, -0.03767222, -340.23105, 14.10474, 23.141842)
+
+[node name="Sketchfab_Scene4" parent="Enviorment/organs" unique_id=1513835605 instance=ExtResource("11_vivmo")]
+transform = Transform3D(7.8135943, -5.0360513, 3.6859183, 5.1408997, 1.8454736, -8.376478, 3.53821, 8.439932, 4.0309615, -298.08643, 36.026604, 32.178474)
+
+[node name="Sketchfab_Scene5" parent="Enviorment/organs" unique_id=2077553111 instance=ExtResource("11_vivmo")]
+transform = Transform3D(3.1753922, 8.66245, 3.8573146, 5.1408997, 1.8454739, -8.376478, -7.9679384, 4.642866, -3.8672695, -242.36488, 26.787598, 25.977388)
+
+[node name="Sketchfab_Scene16" parent="Enviorment/organs" unique_id=1802416568 instance=ExtResource("11_vivmo")]
+transform = Transform3D(5.743716, 7.807227, -2.4610815, 1.876616, -4.1822243, -8.887482, -7.9679375, 4.6428657, -3.867269, -162.8694, 31.009644, -29.688528)
+
+[node name="Sketchfab_Scene17" parent="Enviorment/organs" unique_id=1678875761 instance=ExtResource("11_vivmo")]
+transform = Transform3D(-0.4569198, 9.472263, 3.1729207, 6.225588, -2.2139814, 7.5060244, 7.812381, 2.3182912, -5.79588, -130.12979, 51.614815, -22.23493)
+
+[node name="Sketchfab_Scene6" parent="Enviorment/organs" unique_id=1877164460 instance=ExtResource("11_vivmo")]
+transform = Transform3D(-1.8645823, 4.1985664, 8.882307, 5.747633, 7.7984505, -2.4796896, -7.9679375, 4.6428657, -3.867269, -270.47064, 13.291721, 17.670254)
+
+[node name="Sketchfab_Scene14" parent="Enviorment/organs" unique_id=1841212586 instance=ExtResource("11_vivmo")]
+transform = Transform3D(-7.1319666, 1.2531738, 6.896709, 2.958964, -8.381083, 4.5827923, 6.3544936, 5.309144, 5.606553, -270.47064, -4.2701626, -35.258854)
+
+[node name="Sketchfab_Scene15" parent="Enviorment/organs" unique_id=900246539 instance=ExtResource("11_vivmo")]
+transform = Transform3D(0.8676566, -7.7060156, 6.313833, 7.6725216, -3.5256653, -5.3574324, 6.354494, 5.3091435, 5.606553, -377.87634, 8.578706, -35.258854)
+
+[node name="Sketchfab_Scene7" parent="Enviorment/organs" unique_id=186251907 instance=ExtResource("11_vivmo")]
+transform = Transform3D(-0.5739901, -2.638559, -9.628529, 5.7476335, 7.798453, -2.47969, 8.163041, -5.6764565, 1.0689249, -270.47064, 13.291721, -60.76025)
+
+[node name="Sketchfab_Scene8" parent="Enviorment/organs" unique_id=245404509 instance=ExtResource("11_vivmo")]
+transform = Transform3D(1.7811124, 9.334412, -3.1139057, 0.8472946, 3.0072672, 9.499392, 9.8035555, -1.9557874, -0.25527036, -247.40092, 1.892086, -51.437866)
+
+[node name="Intestines" parent="Enviorment/organs" unique_id=702726772 instance=ExtResource("16_2cqfq")]
+transform = Transform3D(18, 0, 0, 0, 18, 0, 0, 0, 18, -94.729935, 151.69447, 24.418243)
+
+[node name="Intestines4" parent="Enviorment/organs" unique_id=826852404 instance=ExtResource("16_2cqfq")]
+transform = Transform3D(-25, 0, -3.774895e-06, 0, 25, 0, 3.774895e-06, 0, -25, -94.729935, 147.82109, -28.62841)
+
+[node name="Intestines5" parent="Enviorment/organs" unique_id=133518804 instance=ExtResource("16_2cqfq")]
+transform = Transform3D(-25, 0, -3.774895e-06, 0, 25, 0, 3.774895e-06, 0, -25, -97.77105, 107.17594, -20.74974)
+
+[node name="Intestines6" parent="Enviorment/organs" unique_id=90395755 instance=ExtResource("16_2cqfq")]
+transform = Transform3D(-25, 0, -3.774895e-06, 2.6215039e-06, -17.988344, -17.361435, -2.7161645e-06, -17.361435, 17.988344, -96.301216, 87.87108, -17.595917)
+
+[node name="Intestines2" parent="Enviorment/organs" unique_id=1163305302 instance=ExtResource("16_2cqfq")]
+transform = Transform3D(17.782255, 0, -2.7913034, 0, 17.999998, 0, 2.7913034, 0, 17.782255, -97.30759, 135.72537, 19.007523)
+
+[node name="Intestines11" parent="Enviorment/organs" unique_id=376811247 instance=ExtResource("16_2cqfq")]
+transform = Transform3D(16.456696, -4.403562, 5.812552, -7.121589, -6.619101, 15.148271, -1.5684742, -16.149176, -7.7938275, -393.5115, 7.53415, -2.978635)
+
+[node name="Intestines3" parent="Enviorment/organs" unique_id=50836492 instance=ExtResource("16_2cqfq")]
+transform = Transform3D(24.697577, 2.2351742e-06, -3.8768113, -2.5690536, -18.722736, -16.3664, -2.9033828, 16.566805, -18.49625, -97.30759, 105.0313, 14.106962)
+
+[node name="Intestines7" parent="Enviorment/organs" unique_id=1256127786 instance=ExtResource("16_2cqfq")]
+transform = Transform3D(0.18520749, 2.6756256, -24.85572, 1.6198472, -24.805435, -2.658142, -24.946764, -1.5908042, -0.35713002, -88.7024, 109.60949, 15.59853)
+
+[node name="Intestines8" parent="Enviorment/organs" unique_id=401604659 instance=ExtResource("16_2cqfq")]
+transform = Transform3D(0.18520749, 2.6756256, -24.85572, 1.6198472, -24.805435, -2.658142, -24.946764, -1.5908042, -0.35713002, -88.7024, 95.06807, -19.453396)
+
+[node name="Intestines9" parent="Enviorment/organs" unique_id=1728255820 instance=ExtResource("16_2cqfq")]
+transform = Transform3D(3.1792572, -49.898468, 0.18656039, -0.7246816, 0.14074767, 49.99454, -49.893547, -3.1816144, -0.7142602, 189.75536, -1.7743797, 28.515835)
+
+[node name="Intestines10" parent="Enviorment/organs" unique_id=1512550215 instance=ExtResource("16_2cqfq")]
+transform = Transform3D(-47.584892, -15.338152, -0.6465722, -0.7246816, 0.14074768, 49.99454, -15.33466, 47.589085, -0.35625404, 67.07368, -1.7743797, -163.83008)
+
 [node name="meat-palaces" type="Node" parent="Enviorment" unique_id=1687437008]
 
 [node name="palace" type="StaticBody3D" parent="Enviorment/meat-palaces" unique_id=2117794034]
@@ -512,6 +600,12 @@ shape = SubResource("BoxShape3D_0xm2m")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.44925, 0.11027527)
 mesh = SubResource("BoxMesh_h2yge")
 
+[node name="Sketchfab_Scene" parent="Enviorment/meat-palaces/palace3" unique_id=678445991 instance=ExtResource("11_vivmo")]
+transform = Transform3D(-3.2191496, 3.8258433, 0, -3.8258433, -3.2191496, 0, 0, 0, 5, 12.342072, 14.881271, 7.3379025)
+
+[node name="Sketchfab_Scene2" parent="Enviorment/meat-palaces/palace3" unique_id=2012203230 instance=ExtResource("11_vivmo")]
+transform = Transform3D(0.17959183, -2.7914658, 4.144329, 1.6021987, 3.9602082, 2.59802, -4.7329373, 1.2346908, 1.0367414, 20.822723, 25.503326, 12.171087)
+
 [node name="palace4" type="StaticBody3D" parent="Enviorment/meat-palaces" unique_id=2020593616]
 transform = Transform3D(-0.2943348, -0.20840837, 0.93270206, -0.77125466, 0.62813234, -0.103033066, -0.5643875, -0.74967706, -0.34561715, -386.00516, -3.9613953, 24.28365)
 
@@ -573,6 +667,9 @@ transform = Transform3D(4.698833, -9.95322, -27.907948, -29.532879, -3.8560038, 
 [node name="meat piece4" parent="Enviorment/Meat pieces" unique_id=320739737 instance=ExtResource("9_kek77")]
 transform = Transform3D(4.698833, -9.95322, -27.907948, -29.532879, -3.8560038, -3.5971947, -2.3936522, 28.036833, -10.4022, -295.73877, 4.9565096, -51.804375)
 
+[node name="meat piece17" parent="Enviorment/Meat pieces" unique_id=1063539055 instance=ExtResource("9_kek77")]
+transform = Transform3D(0.4257002, -29.959314, -1.5025454, -21.730028, 0.72792476, -20.670637, 20.679073, 1.38166, -21.690233, -326.84415, 4.9565096, -48.870403)
+
 [node name="meat piece5" parent="Enviorment/Meat pieces" unique_id=1898027616 instance=ExtResource("9_kek77")]
 transform = Transform3D(-1.2131331, 6.789914, -29.196314, 21.039778, 21.005722, 4.0108814, 21.350784, -20.313946, -5.611367, -282.69873, 4.9565096, 9.664444)
 
@@ -631,6 +728,9 @@ transform = Transform3D(0.2942604, 1.1597097, -6.896991, 4.117457, 5.551256, 1.1
 
 [node name="Heart20" parent="Enviorment/hearts" unique_id=606308790 instance=ExtResource("10_4c57u")]
 transform = Transform3D(6.89727, -3.8965104, -6.1028557, 5.882079, 7.9303665, 1.5844269, 4.222412, -4.68257, 7.761752, -132.15372, 1.3439617, 150.3354)
+
+[node name="Heart21" parent="Enviorment/hearts" unique_id=315196979 instance=ExtResource("10_4c57u")]
+transform = Transform3D(5.9307284, 2.3481882, -7.7014613, 4.3076153, 7.155787, 5.499014, 6.80227, -6.578809, 3.2323956, -30.223015, -23.758821, 101.64725)
 
 [node name="Heart17" parent="Enviorment/hearts" unique_id=111401937 instance=ExtResource("10_4c57u")]
 transform = Transform3D(8.425327, -4.48371, -2.9850006, 4.015204, 8.921905, -2.068281, 3.590546, 0.54405767, 9.317296, 295.19803, 3.9544582, -89.51344)
@@ -732,13 +832,13 @@ grow_vertical = 2
 text = "BLISS"
 label_settings = SubResource("LabelSettings_yaehf")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=396816101]
+[node name="WorldBorders" type="StaticBody3D" parent="." unique_id=396816101]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1476204554]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldBorders" unique_id=1476204554]
 transform = Transform3D(0.9996439, 0, -0.026682917, 0, 1, 0, 0.026682917, 0, 0.9996439, -246.65092, 51.315872, -45.266155)
 shape = SubResource("BoxShape3D_w48qg")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D" unique_id=645314024]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="WorldBorders" unique_id=645314024]
 transform = Transform3D(0.9999901, 0, 0.0044680294, 0, 1, 0, -0.0044680294, 0, 0.9999901, -231.60094, 51.315872, 22.835264)
 shape = SubResource("BoxShape3D_w48qg")
 

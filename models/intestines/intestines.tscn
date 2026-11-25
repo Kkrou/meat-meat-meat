@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://cf6m2lxan63ff"]
+
+[ext_resource type="PackedScene" uid="uid://c6drddsh7mh78" path="res://models/intestines/Intestines.glb" id="1_js23s"]
+[ext_resource type="Texture2D" uid="uid://qppcd60eij4g" path="res://textures/meat/Meat_Raw_001_basecolor.jpg" id="2_n13ih"]
+[ext_resource type="Texture2D" uid="uid://r64b3vo0made" path="res://textures/meat/Meat_Raw_001_ambientOcclusion.jpg" id="3_ys4go"]
+[ext_resource type="Texture2D" uid="uid://b3aakr7h00c42" path="res://textures/meat/Meat_Raw_001_normal.jpg" id="4_hy14p"]
+[ext_resource type="Texture2D" uid="uid://dxgx3lex645k" path="res://textures/meat/Meat_Raw_001_roughness.jpg" id="5_p2wpw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vlqk5"]
+albedo_texture = ExtResource("2_n13ih")
+roughness = 0.0
+roughness_texture = ExtResource("5_p2wpw")
+normal_enabled = true
+normal_scale = 6.91
+normal_texture = ExtResource("4_hy14p")
+ao_enabled = true
+ao_texture = ExtResource("3_ys4go")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_cl0k5"]
+points = PackedVector3Array(-7.6269965, -6.885714, -1.8236163, -1.3101907, 7.114211, -0.884255, -1.3140504, 7.101771, -2.063872, -11.080205, 5.9363008, -1.330525, -9.107163, -2.200128, -5.029615, 3.6407878, -0.19094671, 0.44976354, -9.107163, -5.6523705, -0.09749508, -6.8869133, 6.921856, 0.3961997, 0.263623, -5.159593, -1.8236163, -9.600038, 5.6899123, -4.7821636, -11.3274145, -4.911804, -3.549134, 3.9624958, 0.5115484, -1.0836776, -0.4764607, -3.4334717, 0.88929105, -9.107163, -4.911804, -5.029615, -1.2165442, 5.9363008, -2.8091953, -9.847247, 7.4160333, -2.562348, -1.097675, -6.045084, -0.19374026, 1.249371, 1.2507147, 1.1361384, -8.859954, 5.4421234, 0.3961997, 1.249371, 6.1826897, -1.0836776, -11.3274145, -5.159593, -2.3155005, -1.7094182, -6.3915367, -1.8236163, -10.092912, -6.3915367, -3.7959814, -8.61429, -4.419027, -5.029615, -1.338121, 6.789981, -0.19882682, -10.5779505, 6.2165713, -3.4938898, -10.092912, 5.6899123, -0.09749508, -8.411983, -6.606381, -0.40635663, -0.72367024, 6.921856, -2.562348, -8.61429, 4.4565682, -4.7821636, 3.6595294, 0.9511311, 0.45611092, 4.456915, 0.018770844, -0.8374338)
+
+[node name="Intestines" unique_id=702726772 instance=ExtResource("1_js23s")]
+
+[node name="Circle" parent="." index="0" unique_id=1464208041]
+surface_material_override/0 = SubResource("StandardMaterial3D_vlqk5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="1" unique_id=1444683412]
+transform = Transform3D(0, 0.044461783, 0, -0.044461783, 0, 0, 0, 0, 0.044461783, -0.011823893, 0.24199587, 0.10376459)
+shape = SubResource("ConvexPolygonShape3D_cl0k5")
