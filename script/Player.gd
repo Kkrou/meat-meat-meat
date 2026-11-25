@@ -100,9 +100,10 @@ func _hide_prompt():
 func _fade_label(label: Label, target_alpha: float):
 	if label == null:
 		return
-	var old = label.get_meta("fade_tween", null)
-	if old and old.is_valid():
-		old.kill()
+	if label.has_meta("fade_tween"):
+		var old = label.get_meta("fade_tween")
+		if old is Tween and old.is_valid():
+			old.kill()
 	var tween = create_tween()
 	tween.tween_property(label, "modulate:a", target_alpha, prompt_fade_time)
 	label.set_meta("fade_tween", tween)
