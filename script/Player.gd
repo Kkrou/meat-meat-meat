@@ -1,6 +1,5 @@
 extends CharacterBody3D
-#hold constants
-const MAX_HOLD_DISTANCE = 1.5
+var final_label_tween: Tween
 #movement constants
 const SPEED = 8.0
 const JUMP_VELOCITY = 4.5
@@ -43,6 +42,10 @@ var interact_counter = 0
 @export var final_shake: float = 0.08           # impact shake strength
 
 @export_group("Claw UI")
+@export var final_label_hold_time: float = 1.5       # seconds visible before fading out (0 = stays on screen)
+@export var final_label_fade_out_time: float = 1.5
+@export var final_label: Label                  # drag "Reach The Hole" here
+@export var final_label_fade_time: float = 1.5
 @export var prompt_fade_time: float = 0.5
 @export var left_prompt_label: Label          # drag your [Left Click] label here
 @export var right_prompt_label: Label         # drag your [Right Click] label here
@@ -64,6 +67,8 @@ func _ready():
 	if right_prompt_label:
 		right_prompt_label.modulate.a = 0.0
 	movement_locked = lock_movement_at_start
+	if final_label:
+		final_label.modulate.a = 0.0
 	if auto_start_for_testing:
 		start_claw_sequence()
 
@@ -122,6 +127,14 @@ func _do_claw_step(anim_name: String):
 		await _final_collapse()
 		claw_state = ClawState.DONE
 		movement_locked = false
+		if final_label:
+			if final_label_tween and final_label_tween.is_valid():
+				final_label_tween.kill()
+			final_label_tween = create_tween()
+			final_label_tween.tween_property(final_label, "modulate:a", 1.0, final_label_fade_time)
+			if final_label_hold_time > 0.0:
+				final_label_tween.tween_interval(final_label_hold_time)
+				final_label_tween.tween_property(final_label, "modulate:a", 0.0, final_label_fade_out_time)
 	else:
 		# next prompt fades in once the animation is over
 		_show_prompt(expect_left)
@@ -274,15 +287,6 @@ func _physics_process(delta):
 			velocity.x = 0.0
 			velocity.z = 0.0
 
-	# Hold logic: move the held object toward the hand every physics tick
-	if held_object:
-		var to_hand = hand.global_position - held_object.global_position
-		if to_hand.length() > MAX_HOLD_DISTANCE:
-			drop()
-		else:
-			held_object.linear_velocity = to_hand / delta
-			var target_basis = hand.global_transform.basis
-			held_object.angular_velocity = (target_basis * held_object.global_transform.basis.inverse()).get_euler() / delta
 #bob code
 	t_bob += delta * velocity.length() * float(is_on_floor())
 	camera.transform.origin = _headbob(t_bob)

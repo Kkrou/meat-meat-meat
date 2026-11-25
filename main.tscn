@@ -12,8 +12,123 @@
 [ext_resource type="PackedScene" uid="uid://bhywtj4qkxsb1" path="res://models/meat-piece.tscn" id="9_kek77"]
 [ext_resource type="PackedScene" uid="uid://bkr8ulearbmf4" path="res://models/heart.tscn" id="10_4c57u"]
 
+[sub_resource type="Terrain3DMaterial" id="Terrain3DMaterial_ig7tw"]
+_shader_parameters = {
+&"bias_distance": null,
+&"blend_sharpness": null,
+&"depth_blur": null,
+&"distant_normal_scale": null,
+&"flat_terrain_normals": null,
+&"general_uniforms": null,
+&"ground_level": null,
+&"mipmap_bias": null,
+&"mipmaps": null,
+&"private": null,
+&"region_blend": null
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xm2m"]
+transparency = 4
+cull_mode = 2
+vertex_color_use_as_albedo = true
+backlight_enabled = true
+backlight = Color(0.5, 0.5, 0.5, 1)
+distance_fade_mode = 1
+distance_fade_min_distance = 128.0
+distance_fade_max_distance = 96.0
+metadata/terrain3d_generated_material = true
+
+[sub_resource type="Terrain3DMeshAsset" id="Terrain3DMeshAsset_h2yge"]
+generated_type = 1
+height_offset = 0.5
+density = 10.0
+material_override = SubResource("StandardMaterial3D_0xm2m")
+last_lod = 0
+last_shadow_lod = 0
+lod0_range = 128.0
+
+[sub_resource type="Terrain3DTextureAsset" id="Terrain3DTextureAsset_272bh"]
+name = "Meat_Raw_001_roughness"
+albedo_texture = ExtResource("2_lquwl")
+normal_texture = ExtResource("6_7mycd")
+normal_depth = 2.0
+roughness = -1.0
+
+[sub_resource type="Terrain3DAssets" id="Terrain3DAssets_1bvp3"]
+mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_h2yge")])
+texture_list = Array[Terrain3DTextureAsset]([SubResource("Terrain3DTextureAsset_272bh")])
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_efxa6"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dg77c"]
+noise = SubResource("FastNoiseLite_efxa6")
+seamless = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ycdy4"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_w48qg"]
+noise = SubResource("FastNoiseLite_ycdy4")
+seamless = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vivmo"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2cqfq"]
+noise = SubResource("FastNoiseLite_vivmo")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dg77c"]
+shader = ExtResource("6_efxa6")
+shader_parameter/cloud_shape_sampler = SubResource("NoiseTexture2D_2cqfq")
+shader_parameter/cloud_noise_sampler = SubResource("NoiseTexture2D_w48qg")
+shader_parameter/cloud_curves = SubResource("NoiseTexture2D_dg77c")
+shader_parameter/clouds_samples = 32
+shader_parameter/shadow_sample = 4
+shader_parameter/clouds_density = 0.5000000074506
+shader_parameter/clouds_scale = 1.5
+shader_parameter/clouds_smoothness = 0.035
+shader_parameter/clouds_light_color = Color(1, 1, 1, 1)
+shader_parameter/clouds_shadow_intensity = 10.0
+shader_parameter/high_clouds_density = 0.0
+shader_parameter/top_color = Color(0.2901961, 0.02745098, 0.0627451, 1)
+shader_parameter/bottom_color = Color(0.6379732, 0.114864014, 0.18141407, 1)
+shader_parameter/sun_scatter = Color(0.93935597, 0.27958903, 0.3328984, 1)
+shader_parameter/astro_tint = Color(1, 0.40724552, 0.338652, 1)
+shader_parameter/astro_scale = 10.0
+shader_parameter/astro_intensity = 3.0
+shader_parameter/stars_intensity = 5.0
+shader_parameter/shooting_stars_intensity = 0.0
+shader_parameter/shooting_star_tint = Color(0, 0, 0, 1)
+
+[sub_resource type="Sky" id="Sky_ycdy4"]
+sky_material = SubResource("ShaderMaterial_dg77c")
+
+[sub_resource type="Environment" id="Environment_h2yge"]
+background_mode = 2
+background_energy_multiplier = 0.5
+sky = SubResource("Sky_ycdy4")
+ambient_light_source = 3
+ambient_light_color = Color(0.25565878, 0.25565878, 0.25565878, 1)
+ambient_light_sky_contribution = 0.1
+ambient_light_energy = 0.5
+tonemap_mode = 2
+sdfgi_use_occlusion = true
+sdfgi_read_sky_light = false
+fog_enabled = true
+fog_light_color = Color(0.72247714, 0.41545546, 0.4377443, 1)
+fog_light_energy = 0.1
+fog_sun_scatter = 0.05
+fog_density = 0.007
+fog_sky_affect = 0.9
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0001
+volumetric_fog_length = 200.0
+
+[sub_resource type="FogMaterial" id="FogMaterial_ig7tw"]
+density = 0.8
+albedo = Color(0, 0, 0, 1)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_0xm2m"]
-size = Vector3(10, 60, 20.12732)
+size = Vector3(13.694447, 60, 30.995087)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kek77"]
 albedo_texture = ExtResource("2_lquwl")
@@ -88,127 +203,22 @@ uv1_scale = Vector3(15, 15, 15)
 material = SubResource("StandardMaterial3D_2cqfq")
 size = Vector3(15, 120, 15)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_efxa6"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dg77c"]
-noise = SubResource("FastNoiseLite_efxa6")
-seamless = true
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_ycdy4"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_w48qg"]
-noise = SubResource("FastNoiseLite_ycdy4")
-seamless = true
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_vivmo"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2cqfq"]
-noise = SubResource("FastNoiseLite_vivmo")
-seamless = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dg77c"]
-shader = ExtResource("6_efxa6")
-shader_parameter/cloud_shape_sampler = SubResource("NoiseTexture2D_2cqfq")
-shader_parameter/cloud_noise_sampler = SubResource("NoiseTexture2D_w48qg")
-shader_parameter/cloud_curves = SubResource("NoiseTexture2D_dg77c")
-shader_parameter/clouds_samples = 32
-shader_parameter/shadow_sample = 4
-shader_parameter/clouds_density = 0.5000000074506
-shader_parameter/clouds_scale = 1.5
-shader_parameter/clouds_smoothness = 0.035
-shader_parameter/clouds_light_color = Color(1, 1, 1, 1)
-shader_parameter/clouds_shadow_intensity = 10.0
-shader_parameter/high_clouds_density = 0.0
-shader_parameter/top_color = Color(0.2901961, 0.02745098, 0.0627451, 1)
-shader_parameter/bottom_color = Color(0.6379732, 0.114864014, 0.18141407, 1)
-shader_parameter/sun_scatter = Color(0.93935597, 0.27958903, 0.3328984, 1)
-shader_parameter/astro_tint = Color(1, 0.40724552, 0.338652, 1)
-shader_parameter/astro_scale = 10.0
-shader_parameter/astro_intensity = 3.0
-shader_parameter/stars_intensity = 5.0
-shader_parameter/shooting_stars_intensity = 0.0
-shader_parameter/shooting_star_tint = Color(0, 0, 0, 1)
-
-[sub_resource type="Sky" id="Sky_ycdy4"]
-sky_material = SubResource("ShaderMaterial_dg77c")
-
-[sub_resource type="Environment" id="Environment_h2yge"]
-background_mode = 2
-background_energy_multiplier = 0.5
-sky = SubResource("Sky_ycdy4")
-ambient_light_source = 3
-ambient_light_color = Color(0.25565878, 0.25565878, 0.25565878, 1)
-ambient_light_sky_contribution = 0.1
-ambient_light_energy = 0.5
-tonemap_mode = 2
-sdfgi_use_occlusion = true
-sdfgi_read_sky_light = false
-fog_enabled = true
-fog_light_color = Color(0.72247714, 0.41545546, 0.4377443, 1)
-fog_light_energy = 0.1
-fog_sun_scatter = 0.05
-fog_density = 0.007
-fog_sky_affect = 0.9
-volumetric_fog_enabled = true
-volumetric_fog_density = 0.0001
-volumetric_fog_length = 200.0
-
-[sub_resource type="FogMaterial" id="FogMaterial_ig7tw"]
-density = 0.8
-albedo = Color(0, 0, 0, 1)
-
-[sub_resource type="Terrain3DMaterial" id="Terrain3DMaterial_ig7tw"]
-_shader_parameters = {
-&"bias_distance": null,
-&"blend_sharpness": null,
-&"depth_blur": null,
-&"distant_normal_scale": null,
-&"flat_terrain_normals": null,
-&"general_uniforms": null,
-&"ground_level": null,
-&"mipmap_bias": null,
-&"mipmaps": null,
-&"private": null,
-&"region_blend": null
-}
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xm2m"]
-transparency = 4
-cull_mode = 2
-vertex_color_use_as_albedo = true
-backlight_enabled = true
-backlight = Color(0.5, 0.5, 0.5, 1)
-distance_fade_mode = 1
-distance_fade_min_distance = 128.0
-distance_fade_max_distance = 96.0
-metadata/terrain3d_generated_material = true
-
-[sub_resource type="Terrain3DMeshAsset" id="Terrain3DMeshAsset_h2yge"]
-generated_type = 1
-height_offset = 0.5
-density = 10.0
-material_override = SubResource("StandardMaterial3D_0xm2m")
-last_lod = 0
-last_shadow_lod = 0
-lod0_range = 128.0
-
-[sub_resource type="Terrain3DTextureAsset" id="Terrain3DTextureAsset_272bh"]
-name = "Meat_Raw_001_roughness"
-albedo_texture = ExtResource("2_lquwl")
-normal_texture = ExtResource("6_7mycd")
-normal_depth = 2.0
-roughness = -1.0
-
-[sub_resource type="Terrain3DAssets" id="Terrain3DAssets_1bvp3"]
-mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_h2yge")])
-texture_list = Array[Terrain3DTextureAsset]([SubResource("Terrain3DTextureAsset_272bh")])
-
 [node name="Main" type="Node3D" unique_id=976627802]
 
-[node name="CharacterBody3D" parent="." unique_id=658356461 node_paths=PackedStringArray("left_prompt_label", "right_prompt_label") instance=ExtResource("1_ig7tw")]
+[node name="Terrain3D" type="Terrain3D" parent="." unique_id=1097524623]
+data_directory = "res://terrain-data"
+material = SubResource("Terrain3DMaterial_ig7tw")
+assets = SubResource("Terrain3DAssets_1bvp3")
+collision_mode = 3
+displacement_sharpness = 0.5
+top_level = true
+metadata/_edit_lock_ = true
+
+[node name="CharacterBody3D" parent="." unique_id=658356461 node_paths=PackedStringArray("final_label", "left_prompt_label", "right_prompt_label") instance=ExtResource("1_ig7tw")]
 transform = Transform3D(0.9999999, 0, 0, 0, 0.9999024, -0.013962179, 0, 0.0139621785, 0.9999025, -404.2569, 0.29255033, -2.2542543)
 feet_head_y = -0.553
 auto_start_for_testing = false
+final_label = NodePath("../Reach The Hole")
 left_prompt_label = NodePath("../[Left Click]")
 right_prompt_label = NodePath("../[Right Click]")
 
@@ -267,6 +277,22 @@ light_size = 0.5
 spot_range = 15.0
 
 [node name="Enviorment" type="Node" parent="." unique_id=1013091573]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Enviorment" unique_id=1719016655]
+environment = SubResource("Environment_h2yge")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Enviorment" unique_id=1788189058]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 50.60275, 0)
+light_color = Color(0.9999623, 0.5856383, 0.5247515, 1)
+light_energy = 0.5
+light_indirect_energy = 0.5
+shadow_enabled = true
+directional_shadow_mode = 0
+
+[node name="FogVolume" type="FogVolume" parent="Enviorment" unique_id=1275978943]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.076157, -38.086685, 0)
+size = Vector3(262.87018, 33.416138, 200)
+material = SubResource("FogMaterial_ig7tw")
 
 [node name="meat-palaces" type="Node" parent="Enviorment" unique_id=1687437008]
 
@@ -361,10 +387,6 @@ mesh = SubResource("BoxMesh_h2yge")
 [node name="palace11" type="StaticBody3D" parent="Enviorment/meat-palaces" unique_id=2044325417]
 transform = Transform3D(-0.5539252, 0.22492683, 0.8016075, 0.65830964, 0.7077673, 0.2563074, -0.5097014, 0.6696812, -0.54012215, -249.42764, 6.900379, -91.27263)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Enviorment/meat-palaces/palace11" unique_id=560899065]
-transform = Transform3D(1, 0, 4.172325e-07, 0, 0.9999999, -1.1920929e-07, 0, 2.9802322e-08, 1, 2.3366241, 35.325996, 4.3934937)
-shape = SubResource("BoxShape3D_0xm2m")
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Enviorment/meat-palaces/palace11" unique_id=1888502474]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.988163, 25.61985, 3.2414494)
 mesh = SubResource("BoxMesh_h2yge")
@@ -420,20 +442,12 @@ mesh = SubResource("BoxMesh_h2yge")
 [node name="palace16" type="StaticBody3D" parent="Enviorment/meat-palaces" unique_id=2113285219]
 transform = Transform3D(0.5031481, -0.16047378, -0.8491704, 0.6583097, 0.7077673, 0.25630745, 0.5598844, -0.6879777, 0.46175355, -378.17035, 6.900379, 42.349796)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Enviorment/meat-palaces/palace16" unique_id=1112025368]
-transform = Transform3D(1, 0, 4.172325e-07, 0, 0.9999999, -1.1920929e-07, 0, 2.9802322e-08, 1, 2.3366241, 35.325996, 4.3934937)
-shape = SubResource("BoxShape3D_0xm2m")
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Enviorment/meat-palaces/palace16" unique_id=593835927]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.988163, 25.61985, 3.2414494)
 mesh = SubResource("BoxMesh_h2yge")
 
 [node name="palace17" type="StaticBody3D" parent="Enviorment/meat-palaces" unique_id=1900125268]
 transform = Transform3D(0.0067594424, -0.84745234, 0.5308287, 0.9832937, -0.09092953, -0.15768735, 0.18190058, 0.52302575, 0.8326798, -206.65929, 27.335724, -4.4108315)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Enviorment/meat-palaces/palace17" unique_id=762741067]
-transform = Transform3D(1, -2.9802322e-08, 3.874302e-07, 1.4901161e-08, 0.99999976, -1.4901161e-07, 2.9802322e-08, 2.9802322e-08, 1, 13.566084, 40.279022, 12.15789)
-shape = SubResource("BoxShape3D_0xm2m")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Enviorment/meat-palaces/palace17" unique_id=403783163]
 transform = Transform3D(0.87185836, -0.4426138, 0.20965713, 0.37013227, 0.8758134, 0.30976266, -0.32072568, -0.19246845, 0.9274106, 7.989313, 42.87523, 30.712738)
@@ -442,20 +456,12 @@ mesh = SubResource("BoxMesh_h2yge")
 [node name="palace18" type="StaticBody3D" parent="Enviorment/meat-palaces" unique_id=1369687645]
 transform = Transform3D(0.17171434, -0.9838633, 0.050270915, 0.96688205, 0.15853053, -0.20001847, 0.18882146, 0.08295134, 0.9785018, -256.6582, 28.647121, 26.02245)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Enviorment/meat-palaces/palace18" unique_id=250229104]
-transform = Transform3D(1, 0, 4.172325e-07, 0, 0.9999999, -1.1920929e-07, 0, 2.9802322e-08, 1, 2.3366241, 35.325996, 4.3934937)
-shape = SubResource("BoxShape3D_0xm2m")
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Enviorment/meat-palaces/palace18" unique_id=1888546899]
 transform = Transform3D(0.8226016, -0.43807364, -0.362516, 0.3209661, 0.8839894, -0.33991662, 0.46936908, 0.16326064, 0.8677782, 3.5905008, 26.3237, 11.545069)
 mesh = SubResource("BoxMesh_h2yge")
 
 [node name="palace19" type="StaticBody3D" parent="Enviorment/meat-palaces" unique_id=1755389997]
 transform = Transform3D(0.53253835, -0.8417984, -0.08819413, 0.8268074, 0.49508205, 0.26698932, -0.18108782, -0.21510205, 0.95965534, -336.91327, 16.648155, 33.79755)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Enviorment/meat-palaces/palace19" unique_id=404748912]
-transform = Transform3D(1, 0, 4.172325e-07, 0, 0.9999999, -1.1920929e-07, 0, 2.9802322e-08, 1, 2.3366241, 35.325996, 4.3934937)
-shape = SubResource("BoxShape3D_0xm2m")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Enviorment/meat-palaces/palace19" unique_id=1499076014]
 transform = Transform3D(0.99823964, 0.030403357, -0.050925754, -0.02584825, 0.9957998, 0.08783491, 0.053382292, -0.08636396, 0.99483263, 0.99539185, 24.440582, 8.502563)
@@ -466,14 +472,14 @@ transform = Transform3D(1.0000001, -7.0780516e-08, 1.4901161e-08, -3.3527613e-08
 mesh = SubResource("BoxMesh_h2yge")
 
 [node name="palace2" type="StaticBody3D" parent="Enviorment/meat-palaces" unique_id=170184557]
-transform = Transform3D(-0.07071398, 0.9974966, 0, -0.9974966, -0.07071398, 0, 0, 0, 1, -42.657883, 47.449158, -2.9372787)
+transform = Transform3D(-0.007016115, 0.9999753, 0, -0.9999753, -0.007016115, 0, 0, 0, 1, -44.07634, 47.449158, -2.9372787)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Enviorment/meat-palaces/palace2" unique_id=473089141]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.652317, 3.875023, 2.9726286)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9897957, -5.4705315, 2.9726286)
 shape = SubResource("BoxShape3D_0xm2m")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Enviorment/meat-palaces/palace2" unique_id=299090184]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2684326, 4.174795, 2.959879)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.946537, -5.3905945, 2.959879)
 mesh = SubResource("BoxMesh_h2yge")
 
 [node name="palace3" type="StaticBody3D" parent="Enviorment/meat-palaces" unique_id=1279657989]
@@ -491,7 +497,11 @@ mesh = SubResource("BoxMesh_h2yge")
 transform = Transform3D(-0.2943348, -0.20840837, 0.93270206, -0.77125466, 0.62813234, -0.103033066, -0.5643875, -0.74967706, -0.34561715, -386.00516, -3.9613953, 24.28365)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Enviorment/meat-palaces/palace4" unique_id=2075820885]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.463507, 0)
+transform = Transform3D(1, -2.9802322e-08, -2.9802322e-08, 2.9802322e-08, 1.0000001, 1.4901161e-07, 2.9802322e-08, -1.7881393e-07, 1, 3.2597733, 19.725235, -4.1341553)
+shape = SubResource("BoxShape3D_0xm2m")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Enviorment/meat-palaces/palace4" unique_id=250276940]
+transform = Transform3D(0.23448834, 0.9718132, -0.024426712, -0.86898845, 0.1982829, -0.45336902, -0.435746, 0.12753636, 0.89098835, 21.714554, 46.451836, -2.2249146)
 shape = SubResource("BoxShape3D_0xm2m")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Enviorment/meat-palaces/palace4" unique_id=1467897744]
@@ -517,37 +527,124 @@ mesh = SubResource("BoxMesh_h2yge")
 transform = Transform3D(-0.474797, -0.33618748, -0.81335473, -0.5778718, 0.8161274, -5.6808858e-08, 0.6638012, 0.4700148, -0.58176816, -408.7132, -3.9613953, -23.732483)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Enviorment/meat-palaces/palace5" unique_id=859291927]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.463507, 0)
+transform = Transform3D(1, -2.9802322e-08, 2.9802322e-08, -2.9802322e-08, 1, 0, 0, -8.940697e-08, 1, -0.6472473, 19.463394, 4.04953)
 shape = SubResource("BoxShape3D_0xm2m")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Enviorment/meat-palaces/palace5" unique_id=185235545]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.44925, 0.11027527)
 mesh = SubResource("BoxMesh_h2yge")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Enviorment" unique_id=1719016655]
-environment = SubResource("Environment_h2yge")
+[node name="Meat pieces" type="Node" parent="Enviorment" unique_id=261746168]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Enviorment" unique_id=1788189058]
-transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 50.60275, 0)
-light_color = Color(0.9999623, 0.5856383, 0.5247515, 1)
-light_energy = 0.5
-light_indirect_energy = 0.5
-shadow_enabled = true
-directional_shadow_mode = 0
+[node name="meat piece" parent="Enviorment/Meat pieces" unique_id=67079959 instance=ExtResource("9_kek77")]
+transform = Transform3D(29.999998, 0, 0, 0, -21.048548, 21.37658, 0, -21.37658, -21.048548, -407.5906, 4.6351624, 2.2654638)
 
-[node name="FogVolume" type="FogVolume" parent="Enviorment" unique_id=1275978943]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.076157, -38.086685, 0)
-size = Vector3(262.87018, 33.416138, 200)
-material = SubResource("FogMaterial_ig7tw")
+[node name="meat piece2" parent="Enviorment/Meat pieces" unique_id=2144998689 instance=ExtResource("9_kek77")]
+transform = Transform3D(29.999994, 0, 0, 0, 17.603886, -24.292025, 0, 24.292025, 17.603886, -186.53566, 24.476955, -33.07093)
 
-[node name="Terrain3D" type="Terrain3D" parent="Enviorment" unique_id=1097524623]
-data_directory = "res://terrain-data"
-material = SubResource("Terrain3DMaterial_ig7tw")
-assets = SubResource("Terrain3DAssets_1bvp3")
-collision_mode = 3
-displacement_sharpness = 0.5
-top_level = true
-metadata/_edit_lock_ = true
+[node name="meat piece12" parent="Enviorment/Meat pieces" unique_id=763110409 instance=ExtResource("9_kek77")]
+transform = Transform3D(-15.110676, -48.230953, -48.429764, -21.146664, 50.464577, -43.659412, 64.99605, 5.205784, -25.463976, -149.16801, 57.122036, -52.06134)
+
+[node name="meat piece9" parent="Enviorment/Meat pieces" unique_id=318676703 instance=ExtResource("9_kek77")]
+transform = Transform3D(30.000002, 0, 0, 0, 25.107788, 16.419437, 0, -16.419437, 25.107788, -186.53566, 31.240437, 22.135138)
+
+[node name="meat piece3" parent="Enviorment/Meat pieces" unique_id=516097928 instance=ExtResource("9_kek77")]
+transform = Transform3D(4.698833, -9.95322, -27.907948, -29.532879, -3.8560038, -3.5971947, -2.3936522, 28.036833, -10.4022, -230.55017, 4.9565096, -46.38057)
+
+[node name="meat piece4" parent="Enviorment/Meat pieces" unique_id=320739737 instance=ExtResource("9_kek77")]
+transform = Transform3D(4.698833, -9.95322, -27.907948, -29.532879, -3.8560038, -3.5971947, -2.3936522, 28.036833, -10.4022, -295.73877, 4.9565096, -51.804375)
+
+[node name="meat piece5" parent="Enviorment/Meat pieces" unique_id=1898027616 instance=ExtResource("9_kek77")]
+transform = Transform3D(-1.2131331, 6.789914, -29.196314, 21.039778, 21.005722, 4.0108814, 21.350784, -20.313946, -5.611367, -282.69873, 4.9565096, 9.664444)
+
+[node name="meat piece11" parent="Enviorment/Meat pieces" unique_id=1363923686 instance=ExtResource("9_kek77")]
+transform = Transform3D(-26.7683, -13.7996645, -51.89439, 32.55817, 41.939754, -27.946785, 42.70157, -40.6279, -11.222733, -270.1444, 47.6651, 28.134495)
+
+[node name="meat piece10" parent="Enviorment/Meat pieces" unique_id=1629757385 instance=ExtResource("9_kek77")]
+transform = Transform3D(-22.28433, -19.379622, 5.2762113, -14.285065, 9.752743, -24.511631, 14.118964, -20.719877, -16.472416, -235.41937, 10.823892, 7.2439575)
+
+[node name="meat piece6" parent="Enviorment/Meat pieces" unique_id=1497015656 instance=ExtResource("9_kek77")]
+transform = Transform3D(21.23826, -21.182894, -0.4702378, 20.133791, 19.969051, 9.79117, -6.6005073, -7.2471704, 28.353327, -300.1496, 20.484098, 17.510038)
+
+[node name="meat piece7" parent="Enviorment/Meat pieces" unique_id=112751760 instance=ExtResource("9_kek77")]
+transform = Transform3D(21.23826, -21.182894, -0.4702378, 20.133791, 19.969051, 9.79117, -6.6005073, -7.2471704, 28.353327, -337.21948, 15.508699, -59.330143)
+
+[node name="meat piece8" parent="Enviorment/Meat pieces" unique_id=1356872912 instance=ExtResource("9_kek77")]
+transform = Transform3D(88.691925, 35.385654, 29.691666, -33.296654, 93.526886, -12.002225, -32.01676, 0.75868034, 94.73306, -406.91476, 46.18935, -15.763654)
+
+[node name="meat piece13" parent="Enviorment/Meat pieces" unique_id=1609366890 instance=ExtResource("9_kek77")]
+transform = Transform3D(88.691925, 35.385654, 29.691666, -33.296654, 93.526886, -12.002225, -32.01676, 0.75868034, 94.73306, 270.60217, 4.621132, -125.59293)
+
+[node name="meat piece15" parent="Enviorment/Meat pieces" unique_id=1363107418 instance=ExtResource("9_kek77")]
+transform = Transform3D(133.0379, 53.07851, 44.5375, -68.64752, 114.05649, 69.12767, -9.403979, -81.69325, 125.450294, 153.8543, 12.43446, 131.08176)
+
+[node name="meat piece16" parent="Enviorment/Meat pieces" unique_id=1047113117 instance=ExtResource("9_kek77")]
+transform = Transform3D(217.96718, 120.161606, -23.483955, 55.140526, -53.528755, 237.89534, 109.31528, -212.59319, -73.17314, -76.786865, 44.91029, 239.26982)
+
+[node name="meat piece14" parent="Enviorment/Meat pieces" unique_id=857265387 instance=ExtResource("9_kek77")]
+transform = Transform3D(164.4744, -27.911425, -110.313774, -1.0241462, 193.51906, -50.490868, 113.785446, 42.087162, 159.00172, 281.7868, 19.352459, -232.68814)
+
+[node name="hearts" type="Node" parent="Enviorment" unique_id=895872931]
+
+[node name="Heart" parent="Enviorment/hearts" unique_id=1104504886 instance=ExtResource("10_4c57u")]
+transform = Transform3D(1, 0, 0, 0, 0.85688853, -0.5155018, 0, 0.5155018, 0.85688853, -317.21317, -0.58515215, 6.6373434)
+
+[node name="Heart12" parent="Enviorment/hearts" unique_id=1937056544 instance=ExtResource("10_4c57u")]
+transform = Transform3D(15, 0, 0, 0, 12.853328, -7.732527, 0, 7.732527, 12.853328, -94.11689, -6.0508866, -194.23239)
+
+[node name="Heart13" parent="Enviorment/hearts" unique_id=1921613996 instance=ExtResource("10_4c57u")]
+transform = Transform3D(4.4068165, -1.6735611, -3.7120287, -1.7700367, 4.1386113, -3.967223, 3.6670067, 4.0088754, 2.5459728, 33.84514, -6.9413204, -190.15875)
+
+[node name="Heart14" parent="Enviorment/hearts" unique_id=530616293 instance=ExtResource("10_4c57u")]
+transform = Transform3D(7.0931063, -1.5781687, 6.8700266, 3.9804666, 8.940298, -2.0559688, -5.817539, 4.192911, 6.969632, -34.326096, -16.629316, -240.74364)
+
+[node name="Heart15" parent="Enviorment/hearts" unique_id=396042151 instance=ExtResource("10_4c57u")]
+transform = Transform3D(3.7064607, -3.6828878, -6.057927, 0.015266912, 6.839996, -4.149002, 7.089564, 1.9107035, 3.1760504, 196.2362, -6.2269716, -178.46669)
+
+[node name="Heart16" parent="Enviorment/hearts" unique_id=1290954647 instance=ExtResource("10_4c57u")]
+transform = Transform3D(11.283172, -1.312182, -6.3220425, -3.7886357, 8.961664, -8.621764, 5.2284107, 9.325597, 7.3957396, 269.72333, -8.896975, 67.12358)
+
+[node name="Heart18" parent="Enviorment/hearts" unique_id=913452049 instance=ExtResource("10_4c57u")]
+transform = Transform3D(0.6725953, 2.6507654, -15.764551, -13.702961, -8.030257, -1.9349028, -8.232648, 13.582651, 1.9326386, 115.97261, -10.879702, 232.32356)
+
+[node name="Heart19" parent="Enviorment/hearts" unique_id=1427697398 instance=ExtResource("10_4c57u")]
+transform = Transform3D(0.2942604, 1.1597097, -6.896991, 4.117457, 5.551256, 1.1090996, 5.6533136, -4.10349, -0.4487914, -13.723648, -1.7485065, 208.69008)
+
+[node name="Heart20" parent="Enviorment/hearts" unique_id=606308790 instance=ExtResource("10_4c57u")]
+transform = Transform3D(6.89727, -3.8965104, -6.1028557, 5.882079, 7.9303665, 1.5844269, 4.222412, -4.68257, 7.761752, -132.15372, 1.3439617, 150.3354)
+
+[node name="Heart17" parent="Enviorment/hearts" unique_id=111401937 instance=ExtResource("10_4c57u")]
+transform = Transform3D(8.425327, -4.48371, -2.9850006, 4.015204, 8.921905, -2.068281, 3.590546, 0.54405767, 9.317296, 295.19803, 3.9544582, -89.51344)
+
+[node name="Heart6" parent="Enviorment/hearts" unique_id=1356480514 instance=ExtResource("10_4c57u")]
+transform = Transform3D(3, 0, 0, 0, 2.5706656, -1.5465055, 0, 1.5465055, 2.5706656, -317.21317, 20.091053, -71.721695)
+
+[node name="Heart8" parent="Enviorment/hearts" unique_id=1709624785 instance=ExtResource("10_4c57u")]
+transform = Transform3D(-0.97838247, -2.3038588, 1.6537843, 2.5376859, 0.06978916, 1.5985229, -1.2660627, 1.9202513, 1.9260637, -331.5046, 20.091053, -69.391136)
+
+[node name="Heart7" parent="Enviorment/hearts" unique_id=1957367471 instance=ExtResource("10_4c57u")]
+transform = Transform3D(-1.4738967, 2.2390263, -1.3469921, -1.1066452, 0.8660683, 2.650521, 2.367058, 1.7990791, 0.40043765, -307.29303, 20.091053, -71.721695)
+
+[node name="Heart9" parent="Enviorment/hearts" unique_id=1714850315 instance=ExtResource("10_4c57u")]
+transform = Transform3D(-2.1727023, -0.91614544, 1.8547342, -1.5273203, 2.5245504, -0.5421577, -1.395225, -1.336907, -2.2947822, -164.90973, 35.581364, 32.488144)
+
+[node name="Heart10" parent="Enviorment/hearts" unique_id=632617867 instance=ExtResource("10_4c57u")]
+transform = Transform3D(-1.0736072, 2.2709515, -1.6401649, 2.2112398, 1.7653843, 0.9969101, 1.7198195, -0.8521701, -2.3056505, -153.29927, 43.507336, 32.606384)
+
+[node name="Heart11" parent="Enviorment/hearts" unique_id=907132650 instance=ExtResource("10_4c57u")]
+transform = Transform3D(2.4404662, -1.7023909, -0.38208216, 0.50957274, 0.06713815, 2.955643, -1.6686692, -2.4692822, 0.34377968, -172.50859, 39.85141, 34.716663)
+
+[node name="Heart3" parent="Enviorment/hearts" unique_id=494411555 instance=ExtResource("10_4c57u")]
+transform = Transform3D(0.757508, -0.5055652, 0.41301996, 0, 0.6326648, 0.7744258, -0.6528259, -0.58663374, 0.47924864, -254.0632, 3.633884, 6.806637)
+
+[node name="Heart4" parent="Enviorment/hearts" unique_id=1374739650 instance=ExtResource("10_4c57u")]
+transform = Transform3D(-0.87207884, -1.6225929, 5.710224, 0.59862393, 5.718055, 1.7162402, -5.906024, 0.8191629, -0.66921234, -116.56781, 62.99083, -51.369133)
+
+[node name="Heart5" parent="Enviorment/hearts" unique_id=1108083063 instance=ExtResource("10_4c57u")]
+transform = Transform3D(0.0855518, 0.01685214, 1.9980981, -1.368281, 1.4579656, 0.0462886, -1.4561894, -1.36896, 0.07389504, -196.31583, 36.97636, 32.13429)
+
+[node name="Heart2" parent="Enviorment/hearts" unique_id=1582108456 instance=ExtResource("10_4c57u")]
+transform = Transform3D(0.90860295, 0.21530496, 0.35788885, 0, 0.85688853, -0.5155018, -0.41766092, 0.46838644, 0.7785714, -406.65717, 3.2869992, -10.88957)
 
 [node name="[Left Click]" type="Label" parent="." unique_id=422239690]
 offset_left = 273.0
@@ -569,7 +666,6 @@ text = "[Right Click]"
 label_settings = ExtResource("7_272bh")
 
 [node name="Reach The Hole" type="Label" parent="." unique_id=1462058820]
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -583,117 +679,5 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Reach The Hole"
 label_settings = ExtResource("7_272bh")
-
-[node name="Meat pieces" type="Node" parent="." unique_id=261746168]
-
-[node name="meat piece" parent="Meat pieces" unique_id=67079959 instance=ExtResource("9_kek77")]
-transform = Transform3D(29.999998, 0, 0, 0, -21.048548, 21.37658, 0, -21.37658, -21.048548, -407.5906, 4.6351624, 2.2654638)
-
-[node name="meat piece2" parent="Meat pieces" unique_id=2144998689 instance=ExtResource("9_kek77")]
-transform = Transform3D(29.999994, 0, 0, 0, 17.603886, -24.292025, 0, 24.292025, 17.603886, -186.53566, 24.476955, -33.07093)
-
-[node name="meat piece12" parent="Meat pieces" unique_id=763110409 instance=ExtResource("9_kek77")]
-transform = Transform3D(-15.110676, -48.230953, -48.429764, -21.146664, 50.464577, -43.659412, 64.99605, 5.205784, -25.463976, -149.16801, 57.122036, -52.06134)
-
-[node name="meat piece9" parent="Meat pieces" unique_id=318676703 instance=ExtResource("9_kek77")]
-transform = Transform3D(30.000002, 0, 0, 0, 25.107788, 16.419437, 0, -16.419437, 25.107788, -186.53566, 31.240437, 22.135138)
-
-[node name="meat piece3" parent="Meat pieces" unique_id=516097928 instance=ExtResource("9_kek77")]
-transform = Transform3D(4.698833, -9.95322, -27.907948, -29.532879, -3.8560038, -3.5971947, -2.3936522, 28.036833, -10.4022, -230.55017, 4.9565096, -46.38057)
-
-[node name="meat piece4" parent="Meat pieces" unique_id=320739737 instance=ExtResource("9_kek77")]
-transform = Transform3D(4.698833, -9.95322, -27.907948, -29.532879, -3.8560038, -3.5971947, -2.3936522, 28.036833, -10.4022, -295.73877, 4.9565096, -51.804375)
-
-[node name="meat piece5" parent="Meat pieces" unique_id=1898027616 instance=ExtResource("9_kek77")]
-transform = Transform3D(-1.2131331, 6.789914, -29.196314, 21.039778, 21.005722, 4.0108814, 21.350784, -20.313946, -5.611367, -282.69873, 4.9565096, 9.664444)
-
-[node name="meat piece11" parent="Meat pieces" unique_id=1363923686 instance=ExtResource("9_kek77")]
-transform = Transform3D(-26.7683, -13.7996645, -51.89439, 32.55817, 41.939754, -27.946785, 42.70157, -40.6279, -11.222733, -270.1444, 47.6651, 28.134495)
-
-[node name="meat piece10" parent="Meat pieces" unique_id=1629757385 instance=ExtResource("9_kek77")]
-transform = Transform3D(-22.28433, -19.379622, 5.2762113, -14.285065, 9.752743, -24.511631, 14.118964, -20.719877, -16.472416, -235.41937, 10.823892, 7.2439575)
-
-[node name="meat piece6" parent="Meat pieces" unique_id=1497015656 instance=ExtResource("9_kek77")]
-transform = Transform3D(21.23826, -21.182894, -0.4702378, 20.133791, 19.969051, 9.79117, -6.6005073, -7.2471704, 28.353327, -300.1496, 20.484098, 17.510038)
-
-[node name="meat piece7" parent="Meat pieces" unique_id=112751760 instance=ExtResource("9_kek77")]
-transform = Transform3D(21.23826, -21.182894, -0.4702378, 20.133791, 19.969051, 9.79117, -6.6005073, -7.2471704, 28.353327, -337.21948, 15.508699, -59.330143)
-
-[node name="meat piece8" parent="Meat pieces" unique_id=1356872912 instance=ExtResource("9_kek77")]
-transform = Transform3D(88.691925, 35.385654, 29.691666, -33.296654, 93.526886, -12.002225, -32.01676, 0.75868034, 94.73306, -406.91476, 46.18935, -15.763654)
-
-[node name="meat piece13" parent="Meat pieces" unique_id=1609366890 instance=ExtResource("9_kek77")]
-transform = Transform3D(88.691925, 35.385654, 29.691666, -33.296654, 93.526886, -12.002225, -32.01676, 0.75868034, 94.73306, 270.60217, 4.621132, -125.59293)
-
-[node name="meat piece15" parent="Meat pieces" unique_id=1363107418 instance=ExtResource("9_kek77")]
-transform = Transform3D(133.0379, 53.07851, 44.5375, -68.64752, 114.05649, 69.12767, -9.403979, -81.69325, 125.450294, 153.8543, 12.43446, 131.08176)
-
-[node name="meat piece16" parent="Meat pieces" unique_id=1047113117 instance=ExtResource("9_kek77")]
-transform = Transform3D(217.96718, 120.161606, -23.483955, 55.140526, -53.528755, 237.89534, 109.31528, -212.59319, -73.17314, -76.786865, 44.91029, 239.26982)
-
-[node name="meat piece14" parent="Meat pieces" unique_id=857265387 instance=ExtResource("9_kek77")]
-transform = Transform3D(164.4744, -27.911425, -110.313774, -1.0241462, 193.51906, -50.490868, 113.785446, 42.087162, 159.00172, 281.7868, 19.352459, -232.68814)
-
-[node name="hearts" type="Node" parent="." unique_id=895872931]
-
-[node name="Heart" parent="hearts" unique_id=1104504886 instance=ExtResource("10_4c57u")]
-transform = Transform3D(1, 0, 0, 0, 0.85688853, -0.5155018, 0, 0.5155018, 0.85688853, -317.21317, -0.58515215, 6.6373434)
-
-[node name="Heart12" parent="hearts" unique_id=1937056544 instance=ExtResource("10_4c57u")]
-transform = Transform3D(15, 0, 0, 0, 12.853328, -7.732527, 0, 7.732527, 12.853328, -94.11689, -6.0508866, -194.23239)
-
-[node name="Heart13" parent="hearts" unique_id=1921613996 instance=ExtResource("10_4c57u")]
-transform = Transform3D(4.4068165, -1.6735611, -3.7120287, -1.7700367, 4.1386113, -3.967223, 3.6670067, 4.0088754, 2.5459728, 33.84514, -6.9413204, -190.15875)
-
-[node name="Heart14" parent="hearts" unique_id=530616293 instance=ExtResource("10_4c57u")]
-transform = Transform3D(7.0931063, -1.5781687, 6.8700266, 3.9804666, 8.940298, -2.0559688, -5.817539, 4.192911, 6.969632, -34.326096, -16.629316, -240.74364)
-
-[node name="Heart15" parent="hearts" unique_id=396042151 instance=ExtResource("10_4c57u")]
-transform = Transform3D(3.7064607, -3.6828878, -6.057927, 0.015266912, 6.839996, -4.149002, 7.089564, 1.9107035, 3.1760504, 196.2362, -6.2269716, -178.46669)
-
-[node name="Heart16" parent="hearts" unique_id=1290954647 instance=ExtResource("10_4c57u")]
-transform = Transform3D(11.283172, -1.312182, -6.3220425, -3.7886357, 8.961664, -8.621764, 5.2284107, 9.325597, 7.3957396, 269.72333, -8.896975, 67.12358)
-
-[node name="Heart18" parent="hearts" unique_id=913452049 instance=ExtResource("10_4c57u")]
-transform = Transform3D(0.6725953, 2.6507654, -15.764551, -13.702961, -8.030257, -1.9349028, -8.232648, 13.582651, 1.9326386, 115.97261, -10.879702, 232.32356)
-
-[node name="Heart19" parent="hearts" unique_id=1427697398 instance=ExtResource("10_4c57u")]
-transform = Transform3D(0.2942604, 1.1597097, -6.896991, 4.117457, 5.551256, 1.1090996, 5.6533136, -4.10349, -0.4487914, -13.723648, -1.7485065, 208.69008)
-
-[node name="Heart20" parent="hearts" unique_id=606308790 instance=ExtResource("10_4c57u")]
-transform = Transform3D(6.89727, -3.8965104, -6.1028557, 5.882079, 7.9303665, 1.5844269, 4.222412, -4.68257, 7.761752, -132.15372, 1.3439617, 150.3354)
-
-[node name="Heart17" parent="hearts" unique_id=111401937 instance=ExtResource("10_4c57u")]
-transform = Transform3D(8.425327, -4.48371, -2.9850006, 4.015204, 8.921905, -2.068281, 3.590546, 0.54405767, 9.317296, 295.19803, 3.9544582, -89.51344)
-
-[node name="Heart6" parent="hearts" unique_id=1356480514 instance=ExtResource("10_4c57u")]
-transform = Transform3D(3, 0, 0, 0, 2.5706656, -1.5465055, 0, 1.5465055, 2.5706656, -317.21317, 20.091053, -71.721695)
-
-[node name="Heart8" parent="hearts" unique_id=1709624785 instance=ExtResource("10_4c57u")]
-transform = Transform3D(-0.97838247, -2.3038588, 1.6537843, 2.5376859, 0.06978916, 1.5985229, -1.2660627, 1.9202513, 1.9260637, -331.5046, 20.091053, -69.391136)
-
-[node name="Heart7" parent="hearts" unique_id=1957367471 instance=ExtResource("10_4c57u")]
-transform = Transform3D(-1.4738967, 2.2390263, -1.3469921, -1.1066452, 0.8660683, 2.650521, 2.367058, 1.7990791, 0.40043765, -307.29303, 20.091053, -71.721695)
-
-[node name="Heart9" parent="hearts" unique_id=1714850315 instance=ExtResource("10_4c57u")]
-transform = Transform3D(-2.1727023, -0.91614544, 1.8547342, -1.5273203, 2.5245504, -0.5421577, -1.395225, -1.336907, -2.2947822, -164.90973, 35.581364, 32.488144)
-
-[node name="Heart10" parent="hearts" unique_id=632617867 instance=ExtResource("10_4c57u")]
-transform = Transform3D(-1.0736072, 2.2709515, -1.6401649, 2.2112398, 1.7653843, 0.9969101, 1.7198195, -0.8521701, -2.3056505, -153.29927, 43.507336, 32.606384)
-
-[node name="Heart11" parent="hearts" unique_id=907132650 instance=ExtResource("10_4c57u")]
-transform = Transform3D(2.4404662, -1.7023909, -0.38208216, 0.50957274, 0.06713815, 2.955643, -1.6686692, -2.4692822, 0.34377968, -172.50859, 39.85141, 34.716663)
-
-[node name="Heart3" parent="hearts" unique_id=494411555 instance=ExtResource("10_4c57u")]
-transform = Transform3D(0.757508, -0.5055652, 0.41301996, 0, 0.6326648, 0.7744258, -0.6528259, -0.58663374, 0.47924864, -254.0632, 3.633884, 6.806637)
-
-[node name="Heart4" parent="hearts" unique_id=1374739650 instance=ExtResource("10_4c57u")]
-transform = Transform3D(-0.87207884, -1.6225929, 5.710224, 0.59862393, 5.718055, 1.7162402, -5.906024, 0.8191629, -0.66921234, -116.56781, 62.99083, -51.369133)
-
-[node name="Heart5" parent="hearts" unique_id=1108083063 instance=ExtResource("10_4c57u")]
-transform = Transform3D(0.0855518, 0.01685214, 1.9980981, -1.368281, 1.4579656, 0.0462886, -1.4561894, -1.36896, 0.07389504, -196.31583, 36.97636, 32.13429)
-
-[node name="Heart2" parent="hearts" unique_id=1582108456 instance=ExtResource("10_4c57u")]
-transform = Transform3D(0.90860295, 0.21530496, 0.35788885, 0, 0.85688853, -0.5155018, -0.41766092, 0.46838644, 0.7785714, -406.65717, 3.2869992, -10.88957)
 
 [editable path="CharacterBody3D"]
