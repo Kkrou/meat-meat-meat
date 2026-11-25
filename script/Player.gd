@@ -1,12 +1,13 @@
 extends CharacterBody3D
+#hold constants
+const MAX_HOLD_DISTANCE = 1.5
 #movement constants
-const SPEED = 15
-const JUMP_VELOCITY = 0
-const SENSITIVITY = 0.001
-
+const SPEED = 8.0
+const JUMP_VELOCITY = 4.5
+const SENSITIVITY = 0.003
 #bob variables
-const BOB_FREQ = 1.5
-const BOB_AMP = 0.04
+const BOB_FREQ = 2.0
+const BOB_AMP = 0.08
 var t_bob = 0.0
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 9.8
@@ -19,23 +20,33 @@ var held_object: RigidBody3D = null
 var current_interactable = null
 var interact_counter = 0
 
-# --- CLAW ---ù
+# --- CLAW ---
+@export_group("Claw")
+@export var feet_head_y: float = 0.3          # head height (local Y) at the 8th click
+@export var cycles: int = 4                   # 1 cycle = left click + right click
+@export var lock_look_while_clawing := true   # also locks mouse look during the sequence
+@export var auto_start_for_testing := false   # starts the sequence on launch (testing only)
+
+@export_group("Claw Step Feel")
+@export var drop_time: float = 0.18           # fall duration per click (lower = more violent)
+@export var impact_dip: float = 0.06          # how far it goes below the target on impact
+@export var recover_time: float = 0.3         # time to come back up after the impact
+
+@export_group("Claw Final Collapse")
+@export var final_drop_depth: float = 0.15    # how far it falls below feet_head_y
+@export var final_drop_time: float = 0.22     # dead-weight fall (short)
+@export var final_pause: float = 0.35         # pause on the ground
+@export var final_rise: float = 0.25          # how much it rises from the lowest point
+@export var final_rise_time: float = 2.0      # slow rise
 @export var final_pitch_dive_deg: float = 30.0  # how far the view pitches down
 @export var final_fov_kick: float = 12.0        # extra FOV degrees during the fall
 @export var final_shake: float = 0.08           # impact shake strength
-@export var final_drop_depth: float = 0.15   # quanto cade sotto feet_head_y
-@export var final_drop_time: float = 0.22    # caduta a peso morto (breve)
-@export var final_pause: float = 0.35        # pausa a terra
-@export var final_rise: float = 0.25         # di quanto si rialza dal punto più basso
-@export var final_rise_time: float = 2.0     # risalita lenta
-@export var drop_time: float = 0.18      # durata della caduta (più basso = più violento)
-@export var impact_dip: float = 0.06     # quanto "sfonda" sotto il livello target
-@export var recover_time: float = 0.3    # tempo per risalire dopo l'impatto
-@export_group("Claw")
-@export var feet_head_y: float = 0.3          # altezza (Y locale) della testa a livello piedi
-@export var cycles: int = 4                   # 1 ciclo = click sinistro + click destro
-@export var lock_look_while_clawing := true   # blocca anche il mouse look durante la sequenza
-@export var auto_start_for_testing := false   # avvia la sequenza all'avvio (solo test)
+
+@export_group("Claw UI")
+@export var prompt_fade_time: float = 0.5
+@export var left_prompt_label: Label          # drag your [Left Click] label here
+@export var right_prompt_label: Label         # drag your [Right Click] label here
+@export var lock_movement_at_start := true    # keeps the player locked while the intro plays
 
 enum ClawState { NONE, WAITING_INPUT, ANIMATING, DONE }
 var claw_state = ClawState.NONE
@@ -48,10 +59,19 @@ var step_height := 0.0
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	standing_head_y = head.position.y
+	if left_prompt_label:
+		left_prompt_label.modulate.a = 0.0
+	if right_prompt_label:
+		right_prompt_label.modulate.a = 0.0
+	movement_locked = lock_movement_at_start
 	if auto_start_for_testing:
 		start_claw_sequence()
 
-# Chiamala da un trigger (Area3D, evento, ecc.)
+# Lock the player manually (the intro script calls this)
+func lock_movement():
+	movement_locked = true
+
+# Called by the intro when the last label has faded out
 func start_claw_sequence():
 	if claw_state != ClawState.NONE:
 		return
@@ -59,16 +79,37 @@ func start_claw_sequence():
 	step_height = (standing_head_y - feet_head_y) / total_steps
 	steps_done = 0
 	expect_left = true
-	movement_locked = true      # ferma movimento del player
+	movement_locked = true
+	_show_prompt(true)   # [Left Click] fades in
 	claw_state = ClawState.WAITING_INPUT
 
+# true = show [Left Click], false = show [Right Click]; the other one fades out
+func _show_prompt(left: bool):
+	_fade_label(left_prompt_label, 1.0 if left else 0.0)
+	_fade_label(right_prompt_label, 0.0 if left else 1.0)
+
+func _hide_prompt():
+	_fade_label(left_prompt_label, 0.0)
+	_fade_label(right_prompt_label, 0.0)
+
+func _fade_label(label: Label, target_alpha: float):
+	if label == null:
+		return
+	var old = label.get_meta("fade_tween", null)
+	if old and old.is_valid():
+		old.kill()
+	var tween = create_tween()
+	tween.tween_property(label, "modulate:a", target_alpha, prompt_fade_time)
+	label.set_meta("fade_tween", tween)
+
 func _do_claw_step(anim_name: String):
-	claw_state = ClawState.ANIMATING   # da qui gli input vengono ignorati
+	claw_state = ClawState.ANIMATING   # inputs are ignored from here
+	_hide_prompt()                     # prompt fades out as the animation starts
 	steps_done += 1
 	expect_left = not expect_left
 	var target_y = standing_head_y - step_height * steps_done
 	anim_player.play(anim_name)
-	# caduta con energia: accelera verso il basso, poi rimbalza sul target
+	# energetic fall: accelerates down, then bounces onto the target
 	var tween = create_tween()
 	tween.tween_property(head, "position:y", target_y - impact_dip, drop_time)\
 		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
@@ -77,11 +118,13 @@ func _do_claw_step(anim_name: String):
 	await anim_player.animation_finished
 	head.position.y = target_y
 	if steps_done >= cycles * 2:
-		# ultimo click: crollo finale, poi il controllo torna al giocatore
+		# last click: final collapse, then control returns to the player
 		await _final_collapse()
 		claw_state = ClawState.DONE
 		movement_locked = false
 	else:
+		# next prompt fades in once the animation is over
+		_show_prompt(expect_left)
 		claw_state = ClawState.WAITING_INPUT
 
 func _final_collapse():
@@ -132,9 +175,9 @@ func _final_collapse():
 	camera.fov = start_fov
 	camera.h_offset = 0.0
 	camera.v_offset = 0.0
-	
+
 func _unhandled_input(event):
-	# Input della sequenza: alternati sinistro -> destro
+	# Sequence input: left click, then right click, alternating
 	if claw_state == ClawState.WAITING_INPUT and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		if event.is_action_pressed("claw_left") and expect_left:
 			_do_claw_step("claw_left")
@@ -142,10 +185,10 @@ func _unhandled_input(event):
 		elif event.is_action_pressed("claw_right") and not expect_left:
 			_do_claw_step("claw_right")
 			return
-	# Controlla se è stato premuto il tasto ESC
+	# Check if ESC was pressed
 	if event.is_action_pressed("ui_cancel") or (event is InputEventKey and event.keycode == KEY_ESCAPE):
 		if event.pressed:
-			# Se era bloccato, lo libera. Se era libero, lo blocca di nuovo (opzionale)
+			# If captured, release it. If free, capture it again (optional)
 			if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 			else:
@@ -188,8 +231,8 @@ func activate():
 
 func increment_counter():
 	interact_counter += 1
-	print("Counter: ", interact_counter) 
-	 # sostituiscilo con l'update della tua UI
+	print("Counter: ", interact_counter)
+	 # replace with your UI update
 	var Memories_Counter = $"../Memories Counter"
 	Memories_Counter.text = "Memories: " + str(interact_counter)
 
@@ -214,7 +257,7 @@ func _physics_process(delta):
 		velocity.y -= gravity * delta
 
 	if movement_locked:
-		# movimento fermo durante la sequenza claw
+		# movement stopped during the intro and the claw sequence
 		velocity.x = 0.0
 		velocity.z = 0.0
 	else:
@@ -231,7 +274,15 @@ func _physics_process(delta):
 			velocity.x = 0.0
 			velocity.z = 0.0
 
-	
+	# Hold logic: move the held object toward the hand every physics tick
+	if held_object:
+		var to_hand = hand.global_position - held_object.global_position
+		if to_hand.length() > MAX_HOLD_DISTANCE:
+			drop()
+		else:
+			held_object.linear_velocity = to_hand / delta
+			var target_basis = hand.global_transform.basis
+			held_object.angular_velocity = (target_basis * held_object.global_transform.basis.inverse()).get_euler() / delta
 #bob code
 	t_bob += delta * velocity.length() * float(is_on_floor())
 	camera.transform.origin = _headbob(t_bob)

@@ -30,7 +30,7 @@ material = SubResource("StandardMaterial3D_kek77")
 size = Vector3(20, 60, 20)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7mycd"]
-size = Vector3(10, 60, 9.849579)
+size = Vector3(15, 120, 15)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7mycd"]
 load_path = "res://.godot/imported/Meat_Raw_001_basecolor.jpg-53977c2599d79b4fe93bf8a34721fcbb.s3tc.ctex"
@@ -50,16 +50,17 @@ metallic_specular = 0.0
 roughness_texture = SubResource("CompressedTexture2D_kek77")
 normal_enabled = true
 normal_texture = SubResource("CompressedTexture2D_5vw27")
+clearcoat_roughness = 1.0
 ao_enabled = true
 ao_texture = SubResource("CompressedTexture2D_272bh")
 uv1_scale = Vector3(15, 15, 15)
 
 [sub_resource type="BoxMesh" id="BoxMesh_efxa6"]
 material = SubResource("StandardMaterial3D_4c57u")
-size = Vector3(10, 120, 10)
+size = Vector3(15, 120, 15)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_272bh"]
-size = Vector3(10, 60, 9.905075)
+size = Vector3(15, 120, 15)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dg77c"]
 load_path = "res://.godot/imported/Meat_Raw_001_basecolor.jpg-53977c2599d79b4fe93bf8a34721fcbb.s3tc.ctex"
@@ -85,7 +86,7 @@ uv1_scale = Vector3(15, 15, 15)
 
 [sub_resource type="BoxMesh" id="BoxMesh_yaehf"]
 material = SubResource("StandardMaterial3D_2cqfq")
-size = Vector3(10, 120, 10)
+size = Vector3(15, 120, 15)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_efxa6"]
 
@@ -146,7 +147,7 @@ fog_enabled = true
 fog_light_color = Color(0.72247714, 0.41545546, 0.4377443, 1)
 fog_light_energy = 0.1
 fog_sun_scatter = 0.05
-fog_density = 0.005
+fog_density = 0.007
 fog_sky_affect = 0.9
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.0001
@@ -195,6 +196,8 @@ lod0_range = 128.0
 name = "Meat_Raw_001_roughness"
 albedo_texture = ExtResource("2_lquwl")
 normal_texture = ExtResource("6_7mycd")
+normal_depth = 2.0
+roughness = -1.0
 
 [sub_resource type="Terrain3DAssets" id="Terrain3DAssets_1bvp3"]
 mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_h2yge")])
@@ -202,17 +205,59 @@ texture_list = Array[Terrain3DTextureAsset]([SubResource("Terrain3DTextureAsset_
 
 [node name="Main" type="Node3D" unique_id=976627802]
 
-[node name="CharacterBody3D" parent="." unique_id=658356461 instance=ExtResource("1_ig7tw")]
-transform = Transform3D(0.9999999, 0, 0, 0, 0.9999024, -0.013962179, 0, 0.0139621785, 0.9999025, -406.50296, 0.25799942, -2.2542543)
+[node name="CharacterBody3D" parent="." unique_id=658356461 node_paths=PackedStringArray("left_prompt_label", "right_prompt_label") instance=ExtResource("1_ig7tw")]
+transform = Transform3D(0.9999999, 0, 0, 0, 0.9999024, -0.013962179, 0, 0.0139621785, 0.9999025, -404.2569, 0.29255033, -2.2542543)
 feet_head_y = -0.553
 auto_start_for_testing = false
+left_prompt_label = NodePath("../[Left Click]")
+right_prompt_label = NodePath("../[Right Click]")
 
 [node name="Head" parent="CharacterBody3D" index="2" unique_id=228465702]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8666609, -0.0026025772)
 
 [node name="Camera3D" parent="CharacterBody3D/Head" index="0" unique_id=708619513]
-transform = Transform3D(1.0000001, -9.567884e-09, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, -3.0517578e-05, -0.059036195, 0.0008094311)
+transform = Transform3D(1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 1.1212769, -0.059036255, 0.00080919266)
 fov = 70.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CharacterBody3D" unique_id=1103951218 node_paths=PackedStringArray("player")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -226.0
+offset_top = -90.5
+offset_right = 226.0
+offset_bottom = 90.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+script = ExtResource("7_5vw27")
+player = NodePath("..")
+
+[node name="Your skeleton taints you" type="Label" parent="CharacterBody3D/VBoxContainer" unique_id=1418200108]
+layout_mode = 2
+text = "Your Skeleton Taints You"
+label_settings = ExtResource("7_272bh")
+horizontal_alignment = 1
+
+[node name="Despise It" type="Label" parent="CharacterBody3D/VBoxContainer" unique_id=890261007]
+layout_mode = 2
+text = "Despise It"
+label_settings = ExtResource("7_272bh")
+horizontal_alignment = 1
+
+[node name="Dispose Of It" type="Label" parent="CharacterBody3D/VBoxContainer" unique_id=1742218961]
+layout_mode = 2
+text = "Dispose Of It"
+label_settings = ExtResource("7_272bh")
+horizontal_alignment = 1
+
+[node name="Claw It Out Of You" type="Label" parent="CharacterBody3D/VBoxContainer" unique_id=45611179]
+layout_mode = 2
+text = "Claw It Out Of You"
+label_settings = ExtResource("7_272bh")
+horizontal_alignment = 1
 
 [node name="SpotLight3D2" type="SpotLight3D" parent="." unique_id=1713942615]
 transform = Transform3D(0.9941661, 4.7147353e-09, -0.107860565, 0.107860565, -4.3456378e-08, 0.9941661, 0, -1, -4.3711392e-08, -403.682, 11.202489, -6.1681714)
@@ -220,7 +265,6 @@ light_color = Color(1, 0.58431375, 0.5254902, 1)
 light_energy = 5.0
 light_size = 0.5
 spot_range = 15.0
-spot_attenuation = 0.9
 
 [node name="Enviorment" type="Node" parent="." unique_id=1013091573]
 
@@ -274,7 +318,7 @@ mesh = SubResource("BoxMesh_h2yge")
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, -96.39885, 55.124634, 19.593445)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Enviorment/meat-palaces/TowerRight" unique_id=1308126023]
-transform = Transform3D(1, 0, 0, 0, 0.9999946, 0, 0, 0, 0.9999946, 1.1110458, 14.079178, -2.8074188)
+transform = Transform3D(1, 0, 0, 0, 0.9999945, 0, 0, 0, 0.9999945, 1.1110458, 14.079178, -2.5209541)
 shape = SubResource("BoxShape3D_7mycd")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Enviorment/meat-palaces/TowerRight" unique_id=2103561244]
@@ -422,7 +466,7 @@ transform = Transform3D(1.0000001, -7.0780516e-08, 1.4901161e-08, -3.3527613e-08
 mesh = SubResource("BoxMesh_h2yge")
 
 [node name="palace2" type="StaticBody3D" parent="Enviorment/meat-palaces" unique_id=170184557]
-transform = Transform3D(-0.07071398, 0.9974966, 0, -0.9974966, -0.07071398, 0, 0, 0, 1, -25.274555, 46.32918, -2.9372787)
+transform = Transform3D(-0.07071398, 0.9974966, 0, -0.9974966, -0.07071398, 0, 0, 0, 1, -42.657883, 47.449158, -2.9372787)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Enviorment/meat-palaces/palace2" unique_id=473089141]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.652317, 3.875023, 2.9726286)
@@ -492,7 +536,7 @@ shadow_enabled = true
 directional_shadow_mode = 0
 
 [node name="FogVolume" type="FogVolume" parent="Enviorment" unique_id=1275978943]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.076157, -32.735565, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.076157, -38.086685, 0)
 size = Vector3(262.87018, 33.416138, 200)
 material = SubResource("FogMaterial_ig7tw")
 
@@ -505,47 +549,7 @@ displacement_sharpness = 0.5
 top_level = true
 metadata/_edit_lock_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1103951218]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -226.0
-offset_top = -90.5
-offset_right = 226.0
-offset_bottom = 90.5
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-script = ExtResource("7_5vw27")
-
-[node name="Your skeleton taints you" type="Label" parent="VBoxContainer" unique_id=1418200108]
-layout_mode = 2
-text = "Your Skeleton Taints You"
-label_settings = ExtResource("7_272bh")
-horizontal_alignment = 1
-
-[node name="Despise It" type="Label" parent="VBoxContainer" unique_id=890261007]
-layout_mode = 2
-text = "Despise It"
-label_settings = ExtResource("7_272bh")
-horizontal_alignment = 1
-
-[node name="Dispose Of It" type="Label" parent="VBoxContainer" unique_id=1742218961]
-layout_mode = 2
-text = "Dispose Of It"
-label_settings = ExtResource("7_272bh")
-horizontal_alignment = 1
-
-[node name="Claw It Out Of You" type="Label" parent="VBoxContainer" unique_id=45611179]
-layout_mode = 2
-text = "Claw It Out Of You"
-label_settings = ExtResource("7_272bh")
-horizontal_alignment = 1
-
 [node name="[Left Click]" type="Label" parent="." unique_id=422239690]
-visible = false
 offset_left = 273.0
 offset_top = 508.0
 offset_right = 464.0
@@ -555,7 +559,6 @@ text = "[Left Click]"
 label_settings = ExtResource("7_272bh")
 
 [node name="[Right Click]" type="Label" parent="." unique_id=404392070]
-visible = false
 offset_left = 768.0
 offset_top = 505.0
 offset_right = 979.0
@@ -619,10 +622,49 @@ transform = Transform3D(21.23826, -21.182894, -0.4702378, 20.133791, 19.969051, 
 [node name="meat piece8" parent="Meat pieces" unique_id=1356872912 instance=ExtResource("9_kek77")]
 transform = Transform3D(88.691925, 35.385654, 29.691666, -33.296654, 93.526886, -12.002225, -32.01676, 0.75868034, 94.73306, -406.91476, 46.18935, -15.763654)
 
+[node name="meat piece13" parent="Meat pieces" unique_id=1609366890 instance=ExtResource("9_kek77")]
+transform = Transform3D(88.691925, 35.385654, 29.691666, -33.296654, 93.526886, -12.002225, -32.01676, 0.75868034, 94.73306, 270.60217, 4.621132, -125.59293)
+
+[node name="meat piece15" parent="Meat pieces" unique_id=1363107418 instance=ExtResource("9_kek77")]
+transform = Transform3D(133.0379, 53.07851, 44.5375, -68.64752, 114.05649, 69.12767, -9.403979, -81.69325, 125.450294, 153.8543, 12.43446, 131.08176)
+
+[node name="meat piece16" parent="Meat pieces" unique_id=1047113117 instance=ExtResource("9_kek77")]
+transform = Transform3D(217.96718, 120.161606, -23.483955, 55.140526, -53.528755, 237.89534, 109.31528, -212.59319, -73.17314, -76.786865, 44.91029, 239.26982)
+
+[node name="meat piece14" parent="Meat pieces" unique_id=857265387 instance=ExtResource("9_kek77")]
+transform = Transform3D(164.4744, -27.911425, -110.313774, -1.0241462, 193.51906, -50.490868, 113.785446, 42.087162, 159.00172, 281.7868, 19.352459, -232.68814)
+
 [node name="hearts" type="Node" parent="." unique_id=895872931]
 
 [node name="Heart" parent="hearts" unique_id=1104504886 instance=ExtResource("10_4c57u")]
 transform = Transform3D(1, 0, 0, 0, 0.85688853, -0.5155018, 0, 0.5155018, 0.85688853, -317.21317, -0.58515215, 6.6373434)
+
+[node name="Heart12" parent="hearts" unique_id=1937056544 instance=ExtResource("10_4c57u")]
+transform = Transform3D(15, 0, 0, 0, 12.853328, -7.732527, 0, 7.732527, 12.853328, -94.11689, -6.0508866, -194.23239)
+
+[node name="Heart13" parent="hearts" unique_id=1921613996 instance=ExtResource("10_4c57u")]
+transform = Transform3D(4.4068165, -1.6735611, -3.7120287, -1.7700367, 4.1386113, -3.967223, 3.6670067, 4.0088754, 2.5459728, 33.84514, -6.9413204, -190.15875)
+
+[node name="Heart14" parent="hearts" unique_id=530616293 instance=ExtResource("10_4c57u")]
+transform = Transform3D(7.0931063, -1.5781687, 6.8700266, 3.9804666, 8.940298, -2.0559688, -5.817539, 4.192911, 6.969632, -34.326096, -16.629316, -240.74364)
+
+[node name="Heart15" parent="hearts" unique_id=396042151 instance=ExtResource("10_4c57u")]
+transform = Transform3D(3.7064607, -3.6828878, -6.057927, 0.015266912, 6.839996, -4.149002, 7.089564, 1.9107035, 3.1760504, 196.2362, -6.2269716, -178.46669)
+
+[node name="Heart16" parent="hearts" unique_id=1290954647 instance=ExtResource("10_4c57u")]
+transform = Transform3D(11.283172, -1.312182, -6.3220425, -3.7886357, 8.961664, -8.621764, 5.2284107, 9.325597, 7.3957396, 269.72333, -8.896975, 67.12358)
+
+[node name="Heart18" parent="hearts" unique_id=913452049 instance=ExtResource("10_4c57u")]
+transform = Transform3D(0.6725953, 2.6507654, -15.764551, -13.702961, -8.030257, -1.9349028, -8.232648, 13.582651, 1.9326386, 115.97261, -10.879702, 232.32356)
+
+[node name="Heart19" parent="hearts" unique_id=1427697398 instance=ExtResource("10_4c57u")]
+transform = Transform3D(0.2942604, 1.1597097, -6.896991, 4.117457, 5.551256, 1.1090996, 5.6533136, -4.10349, -0.4487914, -13.723648, -1.7485065, 208.69008)
+
+[node name="Heart20" parent="hearts" unique_id=606308790 instance=ExtResource("10_4c57u")]
+transform = Transform3D(6.89727, -3.8965104, -6.1028557, 5.882079, 7.9303665, 1.5844269, 4.222412, -4.68257, 7.761752, -132.15372, 1.3439617, 150.3354)
+
+[node name="Heart17" parent="hearts" unique_id=111401937 instance=ExtResource("10_4c57u")]
+transform = Transform3D(8.425327, -4.48371, -2.9850006, 4.015204, 8.921905, -2.068281, 3.590546, 0.54405767, 9.317296, 295.19803, 3.9544582, -89.51344)
 
 [node name="Heart6" parent="hearts" unique_id=1356480514 instance=ExtResource("10_4c57u")]
 transform = Transform3D(3, 0, 0, 0, 2.5706656, -1.5465055, 0, 1.5465055, 2.5706656, -317.21317, 20.091053, -71.721695)

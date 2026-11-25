@@ -1,12 +1,19 @@
 extends VBoxContainer
 
+@export var player: CharacterBody3D   # drag your Player node here in the Inspector
 @export var start_delay := 1.0     # wait before the first label
 @export var fade_in_time := 1.5    # how long each label takes to fade in
-@export var stagger := 2.0        # delay between each label starting
+@export var stagger := 2.0         # delay between each label starting
 @export var hold_time := 2.5       # how long all labels stay visible
 @export var fade_out_time := 1.5
+@export var delay_before_claw := 0.5   # pause between the last fade-out and the [Left Click] prompt
 
 func _ready() -> void:
+	# lock the player while the intro plays (deferred so it runs after the player's own _ready)
+	if player:
+		player.lock_movement.call_deferred()
+	else:
+		push_warning("Intro: player is not assigned in the Inspector")
 	play_sequence()
 
 func play_sequence() -> void:
@@ -28,3 +35,9 @@ func play_sequence() -> void:
 	for l in labels:
 		tween.tween_property(l, "modulate:a", 0.0, fade_out_time) \
 			.set_delay(fade_out_start)
+
+	# when every label has faded out, start the claw sequence
+	await tween.finished
+	await get_tree().create_timer(delay_before_claw).timeout
+	if player:
+		player.start_claw_sequence()
