@@ -4,10 +4,9 @@
 
 [resource]
 font = ExtResource("1_dyrqx")
-font_size = 32
+font_size = 36
 font_color = Color(0, 0, 0, 1)
 outline_size = 3
-outline_color = Color(0, 0, 0, 1)
-shadow_size = 4
-shadow_color = Color(0.080783345, 0.080783345, 0.080783345, 0)
-shadow_offset = Vector2(2, 2)
+outline_color = Color(0.3328807, 0.33288068, 0.33288068, 1)
+shadow_size = 15
+shadow_color = Color(0, 0, 0, 0.7137255)

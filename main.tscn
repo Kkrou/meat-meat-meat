@@ -12,6 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://bf7etgas0iggb" path="res://script/circle_05_a.png" id="7_dg77c"]
 [ext_resource type="PackedScene" uid="uid://bhywtj4qkxsb1" path="res://models/meat-piece.tscn" id="9_kek77"]
 [ext_resource type="PackedScene" uid="uid://bkr8ulearbmf4" path="res://models/heart.tscn" id="10_4c57u"]
+[ext_resource type="Script" uid="uid://6eueavqnlef2" path="res://area_3d.gd" id="13_w48qg"]
+[ext_resource type="FontFile" uid="uid://ch22k04io1wsn" path="res://Aresink.otf" id="14_vivmo"]
 
 [sub_resource type="Terrain3DMaterial" id="Terrain3DMaterial_ig7tw"]
 _shader_parameters = {
@@ -204,6 +206,18 @@ uv1_scale = Vector3(15, 15, 15)
 [sub_resource type="BoxMesh" id="BoxMesh_yaehf"]
 material = SubResource("StandardMaterial3D_2cqfq")
 size = Vector3(15, 120, 15)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2cqfq"]
+size = Vector3(150, 1, 150)
+
+[sub_resource type="LabelSettings" id="LabelSettings_yaehf"]
+font = ExtResource("14_vivmo")
+font_size = 130
+outline_size = 10
+outline_color = Color(0.4509804, 0.8235294, 0.83137256, 1)
+shadow_size = 25
+shadow_color = Color(1, 1, 1, 0.40392157)
+shadow_offset = Vector2(2, 2)
 
 [node name="Main" type="Node3D" unique_id=976627802]
 
@@ -681,5 +695,40 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Reach The Hole"
 label_settings = ExtResource("7_272bh")
+
+[node name="Endtrigger" type="Area3D" parent="." unique_id=679198973]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 62.197887, 0, 0)
+script = ExtResource("13_w48qg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Endtrigger" unique_id=1094183976]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -47.968147, 0)
+shape = SubResource("BoxShape3D_2cqfq")
+
+[node name="Bliss-endScreen" type="ColorRect" parent="." unique_id=1819960605]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Bliss" type="Label" parent="Bliss-endScreen" unique_id=899744162]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = -11.5
+offset_right = 21.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "BLISS"
+label_settings = SubResource("LabelSettings_yaehf")
+
+[connection signal="body_entered" from="Endtrigger" to="CharacterBody3D" method="_on_area_3d_body_entered"]
 
 [editable path="CharacterBody3D"]
