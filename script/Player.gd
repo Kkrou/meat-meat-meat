@@ -1,12 +1,12 @@
 extends CharacterBody3D
 var final_label_tween: Tween
 #movement constants
-const SPEED = 8.0
-const JUMP_VELOCITY = 4.5
-const SENSITIVITY = 0.003
+const SPEED = 4.0
+const JUMP_VELOCITY = 0
+const SENSITIVITY = 0.001
 #bob variables
-const BOB_FREQ = 2.0
-const BOB_AMP = 0.08
+const BOB_FREQ = 1.3
+const BOB_AMP = 0.04
 var t_bob = 0.0
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 12.8
