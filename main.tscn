@@ -140,12 +140,13 @@ ambient_light_color = Color(0.25565878, 0.25565878, 0.25565878, 1)
 ambient_light_sky_contribution = 0.1
 ambient_light_energy = 0.5
 tonemap_mode = 2
-sdfgi_enabled = true
 sdfgi_use_occlusion = true
+sdfgi_read_sky_light = false
 fog_enabled = true
 fog_light_color = Color(0.72247714, 0.41545546, 0.4377443, 1)
 fog_light_energy = 0.1
 fog_sun_scatter = 0.05
+fog_density = 0.005
 fog_sky_affect = 0.9
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.0001
@@ -194,8 +195,6 @@ lod0_range = 128.0
 name = "Meat_Raw_001_roughness"
 albedo_texture = ExtResource("2_lquwl")
 normal_texture = ExtResource("6_7mycd")
-detiling_rotation = 1.0
-detiling_shift = 1.0
 
 [sub_resource type="Terrain3DAssets" id="Terrain3DAssets_1bvp3"]
 mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_h2yge")])
@@ -206,6 +205,7 @@ texture_list = Array[Terrain3DTextureAsset]([SubResource("Terrain3DTextureAsset_
 [node name="CharacterBody3D" parent="." unique_id=658356461 instance=ExtResource("1_ig7tw")]
 transform = Transform3D(0.9999999, 0, 0, 0, 0.9999024, -0.013962179, 0, 0.0139621785, 0.9999025, -406.50296, 0.25799942, -2.2542543)
 feet_head_y = -0.553
+auto_start_for_testing = false
 
 [node name="Head" parent="CharacterBody3D" index="2" unique_id=228465702]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8666609, -0.0026025772)
@@ -215,16 +215,12 @@ transform = Transform3D(1.0000001, -9.567884e-09, 0, 0, 1.0000001, 0, 0, 0, 1.00
 fov = 70.0
 
 [node name="SpotLight3D2" type="SpotLight3D" parent="." unique_id=1713942615]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 102.86266, -70.34903, -3.3046875)
-visible = false
-light_color = Color(1, 0, 0, 1)
-light_energy = 16.0
-light_indirect_energy = 16.0
-light_volumetric_fog_energy = 16.0
-light_size = 1.0
-spot_range = 1000000.0
-spot_attenuation = -10.0
-spot_angle = 1.0
+transform = Transform3D(0.9941661, 4.7147353e-09, -0.107860565, 0.107860565, -4.3456378e-08, 0.9941661, 0, -1, -4.3711392e-08, -403.682, 11.202489, -6.1681714)
+light_color = Color(1, 0.58431375, 0.5254902, 1)
+light_energy = 5.0
+light_size = 0.5
+spot_range = 15.0
+spot_attenuation = 0.9
 
 [node name="Enviorment" type="Node" parent="." unique_id=1013091573]
 
