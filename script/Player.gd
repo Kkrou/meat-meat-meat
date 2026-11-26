@@ -1,23 +1,16 @@
 extends CharacterBody3D
-var final_label_tween: Tween
-#movement constants
+
+# --- MOVEMENT ---
 const SPEED = 4.0
-const JUMP_VELOCITY = 0
 const SENSITIVITY = 0.001
-#bob variables
 const BOB_FREQ = 1.3
 const BOB_AMP = 0.04
 var t_bob = 0.0
-# Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 9.8
+
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
-@onready var raycast = $Head/Camera3D/RayCast3D
-@onready var hand = $Head/Camera3D/Hand
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
-var held_object: RigidBody3D = null
-var current_interactable = null
-var interact_counter = 0
 
 # --- CLAW ---
 @export_group("Claw")
@@ -42,14 +35,17 @@ var interact_counter = 0
 @export var final_shake: float = 0.08           # impact shake strength
 
 @export_group("Claw UI")
-@export var final_label_hold_time: float = 1.5       # seconds visible before fading out (0 = stays on screen)
-@export var final_label_fade_out_time: float = 1.5
-@export var final_label: Label                  # drag "Reach The Hole" here
-@export var final_label_fade_time: float = 1.5
-@export var prompt_fade_time: float = 0.5
 @export var left_prompt_label: Label          # drag your [Left Click] label here
 @export var right_prompt_label: Label         # drag your [Right Click] label here
+@export var prompt_fade_time: float = 0.5
+@export var final_label: Label                # drag "Reach The Hole" here
+@export var final_label_fade_time: float = 1.5
+@export var final_label_hold_time: float = 1.5   # seconds visible before fading out (0 = stays on screen)
+@export var final_label_fade_out_time: float = 1.5
 @export var lock_movement_at_start := true    # keeps the player locked while the intro plays
+
+@export_group("Claw Effects")
+@export var claw_effect: Node                 # drag the blood effect node here (any node type)
 
 enum ClawState { NONE, WAITING_INPUT, ANIMATING, DONE }
 var claw_state = ClawState.NONE
@@ -58,17 +54,21 @@ var expect_left := true
 var steps_done := 0
 var standing_head_y := 0.0
 var step_height := 0.0
+var final_label_tween: Tween
 
 func _ready():
+	print("Player script loaded")   # temporary: if you don't see this, the script failed to compile
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	standing_head_y = head.position.y
+	movement_locked = lock_movement_at_start
 	if left_prompt_label:
 		left_prompt_label.modulate.a = 0.0
 	if right_prompt_label:
 		right_prompt_label.modulate.a = 0.0
-	movement_locked = lock_movement_at_start
 	if final_label:
+		final_label.visible = true
 		final_label.modulate.a = 0.0
+	_set_effect_emitting(false)
 	if auto_start_for_testing:
 		start_claw_sequence()
 
@@ -87,6 +87,17 @@ func start_claw_sequence():
 	movement_locked = true
 	_show_prompt(true)   # [Left Click] fades in
 	claw_state = ClawState.WAITING_INPUT
+
+# Turns every particle node inside the effect on or off
+func _set_effect_emitting(on: bool):
+	if claw_effect == null:
+		return
+	if claw_effect is GPUParticles3D or claw_effect is CPUParticles3D:
+		claw_effect.emitting = on
+	for p in claw_effect.find_children("*", "GPUParticles3D", true, false):
+		p.emitting = on
+	for p in claw_effect.find_children("*", "CPUParticles3D", true, false):
+		p.emitting = on
 
 # true = show [Left Click], false = show [Right Click]; the other one fades out
 func _show_prompt(left: bool):
@@ -115,6 +126,7 @@ func _do_claw_step(anim_name: String):
 	expect_left = not expect_left
 	var target_y = standing_head_y - step_height * steps_done
 	anim_player.play(anim_name)
+	_set_effect_emitting(true)         # blood starts on the click
 	# energetic fall: accelerates down, then bounces onto the target
 	var tween = create_tween()
 	tween.tween_property(head, "position:y", target_y - impact_dip, drop_time)\
@@ -122,6 +134,7 @@ func _do_claw_step(anim_name: String):
 	tween.tween_property(head, "position:y", target_y, recover_time)\
 		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	await anim_player.animation_finished
+	_set_effect_emitting(false)        # blood stops when the animation ends
 	head.position.y = target_y
 	if steps_done >= cycles * 2:
 		# last click: final collapse, then control returns to the player
@@ -191,7 +204,7 @@ func _final_collapse():
 	camera.v_offset = 0.0
 
 func _unhandled_input(event):
-	# Sequence input: left click, then right click, alternating
+	# Claw sequence input: left click, then right click, alternating
 	if claw_state == ClawState.WAITING_INPUT and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		if event.is_action_pressed("claw_left") and expect_left:
 			_do_claw_step("claw_left")
@@ -199,14 +212,13 @@ func _unhandled_input(event):
 		elif event.is_action_pressed("claw_right") and not expect_left:
 			_do_claw_step("claw_right")
 			return
-	# Check if ESC was pressed
-	if event.is_action_pressed("ui_cancel") or (event is InputEventKey and event.keycode == KEY_ESCAPE):
-		if event.pressed:
-			# If captured, release it. If free, capture it again (optional)
-			if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-			else:
-				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	# ESC: release / recapture the mouse
+	if event.is_action_pressed("ui_cancel"):
+		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		else:
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	# Mouse look
 	if event is InputEventMouseMotion:
 		if movement_locked and lock_look_while_clawing:
 			return
@@ -214,71 +226,16 @@ func _unhandled_input(event):
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-40), deg_to_rad(60))
 
-func _process(delta):
-	if Input.is_action_just_pressed("interact"):
-		activate()
-
-func check_hover_collision():
-	if raycast.is_colliding():
-		var hover_collider = raycast.get_collider()
-		if hover_collider and hover_collider != held_object and is_instance_valid(hover_collider) and hover_collider.has_method("interact"):
-			if current_interactable != hover_collider:
-				if current_interactable:
-					current_interactable.hide_prompt()
-				current_interactable = hover_collider
-				current_interactable.show_prompt()
-		else:
-			hide_current_prompt()
-	else:
-		hide_current_prompt()
-
-func hide_current_prompt():
-	if current_interactable:
-		current_interactable.hide_prompt()
-		current_interactable = null
-
-func activate():
-	var hit = raycast.get_collider()
-	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED and raycast.is_colliding():
-		if hit and hit != held_object and hit.has_method("interact"):
-			hit.interact(self)
-
-func increment_counter():
-	interact_counter += 1
-	print("Counter: ", interact_counter)
-	 # replace with your UI update
-	var Memories_Counter = $"../Memories Counter"
-	Memories_Counter.text = "Memories: " + str(interact_counter)
-
-
-func pick_up(object):
-	held_object = object
-	held_object.collision_layer = 2
-	held_object.gravity_scale = 0
-	held_object.angular_damp = 10.0  # helps stop it spinning wildly, tweak to taste
-	hide_current_prompt()  # in case it was also an interactable, clear any prompt
-
-func drop():
-	held_object.gravity_scale = 1
-	held_object.collision_layer = 1  # adjust to whatever your default layer is
-	held_object.angular_damp = 1
-	held_object.angular_velocity = Vector3.ZERO
-	held_object = null
-
 func _physics_process(delta):
-	# Add the gravity.
+	# Gravity
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 
 	if movement_locked:
-		# movement stopped during the intro and the claw sequence
+		# movement stopped during the intro, the claw sequence and the fall
 		velocity.x = 0.0
 		velocity.z = 0.0
 	else:
-		# Handle Jump.
-		if Input.is_action_just_pressed("jump") and is_on_floor():
-			velocity.y = JUMP_VELOCITY
-		# Get the input direction and handle the movement/deceleration.
 		var input_dir = Input.get_vector("left", "right", "forward", "back")
 		var direction = (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 		if direction:
@@ -288,12 +245,10 @@ func _physics_process(delta):
 			velocity.x = 0.0
 			velocity.z = 0.0
 
-#bob code
+	# Head bob
 	t_bob += delta * velocity.length() * float(is_on_floor())
 	camera.transform.origin = _headbob(t_bob)
 	move_and_slide()
-
-	check_hover_collision()
 
 func _headbob(time) -> Vector3:
 	var pos = Vector3.ZERO
@@ -304,4 +259,4 @@ func _headbob(time) -> Vector3:
 func _on_falling_trigger_body_entered(body: Node3D) -> void:
 	print("falling")
 	movement_locked = true
-	anim_player.play("falling") # Replace with function body.
+	anim_player.play("falling")

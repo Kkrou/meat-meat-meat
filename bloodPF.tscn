@@ -28,6 +28,6 @@ scale_curve = SubResource("CurveTexture_d56hj")
 
 [node name="blood" type="GPUParticles3D" parent="." unique_id=1851462166]
 material_override = SubResource("ShaderMaterial_fgfm1")
-amount = 100
+amount = 200
 process_material = SubResource("ParticleProcessMaterial_k3e37")
 draw_pass_1 = SubResource("QuadMesh_dh1aq")
