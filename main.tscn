@@ -239,61 +239,6 @@ displacement_sharpness = 0.5
 top_level = true
 metadata/_edit_lock_ = true
 
-[node name="CharacterBody3D" parent="." unique_id=658356461 node_paths=PackedStringArray("final_label", "left_prompt_label", "right_prompt_label") instance=ExtResource("1_ig7tw")]
-transform = Transform3D(0.9999999, 0, 0, 0, 0.9999024, -0.013962179, 0, 0.0139621785, 0.9999025, -278.98694, 4.5116873, -3.6592398)
-feet_head_y = -0.553
-auto_start_for_testing = false
-final_label = NodePath("../Reach The Hole")
-left_prompt_label = NodePath("../[Left Click]")
-right_prompt_label = NodePath("../[Right Click]")
-
-[node name="Head" parent="CharacterBody3D" index="2" unique_id=228465702]
-transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, -0.044799805, 0.832928, -5.5879354e-09)
-
-[node name="Camera3D" parent="CharacterBody3D/Head" index="0" unique_id=708619513]
-transform = Transform3D(1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0.0005187988, -0.00730145, 8.6545944e-05)
-fov = 70.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CharacterBody3D" unique_id=1103951218 node_paths=PackedStringArray("player")]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -226.0
-offset_top = -90.5
-offset_right = 226.0
-offset_bottom = 90.5
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-script = ExtResource("7_5vw27")
-player = NodePath("..")
-
-[node name="Your skeleton taints you" type="Label" parent="CharacterBody3D/VBoxContainer" unique_id=1418200108]
-layout_mode = 2
-text = "Your Skeleton Taints You"
-label_settings = ExtResource("7_272bh")
-horizontal_alignment = 1
-
-[node name="Despise It" type="Label" parent="CharacterBody3D/VBoxContainer" unique_id=890261007]
-layout_mode = 2
-text = "Despise It"
-label_settings = ExtResource("7_272bh")
-horizontal_alignment = 1
-
-[node name="Dispose Of It" type="Label" parent="CharacterBody3D/VBoxContainer" unique_id=1742218961]
-layout_mode = 2
-text = "Dispose Of It"
-label_settings = ExtResource("7_272bh")
-horizontal_alignment = 1
-
-[node name="Claw It Out Of You" type="Label" parent="CharacterBody3D/VBoxContainer" unique_id=45611179]
-layout_mode = 2
-text = "Claw It Out Of You"
-label_settings = ExtResource("7_272bh")
-horizontal_alignment = 1
-
 [node name="SpotLight3D2" type="SpotLight3D" parent="." unique_id=1713942615]
 transform = Transform3D(0.9941661, 4.7147353e-09, -0.107860565, 0.107860565, -4.3456378e-08, 0.9941661, 0, -1, -4.3711392e-08, -403.682, 11.202489, -6.1681714)
 light_color = Color(1, 0.58431375, 0.5254902, 1)
@@ -867,6 +812,61 @@ transform = Transform3D(0.35565868, -0.815547, -9.960335, 0.06462316, 9.966619, 
 
 [node name="fibre2" parent="." unique_id=1007041104 instance=ExtResource("4_yaehf")]
 transform = Transform3D(2.819882, -0.75376785, -20.796154, 0.10128087, 20.986464, -0.74693245, 20.809563, 3.874302e-07, 2.8216996, -14.928246, 22.68933, 193.61917)
+
+[node name="Intro-Sequence" type="VBoxContainer" parent="." unique_id=1103951218 node_paths=PackedStringArray("player")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -253.5
+offset_top = -100.5
+offset_right = 253.5
+offset_bottom = 100.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+script = ExtResource("7_5vw27")
+player = NodePath("../CharacterBody3D")
+
+[node name="Your skeleton taints you" type="Label" parent="Intro-Sequence" unique_id=1418200108]
+layout_mode = 2
+text = "Your Skeleton Taints You"
+label_settings = ExtResource("7_272bh")
+horizontal_alignment = 1
+
+[node name="Despise It" type="Label" parent="Intro-Sequence" unique_id=890261007]
+layout_mode = 2
+text = "Despise It"
+label_settings = ExtResource("7_272bh")
+horizontal_alignment = 1
+
+[node name="Dispose Of It" type="Label" parent="Intro-Sequence" unique_id=1742218961]
+layout_mode = 2
+text = "Dispose Of It"
+label_settings = ExtResource("7_272bh")
+horizontal_alignment = 1
+
+[node name="Claw It Out Of You" type="Label" parent="Intro-Sequence" unique_id=45611179]
+layout_mode = 2
+text = "Claw It Out Of You"
+label_settings = ExtResource("7_272bh")
+horizontal_alignment = 1
+
+[node name="CharacterBody3D" parent="." unique_id=658356461 node_paths=PackedStringArray("final_label", "left_prompt_label", "right_prompt_label") instance=ExtResource("1_ig7tw")]
+transform = Transform3D(0.9999999, 0, 0, 0, 0.9999024, -0.013962179, 0, 0.0139621785, 0.9999025, -278.98694, 4.5116873, -3.6592398)
+feet_head_y = -0.553
+auto_start_for_testing = false
+final_label = NodePath("../Reach The Hole")
+left_prompt_label = NodePath("../[Left Click]")
+right_prompt_label = NodePath("../[Right Click]")
+
+[node name="Head" parent="CharacterBody3D" index="2" unique_id=228465702]
+transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, -0.044799805, 0.832928, -5.5879354e-09)
+
+[node name="Camera3D" parent="CharacterBody3D/Head" index="0" unique_id=708619513]
+transform = Transform3D(1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0.0005187988, -0.00730145, 8.6545944e-05)
+fov = 70.0
 
 [connection signal="body_entered" from="Endtrigger" to="CharacterBody3D" method="_on_area_3d_body_entered"]
 [connection signal="body_entered" from="FallingTrigger" to="CharacterBody3D" method="_on_falling_trigger_body_entered"]
