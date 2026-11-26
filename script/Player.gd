@@ -46,6 +46,8 @@ var gravity = 9.8
 
 @export_group("Claw Effects")
 @export var claw_effect: Node                 # drag the blood effect node here (any node type)
+@export var finish_effect_with_animation := true   # stop spawning early so the last particles end with the animation
+@export var effect_min_emit_time: float = 0.8      # blood spawns for at least this long after each click
 
 enum ClawState { NONE, WAITING_INPUT, ANIMATING, DONE }
 var claw_state = ClawState.NONE
@@ -57,7 +59,6 @@ var step_height := 0.0
 var final_label_tween: Tween
 
 func _ready():
-	print("Player script loaded")   # temporary: if you don't see this, the script failed to compile
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	standing_head_y = head.position.y
 	movement_locked = lock_movement_at_start
@@ -88,30 +89,43 @@ func start_claw_sequence():
 	_show_prompt(true)   # [Left Click] fades in
 	claw_state = ClawState.WAITING_INPUT
 
-# Turns every particle node inside the effect on or off
-func _set_effect_emitting(on: bool):
+# --- BLOOD EFFECT ---
+# Returns the "main" particle nodes inside the effect (sub-emitters are excluded:
+# they are driven by the main particles' collisions and are never touched here).
+func _get_main_particles() -> Array:
+	var all: Array = []
 	if claw_effect == null:
-		return
-	var particles: Array = []
+		return all
 	if claw_effect is GPUParticles3D or claw_effect is CPUParticles3D:
-		particles.append(claw_effect)
-	particles.append_array(claw_effect.find_children("*", "GPUParticles3D", true, false))
-	particles.append_array(claw_effect.find_children("*", "CPUParticles3D", true, false))
+		all.append(claw_effect)
+	all.append_array(claw_effect.find_children("*", "GPUParticles3D", true, false))
+	all.append_array(claw_effect.find_children("*", "CPUParticles3D", true, false))
 
-	# collect the nodes used as sub-emitters
 	var sub_emitters: Array = []
-	for p in particles:
+	for p in all:
 		if p is GPUParticles3D and not p.sub_emitter.is_empty():
 			var n = p.get_node_or_null(p.sub_emitter)
 			if n:
 				sub_emitters.append(n)
 
-	for p in particles:
-		if p in sub_emitters:
-			p.emitting = false   # fired only by the parent's collisions
-		else:
-			p.emitting = on
+	var main: Array = []
+	for p in all:
+		if not (p in sub_emitters):
+			main.append(p)
+	return main
 
+func _set_effect_emitting(on: bool):
+	for p in _get_main_particles():
+		p.emitting = on
+
+# Longest particle lifetime among the main emitters (in real seconds)
+func _effect_lifetime() -> float:
+	var longest := 0.0
+	for p in _get_main_particles():
+		longest = max(longest, p.lifetime / max(p.speed_scale, 0.01))
+	return longest
+
+# --- PROMPTS ---
 # true = show [Left Click], false = show [Right Click]; the other one fades out
 func _show_prompt(left: bool):
 	_fade_label(left_prompt_label, 1.0 if left else 0.0)
@@ -132,14 +146,25 @@ func _fade_label(label: Label, target_alpha: float):
 	tween.tween_property(label, "modulate:a", target_alpha, prompt_fade_time)
 	label.set_meta("fade_tween", tween)
 
+# --- CLAW STEP ---
 func _do_claw_step(anim_name: String):
 	claw_state = ClawState.ANIMATING   # inputs are ignored from here
 	_hide_prompt()                     # prompt fades out as the animation starts
 	steps_done += 1
 	expect_left = not expect_left
 	var target_y = standing_head_y - step_height * steps_done
+	var anim_length = anim_player.get_animation(anim_name).length
 	anim_player.play(anim_name)
-	_set_effect_emitting(true)         # blood starts on the click
+
+	# blood starts on the click...
+	_set_effect_emitting(true)
+	if finish_effect_with_animation:
+		# ...and stops spawning one particle lifetime before the animation ends
+		# (but never sooner than effect_min_emit_time), so the last particles
+		# finish falling together with the animation
+		var stop_after = max(anim_length - _effect_lifetime(), effect_min_emit_time)
+		get_tree().create_timer(stop_after).timeout.connect(_set_effect_emitting.bind(false))
+
 	# energetic fall: accelerates down, then bounces onto the target
 	var tween = create_tween()
 	tween.tween_property(head, "position:y", target_y - impact_dip, drop_time)\
@@ -147,7 +172,7 @@ func _do_claw_step(anim_name: String):
 	tween.tween_property(head, "position:y", target_y, recover_time)\
 		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	await anim_player.animation_finished
-	_set_effect_emitting(false)        # blood stops when the animation ends
+	_set_effect_emitting(false)        # safety: make sure spawning is off (nothing is cleared)
 	head.position.y = target_y
 	if steps_done >= cycles * 2:
 		# last click: final collapse, then control returns to the player

@@ -854,6 +854,15 @@ text = "Claw It Out Of You"
 label_settings = ExtResource("7_272bh")
 horizontal_alignment = 1
 
+[node name="Blood" parent="." unique_id=2115697802 instance=ExtResource("18_074og")]
+transform = Transform3D(-0.06881613, 0.013929086, 0.9975321, 0.2758541, 0.9611825, 0.0056086555, -0.9587329, 0.2755592, -0.06998732, -404.3841, 0.61027586, -1.1103358)
+
+[node name="blood" parent="Blood" index="0" unique_id=1851462166]
+transform = Transform3D(1, 8.940697e-08, -7.450581e-09, 1.1920929e-07, 1, -5.5879354e-09, 2.9802322e-08, -5.5879354e-09, 1, -0.5065994, -0.55159664, -0.010253906)
+
+[node name="GPUParticlesCollisionBox3D" parent="Blood" index="2" unique_id=1078825852]
+transform = Transform3D(0.9896383, 0.14356004, -0.0027196407, -0.14357956, 0.98959184, -0.009759711, 0.0012902021, 0.010048993, 0.9999491, 1.8032379, -2.1246767, 0.14956665)
+
 [node name="CharacterBody3D" parent="." unique_id=658356461 node_paths=PackedStringArray("left_prompt_label", "right_prompt_label", "final_label", "claw_effect") instance=ExtResource("1_ig7tw")]
 transform = Transform3D(0.9999999, 0, 0, 0, 0.9999024, -0.013962179, 0, 0.0139621785, 0.9999025, -404.4231, 0.43728876, -0.5808363)
 feet_head_y = 0.3
@@ -865,7 +874,8 @@ final_drop_depth = 0.15
 left_prompt_label = NodePath("../[Left Click]")
 right_prompt_label = NodePath("../[Right Click]")
 final_label = NodePath("../Reach The Hole")
-claw_effect = NodePath("Head/Blood/blood")
+claw_effect = NodePath("../Blood/blood")
+effect_min_emit_time = 0.5
 
 [node name="Head" parent="CharacterBody3D" index="2" unique_id=228465702]
 transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, -0.044799805, 0.832928, -5.5879354e-09)
@@ -874,14 +884,8 @@ transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, -0.044799805,
 transform = Transform3D(1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0.0005187988, -0.00730145, 8.6545944e-05)
 fov = 70.0
 
-[node name="Blood" parent="CharacterBody3D/Head" index="1" unique_id=2115697802 instance=ExtResource("18_074og")]
-transform = Transform3D(-0.06881614, 0.013929088, 0.99753225, 0.26244128, 0.96493644, 0.0046309344, -0.96249115, 0.26211217, -0.070058815, 0.08380127, -0.6673507, -0.5318632)
-
-[node name="GPUParticlesCollisionBox3D" parent="CharacterBody3D/Head/Blood" index="2" unique_id=1078825852]
-transform = Transform3D(0.99056387, 0.13702752, -0.002564408, -0.13704556, 0.990521, -0.009321908, 0.0012627393, 0.009585383, 0.9999534, 1.8445263, -1.9050469, 0.1486206)
-
 [connection signal="body_entered" from="Endtrigger" to="CharacterBody3D" method="_on_area_3d_body_entered"]
 [connection signal="body_entered" from="FallingTrigger" to="CharacterBody3D" method="_on_falling_trigger_body_entered"]
 
+[editable path="Blood"]
 [editable path="CharacterBody3D"]
-[editable path="CharacterBody3D/Head/Blood"]

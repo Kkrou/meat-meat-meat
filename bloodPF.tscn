@@ -33,7 +33,7 @@ render_priority = 0
 shader = ExtResource("2_fgfm1")
 
 [sub_resource type="Curve" id="Curve_d56hj"]
-_data = [Vector2(0, 0.68539333), 0.0, 0.0, 0, 0, Vector2(0.19333333, 0.9887641), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.68539333), 0.0, 0.0, 0, 0, Vector2(0.26000002, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_k3e37"]
@@ -59,7 +59,9 @@ draw_pass_1 = SubResource("QuadMesh_dh1aq")
 [node name="blood-spot" type="GPUParticles3D" parent="." unique_id=192487773]
 material_override = SubResource("ShaderMaterial_nyoxo")
 cast_shadow = 0
+emitting = false
 amount = 200
+lifetime = 20.0
 process_material = SubResource("ParticleProcessMaterial_dh1aq")
 draw_pass_1 = SubResource("PlaneMesh_wr27p")
 
