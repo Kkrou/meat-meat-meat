@@ -49,6 +49,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector3(0, 0, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Head:rotation:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_c7tqt"]
 resource_name = "claw_final"
@@ -96,12 +108,29 @@ tracks/0/keys = {
 "values": [Vector3(0, 0, 0), Vector3(-0.20943952, -0.34906584, -0.034906585), Vector3(-0.10471976, -0.2443461, -0.027925268), Vector3(-0.10471976, -0.2443461, -0.027925268), Vector3(0, 0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_nl27k"]
+resource_name = "falling"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head:rotation:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -0.35]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_c7tqt"]
 _data = {
 &"RESET": SubResource("Animation_iwpo4"),
 &"claw_final": SubResource("Animation_c7tqt"),
 &"claw_left": SubResource("Animation_vd578"),
-&"claw_right": SubResource("Animation_fb3t6")
+&"claw_right": SubResource("Animation_fb3t6"),
+&"falling": SubResource("Animation_nl27k")
 }
 
 [node name="CharacterBody3D" type="CharacterBody3D" unique_id=658356461 groups=["player"]]
@@ -123,7 +152,7 @@ mesh = SubResource("CapsuleMesh_cy14o")
 shape = SubResource("ConvexPolygonShape3D_fj7yv")
 
 [node name="Head" type="Node3D" parent="." unique_id=228465702]
-transform = Transform3D(0.99999976, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000002, 7.275958e-12, 0.6794616, -2.7939677e-09)
+transform = Transform3D(0.9999997, 0, 0, 0, 1.0000002, 0, 0, 0, 1.0000004, 7.275958e-12, 0.6794617, -5.5879354e-09)
 
 [node name="Camera3D" type="Camera3D" parent="Head" unique_id=708619513]
 current = true

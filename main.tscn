@@ -224,6 +224,9 @@ shadow_offset = Vector2(2, 2)
 [sub_resource type="BoxShape3D" id="BoxShape3D_w48qg"]
 size = Vector3(292.4229, 100, 1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_yaehf"]
+size = Vector3(1, 5, 30)
+
 [node name="Main" type="Node3D" unique_id=976627802]
 
 [node name="Terrain3D" type="Terrain3D" parent="." unique_id=1097524623]
@@ -236,7 +239,7 @@ top_level = true
 metadata/_edit_lock_ = true
 
 [node name="CharacterBody3D" parent="." unique_id=658356461 node_paths=PackedStringArray("final_label", "left_prompt_label", "right_prompt_label") instance=ExtResource("1_ig7tw")]
-transform = Transform3D(0.9999999, 0, 0, 0, 0.9999024, -0.013962179, 0, 0.0139621785, 0.9999025, -404.2569, 0.29255033, -2.2542543)
+transform = Transform3D(0.9999999, 0, 0, 0, 0.9999024, -0.013962179, 0, 0.0139621785, 0.9999025, -30.04889, 54.70156, 1.1477022)
 feet_head_y = -0.553
 auto_start_for_testing = false
 final_label = NodePath("../Reach The Hole")
@@ -244,7 +247,7 @@ left_prompt_label = NodePath("../[Left Click]")
 right_prompt_label = NodePath("../[Right Click]")
 
 [node name="Head" parent="CharacterBody3D" index="2" unique_id=228465702]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.044799805, 0.832928, -0.0021307468)
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, -0.044799805, 0.832928, -0.0021307468)
 
 [node name="Camera3D" parent="CharacterBody3D/Head" index="0" unique_id=708619513]
 transform = Transform3D(1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0.0005187988, -0.00730145, 8.6545944e-05)
@@ -802,7 +805,7 @@ offset_right = 145.5
 offset_bottom = 22.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Reach The Hole"
+text = "Crawl To The Hole"
 label_settings = ExtResource("7_272bh")
 
 [node name="Endtrigger" type="Area3D" parent="." unique_id=679198973]
@@ -848,6 +851,14 @@ shape = SubResource("BoxShape3D_w48qg")
 transform = Transform3D(0.9999901, 0, 0.0044680294, 0, 1, 0, -0.0044680294, 0, 0.9999901, -231.60094, 51.315872, 22.835264)
 shape = SubResource("BoxShape3D_w48qg")
 
+[node name="FallingTrigger" type="Area3D" parent="." unique_id=1654683725]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.357195, 57.90678, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FallingTrigger" unique_id=1160106024]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2553005, -2.3882484, -0.20308208)
+shape = SubResource("BoxShape3D_yaehf")
+
 [connection signal="body_entered" from="Endtrigger" to="CharacterBody3D" method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="FallingTrigger" to="CharacterBody3D" method="_on_falling_trigger_body_entered"]
 
 [editable path="CharacterBody3D"]

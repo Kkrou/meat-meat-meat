@@ -9,7 +9,7 @@ const BOB_FREQ = 1.3
 const BOB_AMP = 0.04
 var t_bob = 0.0
 # Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = 12.8
+var gravity = 9.8
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
 @onready var raycast = $Head/Camera3D/RayCast3D
@@ -301,6 +301,7 @@ func _headbob(time) -> Vector3:
 	pos.x = cos(time * BOB_FREQ / 2) * BOB_AMP
 	return pos
 
-
-func _on_area_3d_body_entered(body: Node3D) -> void:
-	pass # Replace with function body.
+func _on_falling_trigger_body_entered(body: Node3D) -> void:
+	print("falling")
+	movement_locked = true
+	anim_player.play("falling") # Replace with function body.
