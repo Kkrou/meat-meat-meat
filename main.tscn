@@ -347,7 +347,10 @@ transform = Transform3D(7.8135943, -5.0360513, 3.6859183, 5.1408997, 1.8454736, 
 [node name="Sketchfab_Scene5" parent="Enviorment/organs" unique_id=2077553111 instance=ExtResource("11_vivmo")]
 transform = Transform3D(3.1753922, 8.66245, 3.8573146, 5.1408997, 1.8454739, -8.376478, -7.9679384, 4.642866, -3.8672695, -242.36488, 26.787598, 25.977388)
 
-[node name="Sketchfab_Scene16" parent="Enviorment/organs" unique_id=1802416568 instance=ExtResource("11_vivmo")]
+[node name="Sketchfab_Scene18" parent="Enviorment/organs" unique_id=1802416568 instance=ExtResource("11_vivmo")]
+transform = Transform3D(-0.21126355, -9.088265, 4.166384, 6.8272514, 2.9132178, 6.700882, -7.3036957, 2.9860606, 6.1432424, -205.62418, 26.787598, 14.779039)
+
+[node name="Sketchfab_Scene16" parent="Enviorment/organs" unique_id=1458358441 instance=ExtResource("11_vivmo")]
 transform = Transform3D(5.743716, 7.807227, -2.4610815, 1.876616, -4.1822243, -8.887482, -7.9679375, 4.6428657, -3.867269, -162.8694, 31.009644, -29.688528)
 
 [node name="Sketchfab_Scene17" parent="Enviorment/organs" unique_id=1678875761 instance=ExtResource("11_vivmo")]
