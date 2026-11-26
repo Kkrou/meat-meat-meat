@@ -227,7 +227,7 @@ shadow_offset = Vector2(2, 2)
 size = Vector3(292.4229, 100, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yaehf"]
-size = Vector3(1, 5, 30)
+size = Vector3(1, 7, 30)
 
 [node name="Main" type="Node3D" unique_id=976627802]
 
@@ -262,7 +262,8 @@ directional_shadow_mode = 0
 
 [node name="FogVolume" type="FogVolume" parent="Enviorment" unique_id=1275978943]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.076157, -38.086685, 0)
-size = Vector3(262.87018, 33.416138, 200)
+visible = false
+size = Vector3(300, 35, 300)
 material = SubResource("FogMaterial_ig7tw")
 
 [node name="organs" type="Node" parent="Enviorment" unique_id=941712127]
@@ -542,7 +543,7 @@ transform = Transform3D(0.9990761, 0.04297422, 0, -0.04297422, 0.9990761, 0, 0, 
 shape = SubResource("BoxShape3D_0xm2m")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Enviorment/meat-palaces/palace2" unique_id=299090184]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6145897, -5.3929253, 2.959879)
+transform = Transform3D(0.4999517, 0.015513093, 0, -0.0077840453, 0.9963711, 0, 0, 0, 1, -1.5010986, -5.4288177, 2.959879)
 mesh = SubResource("BoxMesh_h2yge")
 
 [node name="palace3" type="StaticBody3D" parent="Enviorment/meat-palaces" unique_id=1279657989]
@@ -724,6 +725,14 @@ transform = Transform3D(0.0855518, 0.01685214, 1.9980981, -1.368281, 1.4579656, 
 [node name="Heart2" parent="Enviorment/hearts" unique_id=1582108456 instance=ExtResource("10_4c57u")]
 transform = Transform3D(0.90860295, 0.21530496, 0.35788885, 0, 0.85688853, -0.5155018, -0.41766092, 0.46838644, 0.7785714, -406.65717, 3.2869992, -10.88957)
 
+[node name="Fibre" type="Node" parent="Enviorment" unique_id=17774205]
+
+[node name="fibre" parent="Enviorment/Fibre" unique_id=720669841 instance=ExtResource("4_yaehf")]
+transform = Transform3D(0.35565868, -0.815547, -9.960335, 0.06462316, 9.966619, -0.8137538, 9.99347, -0.035425022, 0.35974157, -277.20834, 18.703842, -67.71448)
+
+[node name="fibre2" parent="Enviorment/Fibre" unique_id=1007041104 instance=ExtResource("4_yaehf")]
+transform = Transform3D(2.819882, -0.75376785, -20.796154, 0.10128087, 20.986464, -0.74693245, 20.809563, 3.874302e-07, 2.8216996, -14.928246, 22.68933, 193.61917)
+
 [node name="[Left Click]" type="Label" parent="." unique_id=422239690]
 offset_left = 273.0
 offset_top = 508.0
@@ -802,17 +811,11 @@ transform = Transform3D(0.9999901, 0, 0.0044680294, 0, 1, 0, -0.0044680294, 0, 0
 shape = SubResource("BoxShape3D_w48qg")
 
 [node name="FallingTrigger" type="Area3D" parent="." unique_id=1654683725]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.020255, 55.9519, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.598403, 55.9519, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FallingTrigger" unique_id=1160106024]
-transform = Transform3D(0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 0, 0, 1, -1.2099781, -2.781044, -0.20308208)
+transform = Transform3D(0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 0, 0, 1, -0.5719576, -2.781044, -0.20308208)
 shape = SubResource("BoxShape3D_yaehf")
-
-[node name="fibre" parent="." unique_id=720669841 instance=ExtResource("4_yaehf")]
-transform = Transform3D(0.35565868, -0.815547, -9.960335, 0.06462316, 9.966619, -0.8137538, 9.99347, -0.035425022, 0.35974157, -277.20834, 18.703842, -67.71448)
-
-[node name="fibre2" parent="." unique_id=1007041104 instance=ExtResource("4_yaehf")]
-transform = Transform3D(2.819882, -0.75376785, -20.796154, 0.10128087, 20.986464, -0.74693245, 20.809563, 3.874302e-07, 2.8216996, -14.928246, 22.68933, 193.61917)
 
 [node name="Intro-Sequence" type="VBoxContainer" parent="." unique_id=1103951218 node_paths=PackedStringArray("player")]
 anchors_preset = 8
@@ -865,7 +868,7 @@ transform = Transform3D(0.9896383, 0.14356004, -0.0027196407, -0.14357956, 0.989
 
 [node name="CharacterBody3D" parent="." unique_id=658356461 node_paths=PackedStringArray("left_prompt_label", "right_prompt_label", "final_label", "claw_effect") instance=ExtResource("1_ig7tw")]
 transform = Transform3D(0.9999999, 0, 0, 0, 0.9999024, -0.013962179, 0, 0.0139621785, 0.9999025, -404.4231, 0.43728876, -0.5808363)
-feet_head_y = 0.3
+feet_head_y = -0.5
 auto_start_for_testing = false
 drop_time = 0.18
 impact_dip = 0.06
@@ -878,7 +881,7 @@ claw_effect = NodePath("../Blood/blood")
 effect_min_emit_time = 0.5
 
 [node name="Head" parent="CharacterBody3D" index="2" unique_id=228465702]
-transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, -0.044799805, 0.832928, -5.5879354e-09)
+transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, -0.044799805, 0.9077693, -5.5879354e-09)
 
 [node name="Camera3D" parent="CharacterBody3D/Head" index="0" unique_id=708619513]
 transform = Transform3D(1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0.0005187988, -0.00730145, 8.6545944e-05)
