@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://ctbqllbkn1eyk"]
+
+[ext_resource type="Shader" uid="uid://dln6rd20h0h32" path="res://bloodPF.tres" id="1_aoxed"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fgfm1"]
+render_priority = 0
+shader = ExtResource("1_aoxed")
+
+[sub_resource type="Curve" id="Curve_nyoxo"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.516854), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_d56hj"]
+curve = SubResource("Curve_nyoxo")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k3e37"]
+initial_velocity_min = 4.0
+initial_velocity_max = 6.0
+linear_accel_min = 3.9999976
+linear_accel_max = 3.9999976
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_d56hj")
+
+[sub_resource type="QuadMesh" id="QuadMesh_dh1aq"]
+
+[node name="Node3D" type="Node3D" unique_id=2115697802]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1851462166]
+material_override = SubResource("ShaderMaterial_fgfm1")
+process_material = SubResource("ParticleProcessMaterial_k3e37")
+draw_pass_1 = SubResource("QuadMesh_dh1aq")

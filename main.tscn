@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://qppcd60eij4g" path="res://textures/meat/Meat_Raw_001_basecolor.jpg" id="2_lquwl"]
 [ext_resource type="Texture2D" uid="uid://r64b3vo0made" path="res://textures/meat/Meat_Raw_001_ambientOcclusion.jpg" id="3_7mycd"]
 [ext_resource type="Texture2D" uid="uid://dxgx3lex645k" path="res://textures/meat/Meat_Raw_001_roughness.jpg" id="4_272bh"]
+[ext_resource type="PackedScene" uid="uid://c8ivi03p8vqod" path="res://models/fibre/fibre.blend" id="4_yaehf"]
 [ext_resource type="Texture2D" uid="uid://b3aakr7h00c42" path="res://textures/meat/Meat_Raw_001_normal.jpg" id="5_5vw27"]
 [ext_resource type="Texture2D" uid="uid://ubn8f02gxqtm" path="res://textures/meat/packed_normal_roughness.png" id="6_7mycd"]
 [ext_resource type="Shader" uid="uid://0c178m0yctv3" path="res://script/stylized-sky.gdshader" id="6_efxa6"]
@@ -239,7 +240,7 @@ top_level = true
 metadata/_edit_lock_ = true
 
 [node name="CharacterBody3D" parent="." unique_id=658356461 node_paths=PackedStringArray("final_label", "left_prompt_label", "right_prompt_label") instance=ExtResource("1_ig7tw")]
-transform = Transform3D(0.9999999, 0, 0, 0, 0.9999024, -0.013962179, 0, 0.0139621785, 0.9999025, -30.04889, 54.70156, 1.1477022)
+transform = Transform3D(0.9999999, 0, 0, 0, 0.9999024, -0.013962179, 0, 0.0139621785, 0.9999025, -278.98694, 4.5116873, -3.6592398)
 feet_head_y = -0.553
 auto_start_for_testing = false
 final_label = NodePath("../Reach The Hole")
@@ -247,7 +248,7 @@ left_prompt_label = NodePath("../[Left Click]")
 right_prompt_label = NodePath("../[Right Click]")
 
 [node name="Head" parent="CharacterBody3D" index="2" unique_id=228465702]
-transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, -0.044799805, 0.832928, -0.0021307468)
+transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, -0.044799805, 0.832928, -5.5879354e-09)
 
 [node name="Camera3D" parent="CharacterBody3D/Head" index="0" unique_id=708619513]
 transform = Transform3D(1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0.0005187988, -0.00730145, 8.6545944e-05)
@@ -537,11 +538,11 @@ transform = Transform3D(1, 0, 4.172325e-07, 0, 0.9999999, -1.1920929e-07, 0, 2.9
 shape = SubResource("BoxShape3D_0xm2m")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Enviorment/meat-palaces/palace12" unique_id=1979724921]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.988163, 25.61985, 3.2414494)
+transform = Transform3D(0.9600041, 0.2799122, 0.0064214617, -0.2795543, 0.9595452, -0.033507034, -0.015540689, 0.030371666, 0.999418, 1.9881592, 25.619858, 3.2414398)
 mesh = SubResource("BoxMesh_h2yge")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Enviorment/meat-palaces/palace12" unique_id=1294163063]
-transform = Transform3D(1, -2.4214387e-08, 0, -2.0489097e-08, 1, 0, 0, 1.4901161e-08, 1.0000001, 24.760452, -12.485382, 3.3796768)
+transform = Transform3D(1, -5.7742e-08, 0, -2.0489097e-08, 1, 0, 0, 1.4901161e-08, 1.0000002, 28.643173, -18.98236, 3.4032364)
 mesh = SubResource("BoxMesh_h2yge")
 
 [node name="palace15" type="StaticBody3D" parent="Enviorment/meat-palaces" unique_id=1777521171]
@@ -704,7 +705,10 @@ transform = Transform3D(88.691925, 35.385654, 29.691666, -33.296654, 93.526886, 
 transform = Transform3D(133.0379, 53.07851, 44.5375, -68.64752, 114.05649, 69.12767, -9.403979, -81.69325, 125.450294, 153.8543, 12.43446, 131.08176)
 
 [node name="meat piece16" parent="Enviorment/Meat pieces" unique_id=1047113117 instance=ExtResource("9_kek77")]
-transform = Transform3D(217.96718, 120.161606, -23.483955, 55.140526, -53.528755, 237.89534, 109.31528, -212.59319, -73.17314, -76.786865, 44.91029, 239.26982)
+transform = Transform3D(223.50716, 108.60734, -27.367857, 55.140522, -53.52875, 237.89532, 97.48885, -218.72154, -71.810905, -74.347244, 44.91029, 207.4871)
+
+[node name="meat piece18" parent="Enviorment/Meat pieces" unique_id=1539680811 instance=ExtResource("9_kek77")]
+transform = Transform3D(222.00113, 89.18724, 72.53365, -35.576176, -96.69421, 227.7818, 109.31527, -212.59317, -73.173134, 33.217247, 44.91029, 207.4871)
 
 [node name="meat piece14" parent="Enviorment/Meat pieces" unique_id=857265387 instance=ExtResource("9_kek77")]
 transform = Transform3D(164.4744, -27.911425, -110.313774, -1.0241462, 193.51906, -50.490868, 113.785446, 42.087162, 159.00172, 281.7868, 19.352459, -232.68814)
@@ -730,10 +734,10 @@ transform = Transform3D(3.7064607, -3.6828878, -6.057927, 0.015266912, 6.839996,
 transform = Transform3D(11.283172, -1.312182, -6.3220425, -3.7886357, 8.961664, -8.621764, 5.2284107, 9.325597, 7.3957396, 269.72333, -8.896975, 67.12358)
 
 [node name="Heart18" parent="Enviorment/hearts" unique_id=913452049 instance=ExtResource("10_4c57u")]
-transform = Transform3D(0.6725953, 2.6507654, -15.764551, -13.702961, -8.030257, -1.9349028, -8.232648, 13.582651, 1.9326386, 115.97261, -10.879702, 232.32356)
+transform = Transform3D(0.6725953, 2.6507654, -15.764551, -13.702961, -8.030257, -1.9349028, -8.232648, 13.582651, 1.9326386, 115.97261, -10.879702, 200.54085)
 
 [node name="Heart19" parent="Enviorment/hearts" unique_id=1427697398 instance=ExtResource("10_4c57u")]
-transform = Transform3D(0.2942604, 1.1597097, -6.896991, 4.117457, 5.551256, 1.1090996, 5.6533136, -4.10349, -0.4487914, -13.723648, -1.7485065, 208.69008)
+transform = Transform3D(0.2942604, 1.1597097, -6.896991, 4.117457, 5.551256, 1.1090996, 5.6533136, -4.10349, -0.4487914, -13.723648, -1.7485065, 176.90736)
 
 [node name="Heart20" parent="Enviorment/hearts" unique_id=606308790 instance=ExtResource("10_4c57u")]
 transform = Transform3D(6.89727, -3.8965104, -6.1028557, 5.882079, 7.9303665, 1.5844269, 4.222412, -4.68257, 7.761752, -132.15372, 1.3439617, 150.3354)
@@ -857,6 +861,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.020255, 55.9519, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FallingTrigger" unique_id=1160106024]
 transform = Transform3D(0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 0, 0, 1, -1.2099781, -2.781044, -0.20308208)
 shape = SubResource("BoxShape3D_yaehf")
+
+[node name="fibre" parent="." unique_id=720669841 instance=ExtResource("4_yaehf")]
+transform = Transform3D(0.35565868, -0.815547, -9.960335, 0.06462316, 9.966619, -0.8137538, 9.99347, -0.035425022, 0.35974157, -277.20834, 18.703842, -67.71448)
+
+[node name="fibre2" parent="." unique_id=1007041104 instance=ExtResource("4_yaehf")]
+transform = Transform3D(2.819882, -0.75376785, -20.796154, 0.10128087, 20.986464, -0.74693245, 20.809563, 3.874302e-07, 2.8216996, -14.928246, 22.68933, 193.61917)
 
 [connection signal="body_entered" from="Endtrigger" to="CharacterBody3D" method="_on_area_3d_body_entered"]
 [connection signal="body_entered" from="FallingTrigger" to="CharacterBody3D" method="_on_falling_trigger_body_entered"]
