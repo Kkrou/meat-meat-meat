@@ -855,7 +855,7 @@ label_settings = ExtResource("7_272bh")
 horizontal_alignment = 1
 
 [node name="CharacterBody3D" parent="." unique_id=658356461 node_paths=PackedStringArray("left_prompt_label", "right_prompt_label", "final_label", "claw_effect") instance=ExtResource("1_ig7tw")]
-transform = Transform3D(0.9999999, 0, 0, 0, 0.9999024, -0.013962179, 0, 0.0139621785, 0.9999025, -404.4231, 0.43728876, -3.9046593)
+transform = Transform3D(0.9999999, 0, 0, 0, 0.9999024, -0.013962179, 0, 0.0139621785, 0.9999025, -404.4231, 0.43728876, -0.5808363)
 feet_head_y = 0.3
 auto_start_for_testing = false
 drop_time = 0.18
@@ -876,6 +876,9 @@ fov = 70.0
 
 [node name="Blood" parent="CharacterBody3D/Head" index="1" unique_id=2115697802 instance=ExtResource("18_074og")]
 transform = Transform3D(-0.06881614, 0.013929088, 0.99753225, 0.26244128, 0.96493644, 0.0046309344, -0.96249115, 0.26211217, -0.070058815, 0.08380127, -0.6673507, -0.5318632)
+
+[node name="GPUParticlesCollisionBox3D" parent="CharacterBody3D/Head/Blood" index="2" unique_id=1078825852]
+transform = Transform3D(0.99056387, 0.13702752, -0.002564408, -0.13704556, 0.990521, -0.009321908, 0.0012627393, 0.009585383, 0.9999534, 1.8445263, -1.9050469, 0.1486206)
 
 [connection signal="body_entered" from="Endtrigger" to="CharacterBody3D" method="_on_area_3d_body_entered"]
 [connection signal="body_entered" from="FallingTrigger" to="CharacterBody3D" method="_on_falling_trigger_body_entered"]

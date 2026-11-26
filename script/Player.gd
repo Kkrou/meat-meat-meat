@@ -92,12 +92,25 @@ func start_claw_sequence():
 func _set_effect_emitting(on: bool):
 	if claw_effect == null:
 		return
+	var particles: Array = []
 	if claw_effect is GPUParticles3D or claw_effect is CPUParticles3D:
-		claw_effect.emitting = on
-	for p in claw_effect.find_children("*", "GPUParticles3D", true, false):
-		p.emitting = on
-	for p in claw_effect.find_children("*", "CPUParticles3D", true, false):
-		p.emitting = on
+		particles.append(claw_effect)
+	particles.append_array(claw_effect.find_children("*", "GPUParticles3D", true, false))
+	particles.append_array(claw_effect.find_children("*", "CPUParticles3D", true, false))
+
+	# collect the nodes used as sub-emitters
+	var sub_emitters: Array = []
+	for p in particles:
+		if p is GPUParticles3D and not p.sub_emitter.is_empty():
+			var n = p.get_node_or_null(p.sub_emitter)
+			if n:
+				sub_emitters.append(n)
+
+	for p in particles:
+		if p in sub_emitters:
+			p.emitting = false   # fired only by the parent's collisions
+		else:
+			p.emitting = on
 
 # true = show [Left Click], false = show [Right Click]; the other one fades out
 func _show_prompt(left: bool):

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ctbqllbkn1eyk"]
 
 [ext_resource type="Shader" uid="uid://dln6rd20h0h32" path="res://bloodPF.tres" id="1_aoxed"]
+[ext_resource type="Shader" uid="uid://bcduin5et43mv" path="res://blood-spotPF.tres" id="2_fgfm1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fgfm1"]
 render_priority = 0
@@ -21,13 +22,47 @@ linear_accel_min = 3.9999976
 linear_accel_max = 3.9999976
 scale_max = 3.0
 scale_curve = SubResource("CurveTexture_d56hj")
+collision_mode = 2
+sub_emitter_mode = 3
+sub_emitter_amount_at_collision = 1
 
 [sub_resource type="QuadMesh" id="QuadMesh_dh1aq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nyoxo"]
+render_priority = 0
+shader = ExtResource("2_fgfm1")
+
+[sub_resource type="Curve" id="Curve_d56hj"]
+_data = [Vector2(0, 0.68539333), 0.0, 0.0, 0, 0, Vector2(0.19333333, 0.9887641), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_k3e37"]
+curve = SubResource("Curve_d56hj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dh1aq"]
+gravity = Vector3(0, 0, 0)
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_k3e37")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_wr27p"]
 
 [node name="Node3D" type="Node3D" unique_id=2115697802]
 
 [node name="blood" type="GPUParticles3D" parent="." unique_id=1851462166]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2136133, 0)
 material_override = SubResource("ShaderMaterial_fgfm1")
 amount = 200
+sub_emitter = NodePath("../blood-spot")
 process_material = SubResource("ParticleProcessMaterial_k3e37")
 draw_pass_1 = SubResource("QuadMesh_dh1aq")
+
+[node name="blood-spot" type="GPUParticles3D" parent="." unique_id=192487773]
+material_override = SubResource("ShaderMaterial_nyoxo")
+cast_shadow = 0
+amount = 200
+process_material = SubResource("ParticleProcessMaterial_dh1aq")
+draw_pass_1 = SubResource("PlaneMesh_wr27p")
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="." unique_id=1078825852]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.37977886, 0)
+size = Vector3(10, 1, 10)
