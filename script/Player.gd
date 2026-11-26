@@ -45,9 +45,10 @@ var gravity = 9.8
 @export var lock_movement_at_start := true    # keeps the player locked while the intro plays
 
 @export_group("Claw Effects")
-@export var claw_effect: Node                 # drag the blood effect node here (any node type)
+@export var claw_effect: Node                 # drag the blood effect node here (its root must be a Node3D to lower with the head)
 @export var finish_effect_with_animation := true   # stop spawning early so the last particles end with the animation
 @export var effect_min_emit_time: float = 0.8      # blood spawns for at least this long after each click
+@export_range(0.0, 1.0) var effect_follow_factor: float = 0.5   # 0 = stays put, 1 = drops exactly as much as the head
 
 enum ClawState { NONE, WAITING_INPUT, ANIMATING, DONE }
 var claw_state = ClawState.NONE
@@ -57,6 +58,7 @@ var steps_done := 0
 var standing_head_y := 0.0
 var step_height := 0.0
 var final_label_tween: Tween
+var effect_base_y := 0.0                      # world height of the effect when the game starts
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -70,8 +72,19 @@ func _ready():
 		final_label.visible = true
 		final_label.modulate.a = 0.0
 	_set_effect_emitting(false)
+	# remember where the effect starts (only its height is ever changed)
+	var fx := claw_effect as Node3D
+	if fx:
+		effect_base_y = fx.global_position.y
 	if auto_start_for_testing:
 		start_claw_sequence()
+
+# Lowers the effect (vertically only) by a fraction of the head's drop
+func _process(_delta):
+	var fx := claw_effect as Node3D
+	if fx:
+		var drop = standing_head_y - head.position.y
+		fx.global_position.y = effect_base_y - drop * effect_follow_factor
 
 # Lock the player manually (the intro script calls this)
 func lock_movement():
