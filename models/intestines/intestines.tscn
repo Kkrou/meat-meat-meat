@@ -7,8 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://dxgx3lex645k" path="res://textures/meat/Meat_Raw_001_roughness.jpg" id="5_p2wpw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vlqk5"]
+albedo_color = Color(1, 0.7372549, 0, 1)
 albedo_texture = ExtResource("2_n13ih")
-roughness = 0.0
 roughness_texture = ExtResource("5_p2wpw")
 normal_enabled = true
 normal_scale = 6.91

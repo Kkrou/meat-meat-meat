@@ -119,6 +119,7 @@ ambient_light_color = Color(0.25565878, 0.25565878, 0.25565878, 1)
 ambient_light_sky_contribution = 0.1
 ambient_light_energy = 0.5
 tonemap_mode = 2
+ssao_enabled = true
 sdfgi_use_occlusion = true
 sdfgi_read_sky_light = false
 fog_enabled = true
@@ -241,11 +242,21 @@ top_level = true
 metadata/_edit_lock_ = true
 
 [node name="SpotLight3D2" type="SpotLight3D" parent="." unique_id=1713942615]
-transform = Transform3D(0.9941661, 4.7147353e-09, -0.107860565, 0.107860565, -4.3456378e-08, 0.9941661, 0, -1, -4.3711392e-08, -403.682, 11.202489, -6.1681714)
+transform = Transform3D(0.9941661, -2.6539588e-09, -0.10786057, 0.084869966, 0.6171458, 0.7822584, 0.06656569, -0.78684884, 0.61354536, -405.87854, 10.896261, 2.675396)
 light_color = Color(1, 0.58431375, 0.5254902, 1)
-light_energy = 5.0
+light_energy = 18.0
 light_size = 0.5
-spot_range = 15.0
+spot_range = 22.010147
+spot_attenuation = 2.0
+spot_angle = 60.0
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="." unique_id=1810623125]
+transform = Transform3D(-0.31376103, -0.11809464, 0.9421294, 0.29377186, 0.93147564, 0.2145952, -0.90291303, 0.3441027, -0.25756788, -386.48358, 5.0735064, -8.274387)
+light_color = Color(1, 0.6619029, 0.6108931, 1)
+light_energy = 18.0
+light_size = 0.5
+spot_range = 20.0
+spot_attenuation = 2.0
 
 [node name="Enviorment" type="Node" parent="." unique_id=1013091573]
 
@@ -500,17 +511,6 @@ mesh = SubResource("BoxMesh_h2yge")
 transform = Transform3D(1, -5.7742e-08, 0, -2.0489097e-08, 1, 0, 0, 1.4901161e-08, 1.0000002, 28.643173, -18.98236, 3.4032364)
 mesh = SubResource("BoxMesh_h2yge")
 
-[node name="palace15" type="StaticBody3D" parent="Enviorment/meat-palaces" unique_id=1777521171]
-transform = Transform3D(0.62830305, -0.6322167, 0.4533623, 0.12794934, 0.65879047, 0.741366, -0.7673749, -0.40779525, 0.4948118, -385.9129, -2.8994703, 30.668022)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Enviorment/meat-palaces/palace15" unique_id=57276451]
-transform = Transform3D(0.99999976, -2.9802322e-08, 8.940697e-08, 1.1920929e-07, 0.9999997, -5.9604645e-08, 5.9604645e-08, 1.4901161e-08, 0.9999999, 3.7125473, 25.201645, -1.4862823)
-shape = SubResource("BoxShape3D_0xm2m")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Enviorment/meat-palaces/palace15" unique_id=2028206075]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.988163, 25.61985, 3.2414494)
-mesh = SubResource("BoxMesh_h2yge")
-
 [node name="palace16" type="StaticBody3D" parent="Enviorment/meat-palaces" unique_id=2113285219]
 transform = Transform3D(0.5031481, -0.16047378, -0.8491704, 0.6583097, 0.7077673, 0.25630745, 0.5598844, -0.6879777, 0.46175355, -378.17035, 6.900379, 42.349796)
 
@@ -557,36 +557,12 @@ mesh = SubResource("BoxMesh_h2yge")
 [node name="palace3" type="StaticBody3D" parent="Enviorment/meat-palaces" unique_id=1279657989]
 transform = Transform3D(0.8161274, 0.5778718, 0, -0.5778718, 0.8161274, 0, 0, 0, 1, -431.63885, -3.9613953, -8.584154)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Enviorment/meat-palaces/palace3" unique_id=469766036]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.463507, 0)
-shape = SubResource("BoxShape3D_0xm2m")
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Enviorment/meat-palaces/palace3" unique_id=1455593427]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.44925, 0.11027527)
 mesh = SubResource("BoxMesh_h2yge")
 
-[node name="Sketchfab_Scene" parent="Enviorment/meat-palaces/palace3" unique_id=678445991 instance=ExtResource("11_vivmo")]
-transform = Transform3D(4.3514256, -1.2828925, -2.1022096, -0.3447889, -4.543342, 2.058924, -2.438488, -1.6468878, -4.0424666, 13.976654, 14.405273, 10.300107)
-
-[node name="Sketchfab_Scene3" parent="Enviorment/meat-palaces/palace3" unique_id=16805682 instance=ExtResource("11_vivmo")]
-transform = Transform3D(0.31542814, -4.30279, -2.5271523, 4.084409, -1.2320962, 2.6075923, -2.8667243, -2.2288866, 3.4371424, 11.212402, 12.020966, 6.3665667)
-
-[node name="Sketchfab_Scene4" parent="Enviorment/meat-palaces/palace3" unique_id=1106338231 instance=ExtResource("11_vivmo")]
-transform = Transform3D(4.2937593, -2.5484512, -0.2627629, 2.5585537, 4.2390084, 0.6961451, -0.1320474, -0.7322741, 4.944324, 11.556549, 19.638199, 0.7709546)
-
-[node name="Sketchfab_Scene2" parent="Enviorment/meat-palaces/palace3" unique_id=2012203230 instance=ExtResource("11_vivmo")]
-transform = Transform3D(0.17959183, -2.7914658, 4.144329, 1.6021987, 3.9602082, 2.59802, -4.7329373, 1.2346908, 1.0367414, 20.822723, 25.503326, 12.171087)
-
 [node name="palace4" type="StaticBody3D" parent="Enviorment/meat-palaces" unique_id=2020593616]
 transform = Transform3D(-0.2943348, -0.20840837, 0.93270206, -0.77125466, 0.62813234, -0.103033066, -0.5643875, -0.74967706, -0.34561715, -386.00516, -3.9613953, 24.28365)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Enviorment/meat-palaces/palace4" unique_id=2075820885]
-transform = Transform3D(1, -2.9802322e-08, -2.9802322e-08, 2.9802322e-08, 1.0000001, 1.4901161e-07, 2.9802322e-08, -1.7881393e-07, 1, 3.2597733, 19.725235, -4.1341553)
-shape = SubResource("BoxShape3D_0xm2m")
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="Enviorment/meat-palaces/palace4" unique_id=250276940]
-transform = Transform3D(0.23448834, 0.9718132, -0.024426712, -0.86898845, 0.1982829, -0.45336902, -0.435746, 0.12753636, 0.89098835, 21.714554, 46.451836, -2.2249146)
-shape = SubResource("BoxShape3D_0xm2m")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Enviorment/meat-palaces/palace4" unique_id=1467897744]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.44925, 0.11027527)
@@ -599,12 +575,8 @@ mesh = SubResource("BoxMesh_h2yge")
 [node name="palace6" type="StaticBody3D" parent="Enviorment/meat-palaces" unique_id=2099779547]
 transform = Transform3D(-0.72937363, -0.5164444, 0.4486641, -0.5778718, 0.8161274, -5.2215395e-08, -0.36616713, -0.25927034, -0.8937006, -391.1801, -3.9613953, 21.0016)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Enviorment/meat-palaces/palace6" unique_id=306039715]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.463507, 0)
-shape = SubResource("BoxShape3D_0xm2m")
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Enviorment/meat-palaces/palace6" unique_id=890720167]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.44925, 0.11027527)
+transform = Transform3D(1.0000001, 1.4901161e-08, -2.9802322e-08, 2.0861626e-07, 0.9999998, -4.4703484e-08, 0, 0, 1, -16.229828, 7.9574738, 3.5288086)
 mesh = SubResource("BoxMesh_h2yge")
 
 [node name="palace5" type="StaticBody3D" parent="Enviorment/meat-palaces" unique_id=1518268802]
@@ -617,7 +589,10 @@ mesh = SubResource("BoxMesh_h2yge")
 [node name="Meat pieces" type="Node" parent="Enviorment" unique_id=261746168]
 
 [node name="meat piece" parent="Enviorment/Meat pieces" unique_id=67079959 instance=ExtResource("9_kek77")]
-transform = Transform3D(29.999998, 0, 0, 0, -21.048548, 21.37658, 0, -21.37658, -21.048548, -407.5906, 4.6351624, 2.2654638)
+transform = Transform3D(29.999998, 0, 0, 0, -21.048548, 21.37658, 0, -21.37658, -21.048548, -410.6244, 5.784308, 4.001854)
+
+[node name="meat piece20" parent="Enviorment/Meat pieces" unique_id=1784721713 instance=ExtResource("9_kek77")]
+transform = Transform3D(18.153387, -1.302326, 23.848646, -23.632414, -5.3174086, 17.698418, 3.458799, -29.49625, -4.243538, -406.29077, 7.876848, 8.48896)
 
 [node name="meat piece19" parent="Enviorment/Meat pieces" unique_id=162293749 instance=ExtResource("9_kek77")]
 transform = Transform3D(22.816936, -0.87848115, -19.458038, -5.5368933e-08, 29.96946, -1.3530453, 19.477863, 1.0290784, 22.793713, -393.94003, 0.28890276, -16.526384)
@@ -656,7 +631,7 @@ transform = Transform3D(21.23826, -21.182894, -0.4702378, 20.133791, 19.969051, 
 transform = Transform3D(21.23826, -21.182894, -0.4702378, 20.133791, 19.969051, 9.79117, -6.6005073, -7.2471704, 28.353327, -337.21948, 15.508699, -59.330143)
 
 [node name="meat piece8" parent="Enviorment/Meat pieces" unique_id=1356872912 instance=ExtResource("9_kek77")]
-transform = Transform3D(88.691925, 35.385654, 29.691666, -33.296654, 93.526886, -12.002225, -32.01676, 0.75868034, 94.73306, -406.91476, 46.18935, -15.763654)
+transform = Transform3D(88.691925, 35.38565, 29.691666, -2.9524498, 68.48942, -72.80443, -46.09797, 63.69502, 61.789345, -409.25565, 24.356121, 33.011208)
 
 [node name="meat piece13" parent="Enviorment/Meat pieces" unique_id=1609366890 instance=ExtResource("9_kek77")]
 transform = Transform3D(88.691925, 35.385654, 29.691666, -33.296654, 93.526886, -12.002225, -32.01676, 0.75868034, 94.73306, 270.60217, 4.621132, -125.59293)
@@ -753,16 +728,19 @@ transform = Transform3D(-0.43280947, 0.8947937, -0.109636076, 0.2946859, 0.25536
 transform = Transform3D(0.35565868, -0.815547, -9.960335, 0.06462316, 9.966619, -0.8137538, 9.99347, -0.035425022, 0.35974157, -277.20834, 18.703842, -67.71448)
 
 [node name="fibre3" parent="Enviorment/Fibre" unique_id=283414270 instance=ExtResource("4_yaehf")]
-transform = Transform3D(1.3690408, -0.2260454, -2.6598177, 0.01938693, 2.9899876, -0.2441263, 2.6693351, 0.09421771, 1.3659326, -404.391, -0.08018541, -8.587164)
+transform = Transform3D(1.7126311, -0.21146958, -2.4540117, 0.01938693, 2.9899876, -0.24412632, 2.4630296, 0.12350751, 1.708282, -404.391, -0.08018541, -8.587164)
 
 [node name="fibre4" parent="Enviorment/Fibre" unique_id=2056430028 instance=ExtResource("4_yaehf")]
-transform = Transform3D(-1.0393238, 0.23570634, 2.8043258, 0.019386915, 2.9899876, -0.2441263, -2.8141477, -0.066452965, -1.0373783, -405.98807, 1.7782567, -7.802986)
+transform = Transform3D(-0.28311366, 0.24486533, 2.9765558, 0.01938692, 2.9899883, -0.24412636, -2.9865482, -0.0038030408, -0.2837513, -405.98807, 1.7782567, -8.632499)
 
 [node name="fibre5" parent="Enviorment/Fibre" unique_id=775291177 instance=ExtResource("4_yaehf")]
 transform = Transform3D(-1.0393238, 0.23570634, 2.8043258, 0.019386915, 2.9899876, -0.2441263, -2.8141477, -0.066452965, -1.0373783, -405.98807, -3.0119922, -7.844774)
 
 [node name="fibre6" parent="Enviorment/Fibre" unique_id=338552633 instance=ExtResource("4_yaehf")]
 transform = Transform3D(1.9683979, 0.016121143, 0.35376453, 0.0129246125, 1.9933251, -0.16275081, -0.35389566, 0.1624653, 1.9617243, -391.72943, 0.45439458, -7.844774)
+
+[node name="fibre8" parent="Enviorment/Fibre" unique_id=1557963896 instance=ExtResource("4_yaehf")]
+transform = Transform3D(-1.7127506, 0.49739927, -0.9050293, 0.3208645, 1.9222953, 0.44925323, 0.9815952, 0.2395336, -1.7260051, -394.22574, 1.4319992, -7.844774)
 
 [node name="fibre7" parent="Enviorment/Fibre" unique_id=1972965940 instance=ExtResource("4_yaehf")]
 transform = Transform3D(-2.8650277, -0.053934313, -0.8880936, -0.1903656, 2.9622984, 0.43422544, 0.86912644, 0.47104317, -2.8324442, -386.6396, -2.8258672, -8.415838)
@@ -803,6 +781,18 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Crawl To The Hole"
 label_settings = ExtResource("7_272bh")
+
+[node name="Sketchfab_Scene" parent="." unique_id=678445991 instance=ExtResource("11_vivmo")]
+transform = Transform3D(3.352074, -3.672473, -0.52587676, -2.7959578, -2.9665987, 2.895152, -2.438488, -1.6468878, -4.0424666, -411.9077, -0.2815714, 1.7159529)
+
+[node name="Sketchfab_Scene3" parent="." unique_id=16805682 instance=ExtResource("11_vivmo")]
+transform = Transform3D(2.6176946, -4.2236185, -0.55562425, 3.1511214, 1.4809136, 3.5884976, -2.8667243, -2.2288866, 3.4371424, -415.54153, -0.6300869, -2.2175875)
+
+[node name="Sketchfab_Scene4" parent="." unique_id=1106338231 instance=ExtResource("11_vivmo")]
+transform = Transform3D(4.982771, 0.3697424, 0.18783462, -0.3931365, 4.932249, 0.71998644, -0.1320474, -0.7322741, 4.944324, -410.8589, 5.3876743, -7.8131995)
+
+[node name="Sketchfab_Scene2" parent="." unique_id=2012203230 instance=ExtResource("11_vivmo")]
+transform = Transform3D(1.0724353, 0.010300875, 4.883623, 1.2038172, 4.845144, -0.27457547, -4.7329373, 1.2346908, 1.0367414, -399.9072, 4.819705, 3.5869331)
 
 [node name="Endtrigger" type="Area3D" parent="." unique_id=679198973]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 62.197887, 0, 0)
